@@ -12,6 +12,8 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Net;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
+using Fleck;
 
 namespace MouseClick
 {
@@ -22,15 +24,17 @@ namespace MouseClick
         
         //创建套接字  
         static Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        private static byte[] result = new byte[1024];
+        private static byte[] result = new byte[512];
         static private Form _mainform;
         static DateTime lasttime = DateTime.Now;
         static bool inprocess = false;
 
+        static int debugMode = 0;//0 for socket
+
         public static void SocketServie()
         {
             Console.WriteLine("服务端已启动");
-            string host = "222.20.85.12";//IP地址
+            string host = SettingForm.config_Host;//IP地址
             int port = 2000;//端口
             socket.Bind(new IPEndPoint(IPAddress.Parse(host), port));
             socket.Listen(100);//设定最多100个排队连接请求   
@@ -50,15 +54,62 @@ namespace MouseClick
                 //clientSocket.Send(Encoding.UTF8.GetBytes("服务器连接成功"));
 
 
-               // MessageBox.Show("有客服端连接成功！");
+                MessageBox.Show("有客户端连接成功！");
                 Thread receiveThread = new Thread(ReceiveMessage);
                 receiveThread.Start(clientSocket);
             }
         }
 
 
+        /// <summary>
+        /// 引用user32.dll动态链接库（windows api），
+        /// 使用库中定义 API：SetCursorPos 
+        /// </summary>
+        [DllImport("user32.dll")]
+        private static extern int SetCursorPos(int x, int y);
+        /// <summary>
+        /// 移动鼠标到指定的坐标点
+        /// </summary>
+        public void MoveMouseToPoint(Point p)
+        {
+            SetCursorPos(p.X, p.Y);
+        }
+        /// <summary>
+        /// 设置鼠标的移动范围
+        /// </summary>
+        public void SetMouseRectangle(Rectangle rectangle)
+        {
+            System.Windows.Forms.Cursor.Clip = rectangle;
+        }
+        /// <summary>
+        /// 设置鼠标位于屏幕中心
+        /// </summary>
+        public void SetMouseAtCenterScreen()
+        {
+            int winHeight = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Height;
+            int winWidth = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Width;
+            Point centerP = new Point(winWidth / 2, winHeight / 2);
+            MoveMouseToPoint(centerP);
+        }
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+        public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);
+        //Mouse actions
+        private const int MOUSEEVENTF_LEFTDOWN = 0x02;
+        private const int MOUSEEVENTF_LEFTUP = 0x04;
+        private const int MOUSEEVENTF_RIGHTDOWN = 0x08;
+        private const int MOUSEEVENTF_RIGHTUP = 0x10;
 
 
+       static private float initRotate_X = 0, initRotate_Y = 0,initRotate_Z = 0;
+
+        static private int iskeydown = 0;
+        static private int lastiskeydown = 0;
+
+
+
+        static int lastX = 0;
+        static int lastY = 0;
         /// <summary>  
         /// 接收消息  
         /// </summary>  
@@ -86,21 +137,219 @@ namespace MouseClick
 
                         try
                         {
+                            String str0 = dataStr.Split(',')[0];
+                            String str1 = dataStr.Split(',')[1];
+                            String str2 = dataStr.Split(',')[2];
 
-                            String str1 = dataStr.Split(',')[0];
-                            String str2 = dataStr.Split(',')[1];
-
-
-
-                            _mainform.Invoke((MethodInvoker)delegate
+                            if (str0.Equals("m"))
                             {
-                                // Running on the UI thread
 
 
-                                SetPosition((int)(Int32.Parse(str1)-_mainform.Width/2f), (int)(Int32.Parse(str2) - _mainform.Height+290 ));
+                                String str3 = "";
+
+                                if (dataStr.Split(',').Length > 3)
+                                    str3 = dataStr.Split(',')[3];
 
 
-                            });
+                                _mainform.Invoke((MethodInvoker)delegate
+                                {
+                                    // Running on the UI thread
+
+
+                                    // SetPosition((int)(Int32.Parse(str1) - _mainform.Width / 2f), (int)(Int32.Parse(str2) - _mainform.Height + 290));
+
+
+                                    if (str3 != "")
+                                    {
+                                        _mainform.Width = Int32.Parse(str3);
+                                        _mainform.Height = Int32.Parse(str3);
+                                    }
+
+                                    try
+                                    {
+                                        //SetPosition((int)(Int32.Parse(str1) - _mainform.Width / 2f), (int)(Int32.Parse(str2) - _mainform.Height / 2f));
+                                        SetCursorPos((int)(Int32.Parse(str1) - _mainform.Width / 2f), (int)(Int32.Parse(str2) - _mainform.Height / 2f));
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                    }
+
+
+
+                                });
+
+                            }
+                            else if (str0.Equals("b"))
+                            {
+                                String str3 = "";
+
+                                if (dataStr.Split(',').Length > 3)
+                                    str3 = dataStr.Split(',')[3];
+
+
+                                _mainform.Invoke((MethodInvoker)delegate
+                                {
+                                    // Running on the UI thread
+
+
+                                    // SetPosition((int)(Int32.Parse(str1) - _mainform.Width / 2f), (int)(Int32.Parse(str2) - _mainform.Height + 290));
+
+
+                                    if (str3 != "")
+                                    {
+                                        _mainform.Width = Int32.Parse(str3);
+                                        _mainform.Height = Int32.Parse(str3);
+                                    }
+
+                                    try
+                                    {
+
+                                        int thisX = Int32.Parse(str1);
+                                        int thisY = Int32.Parse(str2);
+                                        //thisX = (int)(thisX + (thisX - lastX) * 0.9f);
+                                        //thisY = (int)(thisY + (thisY - lastY) * 0.9f);
+
+
+                                        SetPosition((int)(thisX - _mainform.Width / 2f), (int)(thisY - _mainform.Height / 2f));
+                                        // SetCursorPos((int)(Int32.Parse(str1) - _mainform.Width / 2f), (int)(Int32.Parse(str2) - _mainform.Height / 2f));
+                                        lastX = thisX;
+                                        lastY = thisY;
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                    }
+
+
+
+                                });
+                            }
+                            else if (str0.Equals("ld"))
+                            {
+                                uint X = (uint)Cursor.Position.X;
+                                uint Y = (uint)Cursor.Position.Y;
+                                mouse_event(MOUSEEVENTF_LEFTDOWN, X, Y, 1, 1);
+                            }
+                            else if (str0.Equals("lu"))
+                            {
+                                uint X = (uint)Cursor.Position.X;
+                                uint Y = (uint)Cursor.Position.Y;
+                                mouse_event(MOUSEEVENTF_LEFTUP, X, Y, 1, 1);
+                            }
+                            else if (str0.Equals("reset"))
+                            {
+
+                                String str3 = "";
+                                String str4 = "";
+                                
+                                    str3 = dataStr.Split(',')[3];
+                                
+                                    str4 = dataStr.Split(',')[4];
+                                initRotate_X = float.Parse(str1);
+                                initRotate_Y = float.Parse(str2);
+                                initRotate_Z = float.Parse(str3);
+
+                                if (str4.Equals("1"))
+                                {
+                                    iskeydown = 1;
+                                }
+                                else
+                                {
+                                    iskeydown = 0;
+                                }
+                            }else if (str0.Equals("ol"))
+                            {
+                               
+
+                                if (iskeydown != lastiskeydown)
+                                {
+                                    uint X = (uint)Cursor.Position.X;
+                                    uint Y = (uint)Cursor.Position.Y;
+                                    if(iskeydown==1)
+                                        mouse_event(MOUSEEVENTF_LEFTDOWN, X, Y, 1, 1);
+                                    else
+                                        mouse_event(MOUSEEVENTF_LEFTUP, X, Y, 1, 1);
+
+
+                                    lastiskeydown = iskeydown;
+                                }
+
+
+
+
+                                String str3 = "";
+                                String str4 = "";
+
+                                str3 = dataStr.Split(',')[3];
+
+                                str4 = dataStr.Split(',')[4];
+
+                                var thisRX = float.Parse(str1)-initRotate_X;
+                                var thisRY = float.Parse(str2)- initRotate_Y;
+                                var thisRZ = float.Parse(str3)- initRotate_Z;
+
+
+                                var xx = (float)(thisRX);
+                                var yy = (float)(thisRY);
+                                var zz = (float)(thisRZ);
+
+                               // Set3Dpos(xx, yy, zz);
+
+
+                                if (str4.Equals("1"))
+                                {
+                                    iskeydown = 1;
+                                }
+                                else
+                                {
+                                    iskeydown = 0;
+                                }
+
+
+                                float mul = 1920f / 2.14f;
+                                int corsorX = (int)Math.Round(960 - mul * Math.Tan(thisRZ));
+                                int corsorY = (int)Math.Round(540 - mul * Math.Tan(thisRX));
+
+
+
+                                _mainform.Invoke((MethodInvoker)delegate                    
+                                {
+                                    // Running on the UI thread
+
+
+                                    // SetPosition((int)(Int32.Parse(str1) - _mainform.Width / 2f), (int)(Int32.Parse(str2) - _mainform.Height + 290));
+
+
+                                
+
+                                    try
+                                    {
+                                        //SetPosition((int)(Int32.Parse(str1) - _mainform.Width / 2f), (int)(Int32.Parse(str2) - _mainform.Height / 2f));
+
+
+                                       SetCursorPos((int)(corsorX - _mainform.Width / 2f), (int)(corsorY- _mainform.Height / 2f));
+
+                                      /*  uint X = (uint)(corsorX - _mainform.Width / 2f);
+                                        uint Y = (uint)(corsorY - _mainform.Height / 2f);
+
+                                        if (iskeydown == 1)
+                                            mouse_event(MOUSEEVENTF_LEFTDOWN, X, Y, 1, 1);
+                                        else
+                                            mouse_event(MOUSEEVENTF_LEFTUP, X, Y, 1, 1);*/
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                    }
+
+
+
+                                });
+
+                            }
+
+
+
+
+
 
                         }
                         catch (Exception ex)
@@ -203,19 +452,56 @@ namespace MouseClick
 
         }
 
+        static private void Set3Dpos(float X,float Y,float Z)
+        {
+            allSockets[0].Send(String.Concat(X) + "," + String.Concat(Y) + "," + String.Concat(Z) + ";");
+        }
 
         private void setPos(int X, int Y)
         {
 
         }
+        static List<IWebSocketConnection> allSockets = new List<IWebSocketConnection>();
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
+
+            
+
             _mainform = this;
             SocketServie();
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 
-            
+            allSockets = new List<IWebSocketConnection>();
+
+            FleckLog.Level = LogLevel.Debug;
+             
+            var server = new WebSocketServer("ws://0.0.0.0:5000");
+
+            server.Start(socket =>
+            {
+                socket.OnOpen = () =>
+                {
+                    Console.WriteLine("Open!");
+
+                    socket.Send("success");
+
+                    allSockets.Add(socket);
+                };
+                socket.OnClose = () =>
+                {
+                    Console.WriteLine("Close!");
+                    allSockets.Remove(socket);
+                };
+                socket.OnMessage = message =>
+                {
+                    Console.WriteLine(message);
+                    allSockets.ToList().ForEach(s => s.Send("Echo: " + message));
+                };
+            });
+
+
             //SendKeys.Send("{ENTER}");
         }
 

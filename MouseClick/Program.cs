@@ -16,7 +16,8 @@ namespace MouseClick
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new SettingForm());
+            //Application.Run(new Form1());
         }
     }
 }

@@ -44,11 +44,11 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(291, 287);
             this.Controls.Add(this.button1);
+            this.Location = new System.Drawing.Point(500, 500);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
