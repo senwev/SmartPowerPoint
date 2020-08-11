@@ -308,10 +308,24 @@ namespace MouseClick
                                     iskeydown = 0;
                                 }
 
+                                //2.14是怎么求的？
+                                //thisRZ thisRX 是校准后的两轴朝向
 
-                                float mul = 1920f / 2.14f;
-                                int corsorX = (int)Math.Round(960 - mul * Math.Tan(thisRZ));
-                                int corsorY = (int)Math.Round(540 - mul * Math.Tan(thisRX));
+                                //float mul = 1920f / 2.14f; //这是2.14是距离屏幕的距离
+                                float mul = 1920f / 1.12f; //这是2.14是距离屏幕的距离
+                                float act_screen_width = 2.584f;
+                                float act_screen_height = 1.632f;
+                                float pix_screen_width = 1920f;
+                                float pix_screen_height = 1080f;
+
+                                float act_start_x = 0.477f;
+                                float act_start_y = 0.435f;
+
+                                float pix_start_x = act_start_x/ act_screen_width* pix_screen_width;
+                                float pix_start_y = act_start_y / act_screen_height * pix_screen_height;
+
+                                int corsorX = (int)Math.Round(960f - mul * Math.Tan(thisRZ));
+                                int corsorY = (int)Math.Round(540f - mul * Math.Tan(thisRX));
 
 
 
@@ -461,6 +475,7 @@ namespace MouseClick
                                 str3 = dataStr.Split(',')[3];
 
 
+                            //鼠标移动定位的代码应该就在这里
                             _mainform.Invoke((MethodInvoker)delegate
                             {
                                 if (str3 != "")
@@ -471,6 +486,10 @@ namespace MouseClick
                                 try
                                 {
                                     //SetPosition((int)(Int32.Parse(str1) - _mainform.Width / 2f), (int)(Int32.Parse(str2) - _mainform.Height / 2f));
+
+                                    float mul = 1920f / 1.12f; //这是2.14是距离屏幕的距离
+
+
                                     SetCursorPos((int)(Int32.Parse(str1) - _mainform.Width / 2f), (int)(Int32.Parse(str2) - _mainform.Height / 2f));
                                 }
                                 catch (Exception ex)
@@ -595,10 +614,28 @@ namespace MouseClick
                             }
 
 
-                            float mul = 1920f / 2.14f;
-                            
-                            int corsorX = (int)Math.Round(960 - mul * Math.Tan(thisRZ));
-                            int corsorY = (int)Math.Round(540 - mul * Math.Tan(thisRX));
+
+                            float act_screen_distance = 1.12f;//距离屏幕距离
+
+                            float act_screen_width = 2.584f;
+                            float act_screen_height = 1.632f;
+                            float pix_screen_width = 1920f;
+                            float pix_screen_height = 1080f;
+
+                            float act_start_x = 0.477f;
+                            float act_start_y = 0.435f;
+
+                            float pix_start_x = act_start_x / act_screen_width * pix_screen_width;
+                            float pix_start_y = act_start_y / act_screen_height * pix_screen_height;
+
+                            float act_pix_ratio_x = pix_screen_width / act_screen_width;
+                            float act_pix_ratio_y = pix_screen_height / act_screen_height;
+
+                            float mul_x = act_screen_distance * act_pix_ratio_x;
+                            float mul_y = act_screen_distance * act_pix_ratio_y;
+
+                            int corsorX = (int)Math.Round(pix_start_x - mul_x * Math.Tan(thisRZ));
+                            int corsorY = (int)Math.Round(pix_screen_height- pix_start_y - mul_y * Math.Tan(thisRX));
 
 
 
@@ -610,8 +647,8 @@ namespace MouseClick
                                     //SetPosition((int)(Int32.Parse(str1) - _mainform.Width / 2f), (int)(Int32.Parse(str2) - _mainform.Height / 2f));
 
 
-                                    SetCursorPos((int)(corsorX - _mainform.Width / 2f), (int)(corsorY - _mainform.Height / 2f));
-
+                                    //SetCursorPos((int)(corsorX - _mainform.Width / 2f), (int)(corsorY - _mainform.Height / 2f));
+                                    SetCursorPos((int)(corsorX ), (int)(corsorY));
                                     /*  uint X = (uint)(corsorX - _mainform.Width / 2f);
                                       uint Y = (uint)(corsorY - _mainform.Height / 2f);
 
