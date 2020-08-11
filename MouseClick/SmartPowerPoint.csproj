@@ -55,12 +55,21 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="WebKitBrowser, Version=0.5.0.0, Culture=neutral, PublicKeyToken=b967213f6d29a3be, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\WebKitBrowser.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constant.cs" />
+    <Compile Include="Devices\SerialHelper.cs" />
+    <Compile Include="Devices\SerialProtocolParse.cs" />
+    <Compile Include="SerialSettingControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SerialSettingControl.Designer.cs">
+      <DependentUpon>SerialSettingControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Solvers\LSSolver.cs" />
+    <Compile Include="Solvers\MovingAverage.cs" />
+    <Compile Include="Solvers\UWBPositionCalibrator.cs" />
+    <Compile Include="Solvers\UWBPositionSolver.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +102,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SerialSettingControl.resx">
+      <DependentUpon>SerialSettingControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SettingForm.resx">
       <DependentUpon>SettingForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -113,6 +125,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LinearAlgebra\LinearAlgebra.csproj">
+      <Project>{1e8e508c-1dcb-4b0e-abfb-1575210f17c3}</Project>
+      <Name>LinearAlgebra</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Utils\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
