@@ -186,10 +186,11 @@
             // textBox_Rec
             // 
             this.textBox_Rec.AcceptsReturn = true;
-            this.textBox_Rec.Location = new System.Drawing.Point(49, 346);
+            this.textBox_Rec.Location = new System.Drawing.Point(49, 326);
             this.textBox_Rec.Multiline = true;
             this.textBox_Rec.Name = "textBox_Rec";
-            this.textBox_Rec.Size = new System.Drawing.Size(257, 111);
+            this.textBox_Rec.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox_Rec.Size = new System.Drawing.Size(257, 139);
             this.textBox_Rec.TabIndex = 15;
             // 
             // SerialSettingControl
@@ -214,6 +215,7 @@
             this.Controls.Add(this.label1);
             this.Name = "SerialSettingControl";
             this.Size = new System.Drawing.Size(365, 483);
+            this.Load += new System.EventHandler(this.SerialSettingControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -147,6 +147,8 @@ namespace MouseClick
         private void SetMsgText(string msg)
         {
             this.textBox_Rec.Text += msg;
+            this.textBox_Rec.Select(this.textBox_Rec.Text.Length, 0);
+            this.textBox_Rec.ScrollToCaret();
         }
 
         private void button_OpenSerial_Click(object sender, EventArgs e)
@@ -243,5 +245,9 @@ namespace MouseClick
             helper.IsHex = checkBox_IsHex.Checked;
         }
 
+        private void SerialSettingControl_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

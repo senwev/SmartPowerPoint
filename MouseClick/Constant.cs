@@ -9,6 +9,9 @@ namespace MouseClick
     using Devices;
     public class Constant
     {
+
+        public static DrawingHelper DrawingHelper = new DrawingHelper();
+
         public static SerialHelper SerialHelper = new SerialHelper();
 
     }

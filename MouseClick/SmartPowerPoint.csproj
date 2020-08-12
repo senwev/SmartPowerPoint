@@ -60,6 +60,7 @@
     <Compile Include="Constant.cs" />
     <Compile Include="Devices\SerialHelper.cs" />
     <Compile Include="Devices\SerialProtocolParse.cs" />
+    <Compile Include="DrawingHelper.cs" />
     <Compile Include="SerialSettingControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -69,7 +70,8 @@
     <Compile Include="Solvers\LSSolver.cs" />
     <Compile Include="Solvers\MovingAverage.cs" />
     <Compile Include="Solvers\UWBPositionCalibrator.cs" />
-    <Compile Include="Solvers\UWBPositionSolver.cs" />
+    <Compile Include="Solvers\UWBPositionSolver3D.cs" />
+    <Compile Include="Solvers\UWBPositionSolver2D.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +85,12 @@
     </Compile>
     <Compile Include="SettingForm.Designer.cs">
       <DependentUpon>SettingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UWBPositionSettingControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UWBPositionSettingControl.Designer.cs">
+      <DependentUpon>UWBPositionSettingControl.cs</DependentUpon>
     </Compile>
     <Compile Include="WebBrowserForm.cs">
       <SubType>Form</SubType>
@@ -107,6 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SettingForm.resx">
       <DependentUpon>SettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UWBPositionSettingControl.resx">
+      <DependentUpon>UWBPositionSettingControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WebBrowserForm.resx">
       <DependentUpon>WebBrowserForm.cs</DependentUpon>

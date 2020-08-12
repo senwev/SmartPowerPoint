@@ -7,6 +7,8 @@ using System.IO.Ports;
 using System.IO;
 using System.Threading;
 using System.Data;
+using MouseClick.Solvers;
+using System.Windows.Forms;
 
 namespace MouseClick.Devices
 {
@@ -33,10 +35,52 @@ namespace MouseClick.Devices
 
         private StringBuilder recStringBuilder;
 
+        private UWBPositionSolver3D solver3D;
+        private UWBPositionSolver2D solver2D;
+
+        private double refHeight = 1000;
+
         public SerialHelper()
         {
             this.Devices = new List<SerialDeviceProperty>();
             this.buffer = new List<byte>();
+
+
+            //var anchor1 = new Tuple<double, double, double>(1, 0, 0);
+            //var anchor0 = new Tuple<double, double, double>(1800, 0, 1);
+            //var anchor2 = new Tuple<double, double, double>(1, 4200, 0);
+            //var anchor3 = new Tuple<double, double, double>(1800, 4200, 0);
+            //var coff_A = 1;
+            //var coff_B = 0;
+            //var list = new List<Tuple<double, double, double>>();
+            //list.Add(anchor0);
+            //list.Add(anchor1);
+            //list.Add(anchor2);
+            //list.Add(anchor3);
+
+            //solver3D = new UWBPositionSolver3D(list, coff_A, coff_B);
+            //var anchor0 = new Tuple<double, double>(1800, 0);
+            //var anchor1 = new Tuple<double, double>(0, 0);
+            //var anchor2 = new Tuple<double, double>(0, 4200);
+            //var anchor3 = new Tuple<double, double>(1800, 4200);
+            //var anchor0 = new Tuple<double, double>(2000, 200);
+            //var anchor1 = new Tuple<double, double>(200, 200);
+            //var anchor2 = new Tuple<double, double>(200, 4400);
+            //var anchor3 = new Tuple<double, double>(2000, 4400);
+            var anchor0 = new Tuple<double, double>(1160, 0);
+            var anchor1 = new Tuple<double, double>(0, 0);
+            var anchor2 = new Tuple<double, double>(0, 1960);
+            var anchor3 = new Tuple<double, double>(1160, 1960);
+            var coff_A = 1;
+            var coff_B = 0;
+            var list = new List<Tuple<double, double>>();
+            list.Add(anchor0);
+            list.Add(anchor1);
+            list.Add(anchor2);
+            list.Add(anchor3);
+
+            solver2D = new UWBPositionSolver2D(list, coff_A, coff_B);
+            Constant.DrawingHelper.Update(anchor0, anchor1, anchor2, anchor3);
         }
 
         private void OnComReceive(object sender, SerialDataReceivedEventArgs e)//接收数据 中断只标志有数据需要读取，读取操作在中断外进行
@@ -69,9 +113,16 @@ namespace MouseClick.Devices
             int idx = 0;
             if (data == null) { return; }
             var datas = SerialProtocolParseHelper.Parse(data);
-            Console.WriteLine(string.Join(",", datas));
+            Console.WriteLine(string.Join(",", datas) + "\r\n");
 
+            var ds = solver2D.Update(datas.Select<long, double>(x => x).ToList(), refHeight);
+            //var ds = solver3D.Update(datas.Select<long, double>(x => x).ToList());
+            Console.WriteLine(string.Join(",", ds) + "\r\n");
+            Constant.DrawingHelper.Update(ds.ToArray());
+            SerialDataReceived?.Invoke(this, string.Join(",", ds) + "\r\n");
         }
+
+
 
         public IList<SerialDeviceProperty> GetPorts()
         {
@@ -128,10 +179,17 @@ namespace MouseClick.Devices
 
         public void StopReceiving()
         {
-            this.recStaus = false;
-            this.ComPort.DiscardInBuffer();
-            this.ComPort.DiscardOutBuffer();
-            this.ComPort.DataReceived -= new SerialDataReceivedEventHandler(OnComReceive);
+            try
+            {
+                this.recStaus = false;
+                this.ComPort.DiscardInBuffer();
+                this.ComPort.DiscardOutBuffer();
+                this.ComPort.DataReceived -= new SerialDataReceivedEventHandler(OnComReceive);
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
     }
