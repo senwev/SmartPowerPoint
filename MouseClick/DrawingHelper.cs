@@ -69,7 +69,7 @@ namespace MouseClick
             var brush = new SolidBrush(AnchorColor);
 
             g.FillEllipse(brush, new RectangleF(point, new SizeF(10, 10)));
-            
+
             //g.FillEllipse(brush, trect);
             brush.Dispose();
         }
@@ -97,7 +97,22 @@ namespace MouseClick
             this.Anchor3 = new Point((int)anchor3.Item1, (int)anchor3.Item2);
             this.Anchor4 = new Point((int)anchor4.Item1, (int)anchor4.Item2);
             //this.DrawingRefreshEvent?.Invoke(this, null);
-            this.Axes = new Rectangle(0, 0, 4200, 1800);
+            var x_list = new List<double>();
+            x_list.Add(anchor1.Item1);
+            x_list.Add(anchor2.Item1);
+            x_list.Add(anchor3.Item1);
+            x_list.Add(anchor4.Item1);
+
+            var y_list = new List<double>();
+            y_list.Add(anchor1.Item2);
+            y_list.Add(anchor2.Item2);
+            y_list.Add(anchor3.Item2);
+            y_list.Add(anchor4.Item2);
+
+            var width = x_list.Max((x) => x);
+            var height = y_list.Max((y) => y);
+
+            this.Axes = new Rectangle(0, 0, (int)width, (int)height);
         }
 
         private Rectangle Transform(Rectangle rect, Rectangle axes, Rectangle area)
@@ -119,8 +134,8 @@ namespace MouseClick
             float w_ratio = 1.0f * area.Width / axes.Width;
             float h_ratio = 1.0f * area.Height / axes.Height;
 
-            float x = 1.0f * (p.X - axes.X) * w_ratio + 100;// + area.Width * 1 / 6;
-            float y = 1.0f * (p.Y - axes.X) * h_ratio + 20;// + area.Height * 1 / 6;
+            float x = 1.0f * (p.X - axes.X) * w_ratio + area.X;// + area.Width * 1 / 6;
+            float y = 1.0f * (p.Y - axes.X) * h_ratio + area.Y;// + area.Height * 1 / 6;
 
             return new Point((int)x, (int)y);
         }
