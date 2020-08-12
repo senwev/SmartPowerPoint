@@ -501,6 +501,7 @@ namespace MouseClick
                         }
                         else if (str0.Equals("b"))
                         {
+                            // EyeCare 接受坐标
                             String str3 = "";
 
                             if (dataStr.Split(',').Length > 3)
