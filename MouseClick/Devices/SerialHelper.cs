@@ -40,7 +40,7 @@ namespace MouseClick.Devices
 
         private double refHeight = 1210;
 
-        public double tolerance = 0.15;
+        public double tolerance = 0.25;
 
         public SerialHelper()
         {
