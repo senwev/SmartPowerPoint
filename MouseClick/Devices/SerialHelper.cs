@@ -136,13 +136,13 @@ namespace MouseClick.Devices
             //var ds = solver3D.Update(datas.Select<long, double>(x => x).ToList());
             Console.WriteLine(string.Join(",", ds) + "\r\n");
             bool flag = false;
-            if (Math.Abs(Global.Position[0] - ds[0] / 1000) > tolerance || double.IsNaN(ds[0]))
+            if (Math.Abs(Global.Position[0] - ds[0] / 1000) > tolerance || double.IsNaN(Global.Position[0]))
             {
                 XMovingAverage.Push(ds[0]);
                 Global.Position[0] = XMovingAverage.Current / 1000;
                 flag = true;
             }
-            if (Math.Abs(Global.Position[1] - ds[1] / 1000) > tolerance || double.IsNaN(ds[1]))
+            if (Math.Abs(Global.Position[1] - ds[1] / 1000) > tolerance || double.IsNaN(Global.Position[0]))
             {
                 YMovingAverage.Push(ds[1]);
                 Global.Position[1] = YMovingAverage.Current / 1000;
