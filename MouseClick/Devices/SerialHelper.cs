@@ -59,18 +59,18 @@ namespace MouseClick.Devices
             //list.Add(anchor3);
 
             //solver3D = new UWBPositionSolver3D(list, coff_A, coff_B);
-            //var anchor0 = new Tuple<double, double>(1800, 0);
-            //var anchor1 = new Tuple<double, double>(0, 0);
-            //var anchor2 = new Tuple<double, double>(0, 4200);
-            //var anchor3 = new Tuple<double, double>(1800, 4200);
+            var anchor0 = new Tuple<double, double>(1800, 0);
+            var anchor1 = new Tuple<double, double>(0, 0);
+            var anchor2 = new Tuple<double, double>(0, 4200);
+            var anchor3 = new Tuple<double, double>(1800, 4200);
             //var anchor0 = new Tuple<double, double>(2000, 200);
             //var anchor1 = new Tuple<double, double>(200, 200);
             //var anchor2 = new Tuple<double, double>(200, 4400);
             //var anchor3 = new Tuple<double, double>(2000, 4400);
-            var anchor0 = new Tuple<double, double>(1160, 0);
-            var anchor1 = new Tuple<double, double>(0, 0);
-            var anchor2 = new Tuple<double, double>(0, 1960);
-            var anchor3 = new Tuple<double, double>(1160, 1960);
+            //var anchor0 = new Tuple<double, double>(1160, 0);
+            //var anchor1 = new Tuple<double, double>(0, 0);
+            //var anchor2 = new Tuple<double, double>(0, 1960);
+            //var anchor3 = new Tuple<double, double>(1160, 1960);
             var coff_A = 1;
             var coff_B = 0;
             var list = new List<Tuple<double, double>>();
@@ -115,9 +115,11 @@ namespace MouseClick.Devices
             var datas = SerialProtocolParseHelper.Parse(data);
             Console.WriteLine(string.Join(",", datas) + "\r\n");
 
-            var ds = solver2D.Update(datas.Select<long, double>(x => x).ToList(), refHeight);
+            var ds = solver2D.Update(datas.Select<long, double>(x => x).ToList());
             //var ds = solver3D.Update(datas.Select<long, double>(x => x).ToList());
             Console.WriteLine(string.Join(",", ds) + "\r\n");
+            Global.Position[0] = ds[0] / 1000;
+            Global.Position[1] = ds[1] / 1000;
             Constant.DrawingHelper.Update(ds.ToArray());
             SerialDataReceived?.Invoke(this, string.Join(",", ds) + "\r\n");
         }

@@ -66,7 +66,7 @@ namespace MouseClick
             //var brush = new SolidBrush(TargetColor);
             Rectangle newArea = new Rectangle((int)(area.X + 1.0 * area.Width / 6), (int)(area.Y + 1.0 * area.Height / 3), (int)(area.Width * 2.0 / 3), (int)(area.Height * 1.0 / 3));
             var point = Transform(p, this.Axes, newArea);
-            var brush = new SolidBrush(AnchorColor);
+            var brush = new SolidBrush(TargetColor);
 
             g.FillEllipse(brush, new RectangleF(point, new SizeF(10, 10)));
 

@@ -8,6 +8,6 @@ namespace MouseClick
 {
     class Global
     {
-        static public double[] Position;
+        static public double[] Position = new double[3];
     }
 }
