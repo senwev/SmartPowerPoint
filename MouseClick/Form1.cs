@@ -312,14 +312,25 @@ namespace MouseClick
                                 //thisRZ thisRX 是校准后的两轴朝向
 
                                 //float mul = 1920f / 2.14f; //这是2.14是距离屏幕的距离
+
+                                float act_screenBottomHeight = 0.874f;//投影幕布底部距离地面距离
+                                float act_screenLeft = 0.686f;//投影幕布左侧距离坐标原点的水平距离
+
+
+                                float posX = (float) Global.Position[0];
+                                float posY = (float) Global.Position[1];
+                                float posZ = (float) Global.Position[2];
+
+
                                 float mul = 1920f / 1.12f; //这是2.14是距离屏幕的距离
                                 float act_screen_width = 2.584f;
                                 float act_screen_height = 1.632f;
+
                                 float pix_screen_width = 1920f;
                                 float pix_screen_height = 1080f;
 
-                                float act_start_x = 0.477f;
-                                float act_start_y = 0.435f;
+                                float act_start_x = posX- act_screenLeft;
+                                float act_start_y = posZ-act_screenBottomHeight;
 
                                 float pix_start_x = act_start_x/ act_screen_width* pix_screen_width;
                                 float pix_start_y = act_start_y / act_screen_height * pix_screen_height;
@@ -615,7 +626,8 @@ namespace MouseClick
                             }
 
 
-
+                            float act_start_x = 0.477f;
+                            float act_start_y = 0.435f;
                             float act_screen_distance = 1.12f;//距离屏幕距离
 
                             float act_screen_width = 2.584f;
@@ -623,8 +635,7 @@ namespace MouseClick
                             float pix_screen_width = 1920f;
                             float pix_screen_height = 1080f;
 
-                            float act_start_x = 0.477f;
-                            float act_start_y = 0.435f;
+
 
                             float pix_start_x = act_start_x / act_screen_width * pix_screen_width;
                             float pix_start_y = act_start_y / act_screen_height * pix_screen_height;
