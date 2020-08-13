@@ -31,6 +31,8 @@
             this.开启遮挡 = new System.Windows.Forms.Button();
             this.IptextBox = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.serialSettingControl1 = new MouseClick.SerialSettingControl();
+            this.uwbPositionSettingControl1 = new MouseClick.UWBPositionSettingControl();
             this.SuspendLayout();
             // 
             // 开启遮挡
@@ -45,7 +47,7 @@
             // 
             // IptextBox
             // 
-            this.IptextBox.Location = new System.Drawing.Point(118, 82);
+            this.IptextBox.Location = new System.Drawing.Point(410, 46);
             this.IptextBox.Name = "IptextBox";
             this.IptextBox.Size = new System.Drawing.Size(100, 21);
             this.IptextBox.TabIndex = 1;
@@ -62,11 +64,31 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // serialSettingControl1
+            // 
+            this.serialSettingControl1.Location = new System.Drawing.Point(12, 12);
+            this.serialSettingControl1.Name = "serialSettingControl1";
+            this.serialSettingControl1.Size = new System.Drawing.Size(365, 483);
+            this.serialSettingControl1.TabIndex = 3;
+            // 
+            // uwbPositionSettingControl1
+            // 
+            this.uwbPositionSettingControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.uwbPositionSettingControl1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.uwbPositionSettingControl1.Location = new System.Drawing.Point(340, 187);
+            this.uwbPositionSettingControl1.Name = "uwbPositionSettingControl1";
+            this.uwbPositionSettingControl1.Size = new System.Drawing.Size(572, 291);
+            this.uwbPositionSettingControl1.TabIndex = 4;
+            // 
             // SettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(924, 505);
+            this.Controls.Add(this.uwbPositionSettingControl1);
+            this.Controls.Add(this.serialSettingControl1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.IptextBox);
             this.Controls.Add(this.开启遮挡);
@@ -83,5 +105,7 @@
         private System.Windows.Forms.Button 开启遮挡;
         private System.Windows.Forms.TextBox IptextBox;
         private System.Windows.Forms.Button button1;
+        private SerialSettingControl serialSettingControl1;
+        private UWBPositionSettingControl uwbPositionSettingControl1;
     }
 }
