@@ -60,15 +60,15 @@ namespace MouseClick.Devices
 
             //solver3D = new UWBPositionSolver3D(list, coff_A, coff_B);
             //x vertical
-            //var anchor0 = new Tuple<double, double>(1800, 0);
-            //var anchor1 = new Tuple<double, double>(0, 0);
-            //var anchor2 = new Tuple<double, double>(0, 4200);
-            //var anchor3 = new Tuple<double, double>(1800, 4200);
-            //y vertical
-            var anchor0 = new Tuple<double, double>(0, 1800);
+            var anchor0 = new Tuple<double, double>(1800, 0);
             var anchor1 = new Tuple<double, double>(0, 0);
-            var anchor2 = new Tuple<double, double>(4200, 0);
-            var anchor3 = new Tuple<double, double>(4200, 1800);
+            var anchor2 = new Tuple<double, double>(0, 4200);
+            var anchor3 = new Tuple<double, double>(1800, 4200);
+            //y vertical
+            //var anchor0 = new Tuple<double, double>(0, 1800);
+            //var anchor1 = new Tuple<double, double>(0, 0);
+            //var anchor2 = new Tuple<double, double>(4200, 0);
+            //var anchor3 = new Tuple<double, double>(4200, 1800);
             //var anchor0 = new Tuple<double, double>(2000, 200);
             //var anchor1 = new Tuple<double, double>(200, 200);
             //var anchor2 = new Tuple<double, double>(200, 4400);

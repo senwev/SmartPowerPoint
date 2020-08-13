@@ -85,7 +85,7 @@ namespace MouseClick
 
         public void Update(double[] point)
         {
-            var p = new Point((int)point[0], (int)point[1]);
+            var p = new Point((int)point[1], (int)point[0]);
             this.Cursor = p;
             this.DrawingRefreshEvent?.Invoke(this, null);
         }
