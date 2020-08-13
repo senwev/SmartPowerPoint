@@ -29,7 +29,8 @@ namespace MouseClick
         private void UWBPositionSettingControl_Paint(object sender, PaintEventArgs e)
         {
             var g = e.Graphics;
-            g.Clear(Color.White);        
+            g.Clear(Color.White);     
+           
             helper.Draw(g, this.ClientRectangle);          
         }
         private void OnDrawingRefresh(object sender, EventArgs e)

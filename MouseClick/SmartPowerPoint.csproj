@@ -41,11 +41,20 @@
     <WarningLevel>0</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Fleck, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Fleck">
       <HintPath>..\packages\Fleck.1.1.0\lib\net45\Fleck.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\3DViewer\libs\OpenTK\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK.GLControl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\3DViewer\libs\OpenTK\OpenTK.GLControl.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,11 +66,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Viewer3D.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer3D.Designer.cs">
+      <DependentUpon>Viewer3D.cs</DependentUpon>
+    </Compile>
     <Compile Include="Constant.cs" />
     <Compile Include="Devices\SerialHelper.cs" />
     <Compile Include="Devices\SerialProtocolParse.cs" />
-    <Compile Include="DrawingHelper.cs" />
+    <Compile Include="Helpers\DrawingHelper.cs" />
     <Compile Include="Global.cs" />
+    <Compile Include="Models\UWBAnchorArea.cs" />
     <Compile Include="SerialSettingControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -99,6 +115,9 @@
     <Compile Include="WebBrowserForm.Designer.cs">
       <DependentUpon>WebBrowserForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Viewer3D.resx">
+      <DependentUpon>Viewer3D.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -139,6 +158,22 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\3DViewer\libs\assimp-net\AssimpNet\AssimpNet.csproj">
+      <Project>{3415ff29-c0be-44fc-ad34-94796118e690}</Project>
+      <Name>AssimpNet</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\3DViewer\libs\devil-net\DevILNet\DevILNet.csproj">
+      <Project>{578fd0d9-41aa-4fa4-8d9b-4021978fa48d}</Project>
+      <Name>DevILNet</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\3DViewer\libs\kd-sharp\KDTree\KDTree.csproj">
+      <Project>{33a00a90-c02e-474b-a8c0-3b0559873ea0}</Project>
+      <Name>KDTree</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\3DViewer\open3mod\open3mod.csproj">
+      <Project>{8e5a024d-a941-4a4e-b2f9-a97d7cbce0e9}</Project>
+      <Name>open3mod</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LinearAlgebra\LinearAlgebra.csproj">
       <Project>{1e8e508c-1dcb-4b0e-abfb-1575210f17c3}</Project>
       <Name>LinearAlgebra</Name>
