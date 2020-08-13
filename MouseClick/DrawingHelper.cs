@@ -89,7 +89,12 @@ namespace MouseClick
             this.Cursor = p;
             this.DrawingRefreshEvent?.Invoke(this, null);
         }
-
+        public void Update(double pointX, double pointY)
+        {
+            var p = new Point((int)pointY, (int)pointX);
+            this.Cursor = p;
+            this.DrawingRefreshEvent?.Invoke(this, null);
+        }
         public void Update(Tuple<double, double> anchor1, Tuple<double, double> anchor2, Tuple<double, double> anchor3, Tuple<double, double> anchor4)
         {
             this.Anchor1 = new Point((int)anchor1.Item2, (int)anchor1.Item1);

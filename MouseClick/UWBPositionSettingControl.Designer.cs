@@ -38,6 +38,7 @@
             this.Size = new System.Drawing.Size(489, 343);
             this.Load += new System.EventHandler(this.UWBPositionSettingControl_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.UWBPositionSettingControl_Paint);
+            this.Resize += new System.EventHandler(this.UWBPositionSettingControl_Resize);
             this.ResumeLayout(false);
 
         }

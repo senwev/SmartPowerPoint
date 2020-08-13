@@ -216,6 +216,7 @@
             this.Name = "SerialSettingControl";
             this.Size = new System.Drawing.Size(365, 483);
             this.Load += new System.EventHandler(this.SerialSettingControl_Load);
+            this.Resize += new System.EventHandler(this.SerialSettingControl_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
 
