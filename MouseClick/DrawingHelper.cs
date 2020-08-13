@@ -92,22 +92,22 @@ namespace MouseClick
 
         public void Update(Tuple<double, double> anchor1, Tuple<double, double> anchor2, Tuple<double, double> anchor3, Tuple<double, double> anchor4)
         {
-            this.Anchor1 = new Point((int)anchor1.Item1, (int)anchor1.Item2);
-            this.Anchor2 = new Point((int)anchor2.Item1, (int)anchor2.Item2);
-            this.Anchor3 = new Point((int)anchor3.Item1, (int)anchor3.Item2);
-            this.Anchor4 = new Point((int)anchor4.Item1, (int)anchor4.Item2);
+            this.Anchor1 = new Point((int)anchor1.Item2, (int)anchor1.Item1);
+            this.Anchor2 = new Point((int)anchor2.Item2, (int)anchor2.Item1);
+            this.Anchor3 = new Point((int)anchor3.Item2, (int)anchor3.Item1);
+            this.Anchor4 = new Point((int)anchor4.Item2, (int)anchor4.Item1);
             //this.DrawingRefreshEvent?.Invoke(this, null);
             var x_list = new List<double>();
-            x_list.Add(anchor1.Item1);
-            x_list.Add(anchor2.Item1);
-            x_list.Add(anchor3.Item1);
-            x_list.Add(anchor4.Item1);
+            x_list.Add(anchor1.Item2);
+            x_list.Add(anchor2.Item2);
+            x_list.Add(anchor3.Item2);
+            x_list.Add(anchor4.Item2);
 
             var y_list = new List<double>();
-            y_list.Add(anchor1.Item2);
-            y_list.Add(anchor2.Item2);
-            y_list.Add(anchor3.Item2);
-            y_list.Add(anchor4.Item2);
+            y_list.Add(anchor1.Item1);
+            y_list.Add(anchor2.Item1);
+            y_list.Add(anchor3.Item1);
+            y_list.Add(anchor4.Item1);
 
             var width = x_list.Max((x) => x);
             var height = y_list.Max((y) => y);
