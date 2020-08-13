@@ -38,7 +38,7 @@ namespace MouseClick.Devices
         private UWBPositionSolver3D solver3D;
         private UWBPositionSolver2D solver2D;
 
-        private double refHeight = 1000;
+        private double refHeight = 1210;
 
         public SerialHelper()
         {
@@ -59,10 +59,16 @@ namespace MouseClick.Devices
             //list.Add(anchor3);
 
             //solver3D = new UWBPositionSolver3D(list, coff_A, coff_B);
-            var anchor0 = new Tuple<double, double>(1800, 0);
+            //x vertical
+            //var anchor0 = new Tuple<double, double>(1800, 0);
+            //var anchor1 = new Tuple<double, double>(0, 0);
+            //var anchor2 = new Tuple<double, double>(0, 4200);
+            //var anchor3 = new Tuple<double, double>(1800, 4200);
+            //y vertical
+            var anchor0 = new Tuple<double, double>(0, 1800);
             var anchor1 = new Tuple<double, double>(0, 0);
-            var anchor2 = new Tuple<double, double>(0, 4200);
-            var anchor3 = new Tuple<double, double>(1800, 4200);
+            var anchor2 = new Tuple<double, double>(4200, 0);
+            var anchor3 = new Tuple<double, double>(4200, 1800);
             //var anchor0 = new Tuple<double, double>(2000, 200);
             //var anchor1 = new Tuple<double, double>(200, 200);
             //var anchor2 = new Tuple<double, double>(200, 4400);
@@ -120,6 +126,7 @@ namespace MouseClick.Devices
             Console.WriteLine(string.Join(",", ds) + "\r\n");
             Global.Position[0] = ds[0] / 1000;
             Global.Position[1] = ds[1] / 1000;
+            Global.Position[2] = refHeight / 1000;
             Constant.DrawingHelper.Update(ds.ToArray());
             SerialDataReceived?.Invoke(this, string.Join(",", ds) + "\r\n");
         }
