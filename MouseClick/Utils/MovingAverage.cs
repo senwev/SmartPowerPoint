@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MouseClick.Solvers
+namespace MouseClick.Utils
 {
     public static class MovingAverageExtensions
     {

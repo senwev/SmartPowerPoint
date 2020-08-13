@@ -12,6 +12,7 @@ using System.Windows.Forms;
 
 namespace MouseClick.Devices
 {
+    using Utils;
     public class SerialHelper
     {
         public SerialPort ComPort

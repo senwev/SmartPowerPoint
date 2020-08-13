@@ -677,7 +677,7 @@ namespace MouseClick
 
 
                                     //SetCursorPos((int)(corsorX - _mainform.Width / 2f), (int)(corsorY - _mainform.Height / 2f));
-                                    SetCursorPos((int)(corsorX ), (int)(corsorY));
+                                    SetCursorPos((int)(corsorX), (int)(corsorY));
                                     /*  uint X = (uint)(corsorX - _mainform.Width / 2f);
                                       uint Y = (uint)(corsorY - _mainform.Height / 2f);
 

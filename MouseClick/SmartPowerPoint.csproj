@@ -69,7 +69,7 @@
       <DependentUpon>SerialSettingControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Solvers\LSSolver.cs" />
-    <Compile Include="Solvers\MovingAverage.cs" />
+    <Compile Include="Utils\MovingAverage.cs" />
     <Compile Include="Solvers\UWBPositionCalibrator.cs" />
     <Compile Include="Solvers\UWBPositionSolver3D.cs" />
     <Compile Include="Solvers\UWBPositionSolver2D.cs" />
@@ -144,9 +144,7 @@
       <Name>LinearAlgebra</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utils\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
