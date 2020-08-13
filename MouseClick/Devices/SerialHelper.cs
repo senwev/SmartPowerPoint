@@ -40,7 +40,7 @@ namespace MouseClick.Devices
 
         private double refHeight = 1210;
 
-        private double tolerance = 0.15;
+        private double tolerance = 0.2;
 
         private int ringLength = 3;
 
