@@ -11,5 +11,10 @@ namespace MouseClick
         {
             InitializeComponent();
         }
+
+        private void Viewer3D_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.viewer3DControl1.OnClosing();
+        }
     }
 }

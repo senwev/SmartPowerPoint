@@ -37,23 +37,11 @@ namespace open3mod
         public TabUiSkeleton()
         {
             InitializeComponent();
-            splitContainer.SplitterDistance = splitContainer.Width - 440;
-        }
-
-        public SplitContainer GetSplitter()
-        {
-            return splitContainer;
-        }
-
-        public InspectionView GetInspector()
-        {
-            return inspectionView1;
         }
 
         public void InjectGlControl(GLControl gl)
         {
-            var s = splitContainer.Controls[0];
-
+            var s = this;
             s.Controls.Add(gl);
             gl.Left = s.Left;
             gl.Top = s.Top;

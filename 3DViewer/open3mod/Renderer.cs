@@ -849,7 +849,7 @@ namespace open3mod
                 return;
             }
             graphics.DrawString("FPS: " + _displayFps.ToString("0.0"), Window.UiState.DefaultFont12,
-                                new SolidBrush(Color.Red), 5, 5);
+                                new SolidBrush(Color.Red), 5, GlControl.Height-30);
         }
 
 

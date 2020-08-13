@@ -62,13 +62,11 @@ namespace open3mod
         private System.Windows.Forms.Timer _timer;
 #endif
 
-
         public delegate void TabAddRemoveHandler(Tab tab, bool add);
         public event TabAddRemoveHandler TabChanged;
 
         public delegate void TabSelectionChangeHandler(Tab tab);
         public event TabSelectionChangeHandler SelectedTabChanged;
-
 
         public GLControl GlControl
         {
@@ -173,11 +171,11 @@ namespace open3mod
         {
             base.OnCreateControl();
 
-            DelayExecution(TimeSpan.FromSeconds(2),
-                MaybeShowTipOfTheDay);
+            //DelayExecution(TimeSpan.FromSeconds(2),
+            //    MaybeShowTipOfTheDay);
 
-            DelayExecution(TimeSpan.FromSeconds(20),
-                MaybeShowDonationDialog);
+            //DelayExecution(TimeSpan.FromSeconds(20),
+            //    MaybeShowDonationDialog);
         }
 
 
@@ -463,10 +461,7 @@ namespace open3mod
             // and drop the UI tab
             tabControl1.TabPages.Remove(tab);
 
-            if (TabChanged != null)
-            {
-                TabChanged((Tab)tab.Tag, false);
-            }
+            TabChanged?.Invoke((Tab)tab.Tag, false);
 
             if (_emptyTab == tab)
             {
@@ -605,8 +600,6 @@ namespace open3mod
         {
             var ui = UiForTab(tab);
             Debug.Assert(ui != null);
-            var inspector = ui.GetInspector();
-            inspector.SetSceneSource(tab.ActiveScene);
         }
 
 
@@ -933,26 +926,6 @@ namespace open3mod
             CloseTab(tabControl1.TabPages[0]);
         }
 
-
-        private void OnFileMenuRecent(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private void OnFileMenuQuit(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private void OnCloseForm(object sender, FormClosedEventArgs e)
-        {
-            UiState.Dispose();
-            _renderer.Dispose();
-        }
-
-
         private void OnShowSettings(object sender, EventArgs e)
         {
             if (_settings == null || _settings.IsDisposed)
@@ -1078,6 +1051,16 @@ namespace open3mod
             }
         }
 
+        public void OnClosing()
+        {
+            CoreSettings.CoreSettings.Default.Save();
+            
+#if LEAP
+            //Cleanup LeapMotion Controller
+            _leapController.RemoveListener(_leapListener);
+            _leapController.Dispose();
+#endif
+        }
 
         // note: the methods below are in MainWindow_Input.cs
         // Windows Forms Designer keeps re-generating them though.
@@ -1097,14 +1080,6 @@ namespace open3mod
             var tip = new TipOfTheDayDialog();
             tip.ShowDialog();
         }
-
-
-        private void OnDonate(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            var donate = new DonationDialog();
-            donate.ShowDialog();
-        }
-
 
         private void OnSetFileAssociations(object sender, EventArgs e)
         {

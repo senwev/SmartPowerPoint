@@ -212,14 +212,7 @@ namespace open3mod
             }
 
             var scene = tab.ActiveScene;
-            var mat = scene.Raw.Materials[_mesh.MaterialIndex];
-            var ui = _host.UiForTab(tab);
-            Debug.Assert(ui != null);
 
-            var inspector = ui.GetInspector();
-            var thumb = inspector.Materials.GetMaterialControl(mat);
-            pictureBoxMaterial.Image = thumb.GetCurrentPreviewImage();
-            labelMaterialName.Text = mat.Name.Length > 0 ? mat.Name : "Unnamed Material";
         }
 
 
@@ -236,11 +229,6 @@ namespace open3mod
             var mat = scene.Raw.Materials[_mesh.MaterialIndex];
             var ui = _host.UiForTab(tab);
             Debug.Assert(ui != null);
-
-            var inspector = ui.GetInspector();
-            inspector.Materials.SelectEntry(mat);
-            var thumb = inspector.Materials.GetMaterialControl(mat);
-            inspector.OpenMaterialsTabAndScrollTo(thumb);
         }
 
         private void OnGenerateNormals(object sender, EventArgs e)
