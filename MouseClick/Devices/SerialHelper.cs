@@ -41,7 +41,7 @@ namespace MouseClick.Devices
 
         private double refHeight = 1210;
 
-        private double tolerance = 0.15;
+        private double tolerance = 0.2;
 
         private int ringLength = 3;
 
@@ -99,7 +99,7 @@ namespace MouseClick.Devices
             solver2D = new UWBPositionSolver2D(list, coff_A, coff_B);
             Constant.DrawingHelper.Update(anchor0, anchor1, anchor2, anchor3);
 
-            this.XMovingAverage=new MovingAverage(ringLength);
+            this.XMovingAverage = new MovingAverage(ringLength);
             this.YMovingAverage = new MovingAverage(ringLength);
         }
 
@@ -142,13 +142,17 @@ namespace MouseClick.Devices
             //var ds = solver3D.Update(datas.Select<long, double>(x => x).ToList());
             Console.WriteLine(string.Join(",", ds) + "\r\n");
             bool flag = false;
-            if (Math.Abs(Global.Position[0] - ds[0] / 1000) > tolerance || XMovingAverage.Length < ringLength)
+            if (Math.Abs(Global.Position[0] - ds[0] / 1000) > tolerance
+                || double.IsNaN(Global.Position[0])
+                || XMovingAverage.Length < ringLength)
             {
                 XMovingAverage.Push(ds[0]);
                 Global.Position[0] = XMovingAverage.Current / 1000;
                 flag = true;
             }
-            if (Math.Abs(Global.Position[1] - ds[1] / 1000) > tolerance || YMovingAverage.Length < ringLength)
+            if (Math.Abs(Global.Position[1] - ds[1] / 1000) > tolerance
+                || double.IsNaN(Global.Position[1])
+                || YMovingAverage.Length < ringLength)
             {
                 YMovingAverage.Push(ds[1]);
                 Global.Position[1] = YMovingAverage.Current / 1000;
@@ -156,7 +160,7 @@ namespace MouseClick.Devices
             }
             if (flag)
             {
-                Constant.DrawingHelper.Update(Global.Position[0], Global.Position[1]);
+                Constant.DrawingHelper.Update(Global.Position[0] * 1000, Global.Position[1] * 1000);
             }
 
             Global.Position[2] = refHeight / 1000;
