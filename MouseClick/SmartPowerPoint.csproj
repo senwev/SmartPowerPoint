@@ -61,6 +61,7 @@
     <Compile Include="Devices\SerialHelper.cs" />
     <Compile Include="Devices\SerialProtocolParse.cs" />
     <Compile Include="DrawingHelper.cs" />
+    <Compile Include="Global.cs" />
     <Compile Include="SerialSettingControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

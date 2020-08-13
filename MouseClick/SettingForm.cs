@@ -47,5 +47,10 @@ namespace MouseClick
         {
             new WebBrowserForm().Show();
         }
+
+        private void serialSettingControl1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

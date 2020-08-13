@@ -70,6 +70,7 @@
             this.serialSettingControl1.Name = "serialSettingControl1";
             this.serialSettingControl1.Size = new System.Drawing.Size(365, 483);
             this.serialSettingControl1.TabIndex = 3;
+            this.serialSettingControl1.Load += new System.EventHandler(this.serialSettingControl1_Load);
             // 
             // uwbPositionSettingControl1
             // 
