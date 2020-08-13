@@ -72,7 +72,7 @@
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Location = new System.Drawing.Point(245, 3);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(54, 13);
+            this.linkLabel1.Size = new System.Drawing.Size(65, 12);
             this.linkLabel1.TabIndex = 1;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Unhide all";
@@ -84,9 +84,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxFilter.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.textBoxFilter.Location = new System.Drawing.Point(12, 7);
+            this.textBoxFilter.Location = new System.Drawing.Point(12, 6);
             this.textBoxFilter.Name = "textBoxFilter";
-            this.textBoxFilter.Size = new System.Drawing.Size(287, 20);
+            this.textBoxFilter.Size = new System.Drawing.Size(287, 21);
             this.textBoxFilter.TabIndex = 7;
             this.textBoxFilter.Text = "Type to search";
             this.toolTip1.SetToolTip(this.textBoxFilter, "Enter search text here. Press Enter to lock search and to cycle through results.");
@@ -106,11 +106,11 @@
             this._tree.HotTracking = true;
             this._tree.ImageIndex = 0;
             this._tree.ImageList = this.imageListIconsHierarchy;
-            this._tree.Location = new System.Drawing.Point(0, 33);
+            this._tree.Location = new System.Drawing.Point(0, 30);
             this._tree.Name = "_tree";
             this._tree.SelectedImageIndex = 0;
             this._tree.ShowNodeToolTips = true;
-            this._tree.Size = new System.Drawing.Size(311, 573);
+            this._tree.Size = new System.Drawing.Size(311, 529);
             this._tree.TabIndex = 5;
             this._tree.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.BeforeExpand);
             this._tree.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.BeforeExpand);
@@ -138,7 +138,7 @@
             this.labelNodeStats.AutoSize = true;
             this.labelNodeStats.Location = new System.Drawing.Point(9, 5);
             this.labelNodeStats.Name = "labelNodeStats";
-            this.labelNodeStats.Size = new System.Drawing.Size(118, 13);
+            this.labelNodeStats.Size = new System.Drawing.Size(137, 12);
             this.labelNodeStats.TabIndex = 0;
             this.labelNodeStats.Text = "Showing m of n nodes. ";
             // 
@@ -147,7 +147,7 @@
             this.labelHiddenCount.AutoSize = true;
             this.labelHiddenCount.Location = new System.Drawing.Point(10, 3);
             this.labelHiddenCount.Name = "labelHiddenCount";
-            this.labelHiddenCount.Size = new System.Drawing.Size(158, 13);
+            this.labelHiddenCount.Size = new System.Drawing.Size(185, 12);
             this.labelHiddenCount.TabIndex = 0;
             this.labelHiddenCount.Text = "p nodes are permanently hidden";
             // 
@@ -158,10 +158,10 @@
             this.panelHiddenInfo.Controls.Add(this.linkLabel1);
             this.panelHiddenInfo.Controls.Add(this.labelHiddenCount);
             this.panelHiddenInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelHiddenInfo.Location = new System.Drawing.Point(0, 612);
+            this.panelHiddenInfo.Location = new System.Drawing.Point(0, 565);
             this.panelHiddenInfo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 6);
             this.panelHiddenInfo.Name = "panelHiddenInfo";
-            this.panelHiddenInfo.Size = new System.Drawing.Size(311, 21);
+            this.panelHiddenInfo.Size = new System.Drawing.Size(311, 20);
             this.panelHiddenInfo.TabIndex = 9;
             this.panelHiddenInfo.Visible = false;
             // 
@@ -170,9 +170,9 @@
             this.panel1.BackColor = System.Drawing.Color.Cornsilk;
             this.panel1.Controls.Add(this.labelNodeStats);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 633);
+            this.panel1.Location = new System.Drawing.Point(0, 585);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(311, 21);
+            this.panel1.Size = new System.Drawing.Size(311, 19);
             this.panel1.TabIndex = 8;
             // 
             // labelHitCount
@@ -180,9 +180,9 @@
             this.labelHitCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelHitCount.AutoSize = true;
             this.labelHitCount.BackColor = System.Drawing.Color.GreenYellow;
-            this.labelHitCount.Location = new System.Drawing.Point(247, 10);
+            this.labelHitCount.Location = new System.Drawing.Point(247, 9);
             this.labelHitCount.Name = "labelHitCount";
-            this.labelHitCount.Size = new System.Drawing.Size(0, 13);
+            this.labelHitCount.Size = new System.Drawing.Size(0, 12);
             this.labelHitCount.TabIndex = 10;
             // 
             // contextMenuStripTreeNode
@@ -197,32 +197,32 @@
             this.toolStripSeparator2,
             this.detailsToolStripMenuItem});
             this.contextMenuStripTreeNode.Name = "contextMenuStripTreeNode";
-            this.contextMenuStripTreeNode.Size = new System.Drawing.Size(176, 148);
+            this.contextMenuStripTreeNode.Size = new System.Drawing.Size(186, 148);
             this.contextMenuStripTreeNode.Opening += new System.ComponentModel.CancelEventHandler(this.OpOpenNodeContextMenu);
             // 
             // centerPivotToolStripMenuItem
             // 
             this.centerPivotToolStripMenuItem.Name = "centerPivotToolStripMenuItem";
-            this.centerPivotToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.centerPivotToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.centerPivotToolStripMenuItem.Text = "Center View (Pivot)";
             this.centerPivotToolStripMenuItem.Click += new System.EventHandler(this.OnContextMenuPivotNode);
             // 
             // hideToolStripMenuItem
             // 
             this.hideToolStripMenuItem.Name = "hideToolStripMenuItem";
-            this.hideToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.hideToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.hideToolStripMenuItem.Text = "Hide from View";
             this.hideToolStripMenuItem.Click += new System.EventHandler(this.OnContextMenuHideNode);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(172, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(182, 6);
             // 
             // toolStripMenuItemRename
             // 
             this.toolStripMenuItemRename.Name = "toolStripMenuItemRename";
-            this.toolStripMenuItemRename.Size = new System.Drawing.Size(175, 22);
+            this.toolStripMenuItemRename.Size = new System.Drawing.Size(185, 22);
             this.toolStripMenuItemRename.Text = "Rename";
             this.toolStripMenuItemRename.Click += new System.EventHandler(this.OnRenameNode);
             // 
@@ -230,27 +230,27 @@
             // 
             this.toolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem1.Image")));
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(175, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(185, 22);
             this.toolStripMenuItem1.Text = "Delete";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.OnDeleteNodePermanently);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(175, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(185, 22);
             this.toolStripMenuItem2.Text = "Delete all but this";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.DeleteAllButThisNode);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(172, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(182, 6);
             // 
             // detailsToolStripMenuItem
             // 
             this.detailsToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.detailsToolStripMenuItem.Name = "detailsToolStripMenuItem";
-            this.detailsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.detailsToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.detailsToolStripMenuItem.Text = "Details";
             this.detailsToolStripMenuItem.Click += new System.EventHandler(this.OnContextMenuShowDetails);
             // 
@@ -266,12 +266,12 @@
             this.toolStripSeparator4,
             this.detailsToolStripMenuItem1});
             this.contextMenuStripMesh.Name = "contextMenuStripMesh";
-            this.contextMenuStripMesh.Size = new System.Drawing.Size(174, 170);
+            this.contextMenuStripMesh.Size = new System.Drawing.Size(187, 148);
             // 
             // toolStripMenuItemRenameMesh
             // 
             this.toolStripMenuItemRenameMesh.Name = "toolStripMenuItemRenameMesh";
-            this.toolStripMenuItemRenameMesh.Size = new System.Drawing.Size(173, 22);
+            this.toolStripMenuItemRenameMesh.Size = new System.Drawing.Size(186, 22);
             this.toolStripMenuItemRenameMesh.Text = "Rename";
             this.toolStripMenuItemRenameMesh.Click += new System.EventHandler(this.OnRenameMesh);
             // 
@@ -279,19 +279,19 @@
             // 
             this.deleteToolStripMenuItem.Image = global::open3mod.Properties.Resources.FailedToLoad;
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.OnDeleteMesh);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(170, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(183, 6);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(173, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(186, 22);
             this.toolStripMenuItem3.Text = "Generate Normals";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.OnGenerateMeshNormals);
             // 
@@ -299,48 +299,48 @@
             // 
             this.toolStripMenuItem4.Enabled = false;
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(173, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(186, 22);
             this.toolStripMenuItem4.Text = "Generate Tangents";
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Enabled = false;
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(173, 22);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(186, 22);
             this.toolStripMenuItem5.Text = "Generate UVs";
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(170, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(183, 6);
             // 
             // detailsToolStripMenuItem1
             // 
             this.detailsToolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.detailsToolStripMenuItem1.Name = "detailsToolStripMenuItem1";
-            this.detailsToolStripMenuItem1.Size = new System.Drawing.Size(173, 22);
+            this.detailsToolStripMenuItem1.Size = new System.Drawing.Size(186, 22);
             this.detailsToolStripMenuItem1.Text = "Mesh Editor";
             this.detailsToolStripMenuItem1.Click += new System.EventHandler(this.OnContextMenuShowDetails);
             // 
             // meshInfoPopup
             // 
             this.meshInfoPopup.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.meshInfoPopup.Location = new System.Drawing.Point(223, 335);
+            this.meshInfoPopup.Location = new System.Drawing.Point(223, 308);
             this.meshInfoPopup.Name = "meshInfoPopup";
-            this.meshInfoPopup.Size = new System.Drawing.Size(88, 90);
+            this.meshInfoPopup.Size = new System.Drawing.Size(88, 83);
             this.meshInfoPopup.TabIndex = 12;
             // 
             // nodeInfoPopup
             // 
             this.nodeInfoPopup.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.nodeInfoPopup.Location = new System.Drawing.Point(223, 43);
+            this.nodeInfoPopup.Location = new System.Drawing.Point(220, 33);
             this.nodeInfoPopup.Name = "nodeInfoPopup";
-            this.nodeInfoPopup.Size = new System.Drawing.Size(88, 90);
+            this.nodeInfoPopup.Size = new System.Drawing.Size(88, 83);
             this.nodeInfoPopup.TabIndex = 11;
             // 
             // HierarchyInspectionView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.CornflowerBlue;
             this.Controls.Add(this.meshInfoPopup);
@@ -352,7 +352,7 @@
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "HierarchyInspectionView";
-            this.Size = new System.Drawing.Size(311, 654);
+            this.Size = new System.Drawing.Size(311, 604);
             this.panelHiddenInfo.ResumeLayout(false);
             this.panelHiddenInfo.PerformLayout();
             this.panel1.ResumeLayout(false);

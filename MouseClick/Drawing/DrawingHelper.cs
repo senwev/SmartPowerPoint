@@ -32,10 +32,10 @@ namespace MouseClick
             {
                 return;
             }
-            DrawAnchor($"Anchor0 x:{this.UWBAnchorArea.Anchor0.Y},y:{this.UWBAnchorArea.Anchor0.X}", g, this.UWBAnchorArea.Anchor0, area);
-            DrawAnchor($"Anchor1 x:{this.UWBAnchorArea.Anchor1.Y},y:{this.UWBAnchorArea.Anchor1.X}", g, this.UWBAnchorArea.Anchor1, area);
-            DrawAnchor($"Anchor2 x:{this.UWBAnchorArea.Anchor2.Y},y:{this.UWBAnchorArea.Anchor2.X}", g, this.UWBAnchorArea.Anchor2, area);
-            DrawAnchor($"Anchor3 x:{this.UWBAnchorArea.Anchor3.Y},y:{this.UWBAnchorArea.Anchor3.X}", g, this.UWBAnchorArea.Anchor3, area);
+            DrawAnchor($"Anchor0\r\nx:{this.UWBAnchorArea.Anchor0.Y},y:{this.UWBAnchorArea.Anchor0.X}", g, this.UWBAnchorArea.Anchor0, area);
+            DrawAnchor($"Anchor1\r\nx:{this.UWBAnchorArea.Anchor1.Y},y:{this.UWBAnchorArea.Anchor1.X}", g, this.UWBAnchorArea.Anchor1, area);
+            DrawAnchor($"Anchor2\r\nx:{this.UWBAnchorArea.Anchor2.Y},y:{this.UWBAnchorArea.Anchor2.X}", g, this.UWBAnchorArea.Anchor2, area);
+            DrawAnchor($"Anchor3\r\nx:{this.UWBAnchorArea.Anchor3.Y},y:{this.UWBAnchorArea.Anchor3.X}", g, this.UWBAnchorArea.Anchor3, area);
             DrawTarget(g, this.UWBAnchorArea.TargetCursor, area);
         }
 
@@ -65,7 +65,7 @@ namespace MouseClick
             var brush = new SolidBrush(this.UWBAnchorArea.AnchorColor);
 
             g.FillEllipse(brush, new RectangleF(point, new SizeF(PointWidth, PointHeight)));
-            g.DrawString(msg, new Font("宋体", 10), new SolidBrush(this.UWBAnchorArea.AnchorColor), point.X - 45, point.Y + 15);
+            g.DrawString(msg, new Font("宋体", 10), new SolidBrush(this.UWBAnchorArea.AnchorColor), point.X - 25, point.Y + 15);
             brush.Dispose();
         }
 
@@ -78,7 +78,7 @@ namespace MouseClick
             var brush = new SolidBrush(this.UWBAnchorArea.TargetColor);
 
             g.FillEllipse(brush, new RectangleF(point, new SizeF(PointWidth, PointHeight)));
-            g.DrawString($"Cursor x:{p.Y},y:{p.X}", new Font("宋体", 10), new SolidBrush(this.UWBAnchorArea.TargetColor), point.X - 45, point.Y + 15);
+            g.DrawString($"Cursor\r\nx:{p.Y},y:{p.X}", new Font("宋体", 10), new SolidBrush(this.UWBAnchorArea.TargetColor), point.X - 25, point.Y + 15);
 
             brush.Dispose();
         }

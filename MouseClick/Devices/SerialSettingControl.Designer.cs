@@ -145,17 +145,20 @@
             // 
             // button_OpenSerial
             // 
-            this.button_OpenSerial.Location = new System.Drawing.Point(68, 289);
+            this.button_OpenSerial.BackColor = System.Drawing.Color.Red;
+            this.button_OpenSerial.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_OpenSerial.ForeColor = System.Drawing.Color.White;
+            this.button_OpenSerial.Location = new System.Drawing.Point(49, 289);
             this.button_OpenSerial.Name = "button_OpenSerial";
             this.button_OpenSerial.Size = new System.Drawing.Size(75, 23);
             this.button_OpenSerial.TabIndex = 11;
             this.button_OpenSerial.Text = "打开串口";
-            this.button_OpenSerial.UseVisualStyleBackColor = true;
+            this.button_OpenSerial.UseVisualStyleBackColor = false;
             this.button_OpenSerial.Click += new System.EventHandler(this.button_OpenSerial_Click);
             // 
             // button_CloseSerial
             // 
-            this.button_CloseSerial.Location = new System.Drawing.Point(149, 289);
+            this.button_CloseSerial.Location = new System.Drawing.Point(140, 289);
             this.button_CloseSerial.Name = "button_CloseSerial";
             this.button_CloseSerial.Size = new System.Drawing.Size(75, 23);
             this.button_CloseSerial.TabIndex = 12;

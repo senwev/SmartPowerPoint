@@ -72,22 +72,22 @@
     <Compile Include="HomeForm.Designer.cs">
       <DependentUpon>HomeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Viewer3D.cs">
+    <Compile Include="Drawing\Viewer3D.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Viewer3D.Designer.cs">
+    <Compile Include="Drawing\Viewer3D.Designer.cs">
       <DependentUpon>Viewer3D.cs</DependentUpon>
     </Compile>
     <Compile Include="Constant.cs" />
     <Compile Include="Devices\SerialHelper.cs" />
     <Compile Include="Devices\SerialProtocolParse.cs" />
-    <Compile Include="Helpers\DrawingHelper.cs" />
+    <Compile Include="Drawing\DrawingHelper.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="Models\UWBAnchorArea.cs" />
-    <Compile Include="SerialSettingControl.cs">
+    <Compile Include="Devices\SerialSettingControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SerialSettingControl.Designer.cs">
+    <Compile Include="Devices\SerialSettingControl.Designer.cs">
       <DependentUpon>SerialSettingControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Solvers\LSSolver.cs" />
@@ -109,10 +109,10 @@
     <Compile Include="SettingForm.Designer.cs">
       <DependentUpon>SettingForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UWBPositionSettingControl.cs">
+    <Compile Include="Drawing\UWBPositionSettingControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UWBPositionSettingControl.Designer.cs">
+    <Compile Include="Drawing\UWBPositionSettingControl.Designer.cs">
       <DependentUpon>UWBPositionSettingControl.cs</DependentUpon>
     </Compile>
     <Compile Include="WebBrowserForm.cs">
@@ -124,7 +124,7 @@
     <EmbeddedResource Include="HomeForm.resx">
       <DependentUpon>HomeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Viewer3D.resx">
+    <EmbeddedResource Include="Drawing\Viewer3D.resx">
       <DependentUpon>Viewer3D.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
@@ -139,13 +139,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="SerialSettingControl.resx">
+    <EmbeddedResource Include="Devices\SerialSettingControl.resx">
       <DependentUpon>SerialSettingControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingForm.resx">
       <DependentUpon>SettingForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UWBPositionSettingControl.resx">
+    <EmbeddedResource Include="Drawing\UWBPositionSettingControl.resx">
       <DependentUpon>UWBPositionSettingControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WebBrowserForm.resx">

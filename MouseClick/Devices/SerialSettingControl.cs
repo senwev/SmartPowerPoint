@@ -24,6 +24,7 @@ namespace MouseClick
             {
                 this.button_OpenSerial.Enabled = true;
                 this.button_CloseSerial.Enabled = false;
+                this.button_StartOrStopReceive.Enabled = false;
                 this.button_Reset.Enabled = true;
                 UpdateControl();
             }
@@ -117,6 +118,7 @@ namespace MouseClick
             button_Reset.Enabled = true;//打开串口后使能重置功能
             button_OpenSerial.Enabled = true;
             button_CloseSerial.Enabled = false;
+            button_StartOrStopReceive.Enabled = false;
             comboBox_AvailableCom.Enabled = true;//使能可用串口控件
             comboBox_Rate.Enabled = true;//使能可用波特率下拉控件
             comboBox_ParityCom.Enabled = true;//使能可用校验位下拉控件
@@ -181,6 +183,7 @@ namespace MouseClick
                 //↓↓↓↓↓↓↓↓↓成功打开串口后的设置↓↓↓↓↓↓↓↓↓
                 button_OpenSerial.Enabled = false;
                 button_CloseSerial.Enabled = true;
+                button_StartOrStopReceive.Enabled = true;
                 button_Reset.Enabled = false;//打开串口后失能重置功能
                 comboBox_AvailableCom.Enabled = false;//失能可用串口控件
                 comboBox_Rate.Enabled = false;//失能可用波特率控件
