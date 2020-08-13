@@ -118,6 +118,9 @@ namespace MouseClick
             var height = y_list.Max((y) => y);
 
             this.Axes = new Rectangle(0, 0, (int)width, (int)height);
+            Random rand = new Random();
+
+            this.Cursor = new Point(rand.Next(0, this.Axes.Width), rand.Next(0, this.Axes.Height));
         }
 
         private Rectangle Transform(Rectangle rect, Rectangle axes, Rectangle area)
