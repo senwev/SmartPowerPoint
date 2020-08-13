@@ -40,7 +40,11 @@ namespace MouseClick.Devices
 
         private double refHeight = 1210;
 
-        public double tolerance = 0.15;
+        private double tolerance = 0.15;
+
+        private MovingAverage XMovingAverage = new MovingAverage(3);
+
+        private MovingAverage YMovingAverage = new MovingAverage(3);
 
         public SerialHelper()
         {
@@ -126,14 +130,18 @@ namespace MouseClick.Devices
             var ds = solver2D.Update(datas.Select<long, double>(x => x).ToList());
             //var ds = solver3D.Update(datas.Select<long, double>(x => x).ToList());
             Console.WriteLine(string.Join(",", ds) + "\r\n");
-            if (Math.Abs(Global.Position[0] - ds[0] / 1000) > tolerance)
+            XMovingAverage.Push(ds[0]);
+            YMovingAverage.Push(ds[1]);
+            var outX = XMovingAverage.Current;
+            var outY = YMovingAverage.Current;
+            if (Math.Abs(Global.Position[0] - outX / 1000) > tolerance)
             {
-                Global.Position[0] = ds[0] / 1000;
+                Global.Position[0] = outX / 1000;
                 Constant.DrawingHelper.Update(ds.ToArray());
             }
-            if (Math.Abs(Global.Position[1] - ds[1] / 1000) > tolerance)
+            if (Math.Abs(Global.Position[1] - outY / 1000) > tolerance)
             {
-                Global.Position[1] = ds[1] / 1000;
+                Global.Position[1] = outY / 1000;
                 Constant.DrawingHelper.Update(ds.ToArray());
             }
             Global.Position[2] = refHeight / 1000;
