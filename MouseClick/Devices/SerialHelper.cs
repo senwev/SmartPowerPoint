@@ -42,9 +42,11 @@ namespace MouseClick.Devices
 
         private double tolerance = 0.15;
 
-        private MovingAverage XMovingAverage = new MovingAverage(3);
+        private int ringLength = 3;
 
-        private MovingAverage YMovingAverage = new MovingAverage(3);
+        private MovingAverage XMovingAverage;
+
+        private MovingAverage YMovingAverage;
 
         private long calibrate = -272;
 
@@ -95,6 +97,9 @@ namespace MouseClick.Devices
 
             solver2D = new UWBPositionSolver2D(list, coff_A, coff_B);
             Constant.DrawingHelper.Update(anchor0, anchor1, anchor2, anchor3);
+
+            this.XMovingAverage=new MovingAverage(ringLength);
+            this.YMovingAverage = new MovingAverage(ringLength);
         }
 
         private void OnComReceive(object sender, SerialDataReceivedEventArgs e)//接收数据 中断只标志有数据需要读取，读取操作在中断外进行
@@ -136,13 +141,13 @@ namespace MouseClick.Devices
             //var ds = solver3D.Update(datas.Select<long, double>(x => x).ToList());
             Console.WriteLine(string.Join(",", ds) + "\r\n");
             bool flag = false;
-            if (Math.Abs(Global.Position[0] - ds[0] / 1000) > tolerance || double.IsNaN(Global.Position[0]))
+            if (Math.Abs(Global.Position[0] - ds[0] / 1000) > tolerance || XMovingAverage.Length < ringLength)
             {
                 XMovingAverage.Push(ds[0]);
                 Global.Position[0] = XMovingAverage.Current / 1000;
                 flag = true;
             }
-            if (Math.Abs(Global.Position[1] - ds[1] / 1000) > tolerance || double.IsNaN(Global.Position[0]))
+            if (Math.Abs(Global.Position[1] - ds[1] / 1000) > tolerance || YMovingAverage.Length < ringLength)
             {
                 YMovingAverage.Push(ds[1]);
                 Global.Position[1] = YMovingAverage.Current / 1000;
