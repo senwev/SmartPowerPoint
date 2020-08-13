@@ -249,5 +249,10 @@ namespace MouseClick
         {
 
         }
+
+        private void SerialSettingControl_Resize(object sender, EventArgs e)
+        {
+
+        }
     }
 }

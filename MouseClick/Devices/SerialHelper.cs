@@ -46,6 +46,8 @@ namespace MouseClick.Devices
 
         private MovingAverage YMovingAverage = new MovingAverage(3);
 
+        private long calibrate = -272;
+
         public SerialHelper()
         {
             this.Devices = new List<SerialDeviceProperty>();
@@ -126,26 +128,33 @@ namespace MouseClick.Devices
             if (data == null) { return; }
             var datas = SerialProtocolParseHelper.Parse(data);
             Console.WriteLine(string.Join(",", datas) + "\r\n");
-
+            if(datas.Contains(calibrate))
+            {
+                return;
+            }
             var ds = solver2D.Update(datas.Select<long, double>(x => x).ToList());
             //var ds = solver3D.Update(datas.Select<long, double>(x => x).ToList());
             Console.WriteLine(string.Join(",", ds) + "\r\n");
-            XMovingAverage.Push(ds[0]);
-            YMovingAverage.Push(ds[1]);
-            var outX = XMovingAverage.Current;
-            var outY = YMovingAverage.Current;
-            if (Math.Abs(Global.Position[0] - outX / 1000) > tolerance)
+            bool flag = false;
+            if (Math.Abs(Global.Position[0] - ds[0] / 1000) > tolerance)
             {
-                Global.Position[0] = outX / 1000;
-                Constant.DrawingHelper.Update(ds.ToArray());
+                XMovingAverage.Push(ds[0]);
+                Global.Position[0] = XMovingAverage.Current / 1000;
+                flag = true;
             }
-            if (Math.Abs(Global.Position[1] - outY / 1000) > tolerance)
+            if (Math.Abs(Global.Position[1] - ds[1] / 1000) > tolerance)
             {
-                Global.Position[1] = outY / 1000;
-                Constant.DrawingHelper.Update(ds.ToArray());
+                YMovingAverage.Push(ds[1]);
+                Global.Position[1] = YMovingAverage.Current / 1000;
+                flag = true;
             }
+            if (flag)
+            {
+                Constant.DrawingHelper.Update(Global.Position[0], Global.Position[1]);
+            }
+
             Global.Position[2] = refHeight / 1000;
-  
+
             SerialDataReceived?.Invoke(this, string.Join(",", ds) + "\r\n");
         }
 

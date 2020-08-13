@@ -77,6 +77,7 @@
             this.uwbPositionSettingControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.uwbPositionSettingControl1.AutoScroll = true;
             this.uwbPositionSettingControl1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.uwbPositionSettingControl1.Location = new System.Drawing.Point(340, 187);
             this.uwbPositionSettingControl1.Name = "uwbPositionSettingControl1";

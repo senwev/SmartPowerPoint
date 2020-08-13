@@ -50,5 +50,9 @@ namespace MouseClick
             this.Refresh();
         }
 
+        private void UWBPositionSettingControl_Resize(object sender, EventArgs e)
+        {
+            this.Refresh();
+        }
     }
 }
