@@ -176,12 +176,12 @@ namespace open3mod
             _previousMousePosX = e.X;
             _previousMousePosY = e.Y;
 
-            if(e.Button == MouseButtons.Middle)
+            if (e.Button == MouseButtons.Middle)
             {
                 _mouseWheelDown = true;
                 return;
             }
-            if(e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
             {
                 _mouseRightDown = true;
                 return;
@@ -214,7 +214,7 @@ namespace open3mod
                 var view = UiState.ActiveTab.ActiveViews[(int)index];
                 Debug.Assert(view != null);
                 _renderer.OnMouseClick(e, view.Bounds, index);
-            }           
+            }
         }
 
 
@@ -249,7 +249,7 @@ namespace open3mod
 
         partial void OnMouseMove(object sender, MouseEventArgs e)
         {
-            if(_mouseWheelDown)
+            if (_mouseWheelDown)
             {
                 if (UiState.ActiveTab.ActiveCameraController != null)
                 {
@@ -316,7 +316,7 @@ namespace open3mod
             {
                 var vx = e.X - _previousMousePosX;
                 var vy = e.Y - _previousMousePosY;
-                if(_mouseRightDown)
+                if (_mouseRightDown)
                 {
                     var viewMatrix = UiState.ActiveTab.ActiveCameraController == null ? Matrix4.Identity :
                      UiState.ActiveTab.ActiveCameraController.GetView();
@@ -324,7 +324,10 @@ namespace open3mod
                 }
                 else
                 {
-                    UiState.ActiveTab.ActiveCameraController.MouseMove(vx, vy);
+                    //UiState.ActiveTab.ActiveCameraController.MouseMove(vx, vy);
+                    //var realX = e.X - glControl1.ClientSize.Width / 2;
+                    //var realY = e.Y - glControl1.ClientSize.Height / 2;
+                    UiState.ActiveTab.ActiveCameraController.MouseMoveToPoint(vy, vy);
                 }
             }
             _previousMousePosX = e.X;
@@ -350,7 +353,6 @@ namespace open3mod
             }
         }
 
-
         partial void OnMouseLeave(object sender, EventArgs e)
         {
             if (_mouseDown)
@@ -361,24 +363,20 @@ namespace open3mod
             Cursor = Cursors.Default;
         }
 
-
         partial void OnMouseEnter(object sender, EventArgs e)
         {
             Capture = false;
         }
-
 
         protected override bool IsInputKey(Keys keyData)
         {
             return true;
         }
 
-
         partial void OnPreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             e.IsInputKey = true;
         }
-
 
         partial void OnKeyDown(object sender, KeyEventArgs e)
         {
@@ -419,7 +417,6 @@ namespace open3mod
             }
         }
 
-
         partial void OnKeyUp(object sender, KeyEventArgs keyEventArgs)
         {
             switch (keyEventArgs.KeyData)
@@ -451,6 +448,15 @@ namespace open3mod
                 case Keys.PageDown:
                     _downPressed = false;
                     break;
+            }
+        }
+
+
+        public void OnMoveToAngle(double x, double y)
+        {
+            if (UiState.ActiveTab.ActiveCameraController != null)
+            {
+                UiState.ActiveTab.ActiveCameraController.MouseMoveToPoint(y, y);
             }
         }
     }

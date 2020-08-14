@@ -180,7 +180,6 @@ namespace open3mod
             if (_gSettings.MultiSampling != comboBoxSetMultiSampling.SelectedIndex)
             {
                 _gSettings.MultiSampling = comboBoxSetMultiSampling.SelectedIndex;
-                labelPleaseRestart.Visible = true;
             }
         }
 

@@ -772,6 +772,7 @@ namespace open3mod
             this.toolStripButtonShowSettings.Size = new System.Drawing.Size(32, 32);
             this.toolStripButtonShowSettings.Text = "Settings";
             this.toolStripButtonShowSettings.ToolTipText = "Open settings dialog";
+            this.toolStripButtonShowSettings.Visible = false;
             this.toolStripButtonShowSettings.Click += new System.EventHandler(this.OnShowSettings);
             // 
             // tabControl1

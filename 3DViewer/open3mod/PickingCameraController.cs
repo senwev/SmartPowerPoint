@@ -87,6 +87,10 @@ namespace open3mod
         {
 
         }
+
+        public void MouseMoveToPoint(double x, double y)
+        {
+        }
     }
 }
 
