@@ -512,6 +512,7 @@ namespace MouseClick
                         }
                         else if (str0.Equals("b"))
                         {
+                            
                             // EyeCare 接受坐标
                             String str3 = "";
 
@@ -525,15 +526,23 @@ namespace MouseClick
 
                                 if (str3 != "")
                                 {
-                                    _mainform.Width = Int32.Parse(str3);
-                                    _mainform.Height = Int32.Parse(str3);
+                                    //配置窗口宽度
+                                    float w = float.Parse(str3);
+                                    float h = float.Parse(str3);
+
+                                    _mainform.Width = (int)w;
+                                    _mainform.Height = (int)h;
                                 }
 
                                 try
                                 {
 
-                                    int thisX = Int32.Parse(str1);
-                                    int thisY = Int32.Parse(str2);
+                                    float X = float.Parse(str1);
+                                    float Y = float.Parse(str2)-100;
+
+
+                                    int thisX = (int)X;
+                                    int thisY = (int)Y;
 
                                     SetPosition((int)(thisX - _mainform.Width / 2f), (int)(thisY - _mainform.Height / 2f));
                                     // SetCursorPos((int)(Int32.Parse(str1) - _mainform.Width / 2f), (int)(Int32.Parse(str2) - _mainform.Height / 2f));
@@ -542,6 +551,7 @@ namespace MouseClick
                                 }
                                 catch (Exception ex)
                                 {
+
                                 }
 
                             });
@@ -560,7 +570,7 @@ namespace MouseClick
                         }
                         else if (str0.Equals("reset"))
                         {
-
+                            //执行校准
                             String str3 = "";
                             String str4 = "";
 
@@ -651,7 +661,7 @@ namespace MouseClick
                             float act_screen_distance = posX;//距离屏幕距离
 
 
-
+                            
 
 
                             float pix_start_x = act_start_x / act_screen_width * pix_screen_width;
@@ -712,54 +722,7 @@ namespace MouseClick
                 }
 
 
-                /*
-                String[] receiveStrarr = receiveStr1.Split('\n');
-                String receiveStr = receiveStrarr[receiveStrarr.Length - 2];
-
-                foreach (var thisstr in receiveStrarr)
-                {
-                    if (thisstr != "")
-                    {
-
-                        _mainform.Invoke((MethodInvoker)delegate {
-                            // Running on the UI thread
-                            if (thisstr.Length < 3)
-                            {
-                                long num = Int64.Parse(thisstr);
-                                // if (num < 100 && num > 0)
-                                var purenum = num - 23.5f;
-                                    SetPosition((int)( (23.5+ purenum*(purenum>0?0.8:1.0))/47f*1920f-_mainform.Width/2.2f), 550);
-                            }
-                            else
-                            {
-                                var a = receiveStr1;
-                            }
-
-                        });
-                    }
-
-
-                }
-                */
-
-
-
-
-                //SetPosition(1000, 600, _mainform);
-
-                // SetPosition(100+Int32.Parse(receiveStr)*10, 600,_mainform);
-
-                //下面是反向传送
-
-                //代码屏蔽
-                /*
-                Console.WriteLine("接收客户端{0} 的消息：{1}", myClientSocket.RemoteEndPoint.ToString(), Encoding.UTF8.GetString(result, 0, receiveNumber));
-                //给Client端返回信息
-                string sendStr = "已成功接到您发送的消息";
-                byte[] bs = Encoding.UTF8.GetBytes(sendStr);//Encoding.UTF8.GetBytes()不然中文会乱码
-                myClientSocket.Send(bs, bs.Length, 0);  //返回信息给客户端
-                myClientSocket.Close(); //发送完数据关闭Socket并释放资源
-                Console.ReadLine();*/
+  
             }
             catch (Exception ex)
             {
@@ -777,14 +740,18 @@ namespace MouseClick
             InitializeComponent();
         }
 
+
+        /// <summary>
+        /// 设置屏幕黑块位置
+        /// </summary>
+        /// <param name="X"></param>
+        /// <param name="Y"></param>
         static private void SetPosition(int X, int Y)
         {
             var form = _mainform;
             Point point = new Point(X, Y);
 
             form.Location = point;
-
-
         }
 
         static private void SetPosition(int X, int Y, Form form)

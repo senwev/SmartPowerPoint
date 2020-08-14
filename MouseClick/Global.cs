@@ -11,8 +11,8 @@ namespace MouseClick
     {
         static public double[] Position = new double[3] {1.213,1.163,1.229};
 
-        static public MovingAverage XMovingAverage = new MovingAverage(10);
+        static public MovingAverage XMovingAverage = new MovingAverage(20);
 
-        static public MovingAverage YMovingAverage = new MovingAverage(10);
+        static public MovingAverage YMovingAverage = new MovingAverage(20);
     }
 }
