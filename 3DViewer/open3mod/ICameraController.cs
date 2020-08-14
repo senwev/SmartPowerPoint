@@ -71,6 +71,13 @@ namespace open3mod
         void MouseMove(int x, int y);
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        void MouseMoveToPoint(double x, double y);
+
+        /// <summary>
         /// Processes scroll events
         /// </summary>
         /// <param name="z">Signed scroll delta (knocks * DELTA_.. constants

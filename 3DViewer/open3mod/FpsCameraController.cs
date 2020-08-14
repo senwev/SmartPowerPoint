@@ -30,7 +30,7 @@ namespace open3mod
         private Matrix4 _orientation;
         private Vector3 _translation;
 
-        private static readonly Vector3 StartPosition = new Vector3(0.0f,1.0f,2.5f);
+        private static readonly Vector3 StartPosition = new Vector3(0.0f, 1.0f, 2.5f);
         private bool _dirty = true;
         private bool _updateOrientation = true;
         private const float MovementBaseSpeed = 1.0f;
@@ -55,7 +55,7 @@ namespace open3mod
 
         public Matrix4 GetView()
         {
-            if(_dirty)
+            if (_dirty)
             {
                 UpdateViewMatrix();
             }
@@ -65,7 +65,7 @@ namespace open3mod
 
         public void Pan(float x, float y)
         {
-            
+
 
         }
 
@@ -104,11 +104,15 @@ namespace open3mod
             _updateOrientation = true;
         }
 
+        public void MouseMoveToPoint()
+        {
+
+        }
 
         public void Scroll(float z)
         {
             var o = GetOrientation();
-            _translation -= o.Row2.Xyz *z*BaseZoomSpeed;
+            _translation -= o.Row2.Xyz * z * BaseZoomSpeed;
             _dirty = true;
         }
 
@@ -134,7 +138,7 @@ namespace open3mod
             {
                 _updateOrientation = false;
                 _orientation = Matrix4.CreateFromAxisAngle(Vector3.UnitY, _yawAngle);
-                _orientation *= Matrix4.CreateFromAxisAngle(_orientation.Row0.Xyz, _pitchAngle);   
+                _orientation *= Matrix4.CreateFromAxisAngle(_orientation.Row0.Xyz, _pitchAngle);
             }
             return _orientation;
         }
@@ -148,6 +152,11 @@ namespace open3mod
             _updateOrientation = true;
 
             UpdateViewMatrix();
+        }
+
+        public void MouseMoveToPoint(double x, double y)
+        {
+
         }
     }
 }

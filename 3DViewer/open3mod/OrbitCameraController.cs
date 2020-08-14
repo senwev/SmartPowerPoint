@@ -65,7 +65,7 @@ namespace open3mod
             _up = Vector3.UnitY;
             _front = Vector3.UnitZ;
 
-            SetOrbitOrConstrainedMode(camMode, true);           
+            SetOrbitOrConstrainedMode(camMode, true);
         }
 
 
@@ -89,7 +89,7 @@ namespace open3mod
 
         public void MouseMove(int x, int y)
         {
-            if(x == 0 && y == 0)
+            if (x == 0 && y == 0)
             {
                 return;
             }
@@ -104,6 +104,54 @@ namespace open3mod
                 _view *= Matrix4.CreateFromAxisAngle(_right, (float)(y * RotationSpeed * Math.PI / 180.0));
             }
 
+
+            _dirty = true;
+
+            // leave the X,Z,Y constrained camera modes if we were in any of them
+            SetOrbitOrConstrainedMode(CameraMode.Orbit);
+        }
+
+        public void MouseMoveToPoint(double x, double y)
+        {
+            if (x == 0 && y == 0)
+            {
+                return;
+            }
+            _view = new Matrix4(
+                        0, 0, 1, 0,
+                        0, 1, 0, 0,
+                       -1, 0, 0, 0,
+                        0, 0, 0, 1
+                        );
+            //if (x != 0)
+            //{
+            _view *= Matrix4.CreateFromAxisAngle(_up, (float)(x * RotationSpeed * Math.PI / 180.0));
+            //}
+
+            //if (y != 0)
+            //{
+            _view *= Matrix4.CreateFromAxisAngle(_right, (float)(y * RotationSpeed * Math.PI / 180.0));
+            //}
+
+
+            _dirty = true;
+
+            // leave the X,Z,Y constrained camera modes if we were in any of them
+            SetOrbitOrConstrainedMode(CameraMode.Orbit);
+        }
+
+        public void MouseMoveToAngle(int x, int y)
+        {
+            _view = new Matrix4(
+                        0, 0, 1, 0,
+                        0, 1, 0, 0,
+                       -1, 0, 0, 0,
+                        0, 0, 0, 1
+                        );
+
+            _view *= Matrix4.CreateFromAxisAngle(_up, (float)(x * RotationSpeed * Math.PI / 180.0));
+
+            _view *= Matrix4.CreateFromAxisAngle(_right, (float)(y * RotationSpeed * Math.PI / 180.0));
 
             _dirty = true;
 
@@ -158,21 +206,21 @@ namespace open3mod
         /// <param name="init">Do not use</param>
         public void SetOrbitOrConstrainedMode(CameraMode cameraMode, bool init = false)
         {
-            if(_mode == cameraMode && !init)
+            if (_mode == cameraMode && !init)
             {
                 return;
             }
             _mode = cameraMode;
-    
-            switch(_mode)
+
+            switch (_mode)
             {
                 case CameraMode.X:
                     _view = new Matrix4(
-                        0,0,1,0,
-                        0,1,0,0,
-                       -1,0,0,0,
-                        0,0,0,1
-                        ); 
+                        0, 0, 1, 0,
+                        0, 1, 0, 0,
+                       -1, 0, 0, 0,
+                        0, 0, 0, 1
+                        );
                     break;
                 case CameraMode.Y:
                     _view = new Matrix4(
@@ -180,7 +228,7 @@ namespace open3mod
                         0, 0, 1, 0,
                         1, 0, 0, 0,
                         0, 0, 0, 1
-                        ); 
+                        );
                     break;
                 case CameraMode.Z:
                     _view = new Matrix4(
@@ -188,11 +236,11 @@ namespace open3mod
                         0, 1, 0, 0,
                         0, 0, 1, 0,
                         0, 0, 0, 1
-                        ); 
+                        );
                     break;
                 case CameraMode.Orbit:
                     // leave _view unchanged 
-                    break;               
+                    break;
                 default:
                     Debug.Assert(false);
                     break;
