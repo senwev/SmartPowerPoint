@@ -164,33 +164,33 @@ namespace open3mod
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.OnFileMenuOpen);
             // 
             // closeAllToolStripMenuItem
             // 
             this.closeAllToolStripMenuItem.Name = "closeAllToolStripMenuItem";
-            this.closeAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.closeAllToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.closeAllToolStripMenuItem.Text = "Close all";
             this.closeAllToolStripMenuItem.Click += new System.EventHandler(this.OnFileMenuCloseAll);
             // 
             // toolStripMenuItemReload
             // 
             this.toolStripMenuItemReload.Name = "toolStripMenuItemReload";
-            this.toolStripMenuItemReload.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemReload.Size = new System.Drawing.Size(162, 22);
             this.toolStripMenuItemReload.Text = "Reload";
             this.toolStripMenuItemReload.Click += new System.EventHandler(this.OnReloadCurrentTab);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(159, 6);
             // 
             // recentToolStripMenuItem
             // 
             this.recentToolStripMenuItem.Name = "recentToolStripMenuItem";
-            this.recentToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.recentToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.recentToolStripMenuItem.Text = "Recent";
             // 
             // toolStripMenuItem4
@@ -202,7 +202,7 @@ namespace open3mod
             this.wustonAnimatedToolStripMenuItem,
             this.lostEmpireToolStripMenuItem});
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(162, 22);
             this.toolStripMenuItem4.Text = "Sample scenes";
             // 
             // wusonToolStripMenuItem
@@ -243,7 +243,7 @@ namespace open3mod
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(159, 6);
             // 
             // editToolStripMenuItem
             // 
@@ -533,6 +533,7 @@ namespace open3mod
             // 
             // toolStripSelectRenderer
             // 
+            this.toolStripSelectRenderer.ImageScalingSize = new System.Drawing.Size(28, 28);
             this.toolStripSelectRenderer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripButton,
             this.toolStripSeparator12,
@@ -558,7 +559,7 @@ namespace open3mod
             this.toolStripButtonShowSettings});
             this.toolStripSelectRenderer.Location = new System.Drawing.Point(0, 25);
             this.toolStripSelectRenderer.Name = "toolStripSelectRenderer";
-            this.toolStripSelectRenderer.Size = new System.Drawing.Size(1051, 25);
+            this.toolStripSelectRenderer.Size = new System.Drawing.Size(1051, 35);
             this.toolStripSelectRenderer.TabIndex = 2;
             this.toolStripSelectRenderer.Text = "toolStrip1";
             // 
@@ -568,7 +569,7 @@ namespace open3mod
             this.openToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripButton.Image")));
             this.openToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openToolStripButton.Name = "openToolStripButton";
-            this.openToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.openToolStripButton.Size = new System.Drawing.Size(32, 32);
             this.openToolStripButton.Text = "&Open";
             this.openToolStripButton.ToolTipText = "Open a 3D file";
             this.openToolStripButton.Click += new System.EventHandler(this.OnFileMenuOpen);
@@ -576,7 +577,7 @@ namespace open3mod
             // toolStripSeparator12
             // 
             this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 35);
             // 
             // toolStripButtonUndo
             // 
@@ -584,7 +585,7 @@ namespace open3mod
             this.toolStripButtonUndo.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonUndo.Image")));
             this.toolStripButtonUndo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonUndo.Name = "toolStripButtonUndo";
-            this.toolStripButtonUndo.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonUndo.Size = new System.Drawing.Size(32, 32);
             this.toolStripButtonUndo.Text = "Undo";
             this.toolStripButtonUndo.Click += new System.EventHandler(this.OnGlobalUndo);
             // 
@@ -594,14 +595,14 @@ namespace open3mod
             this.toolStripButtonRedo.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonRedo.Image")));
             this.toolStripButtonRedo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonRedo.Name = "toolStripButtonRedo";
-            this.toolStripButtonRedo.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonRedo.Size = new System.Drawing.Size(32, 32);
             this.toolStripButtonRedo.Text = "Redo";
             this.toolStripButtonRedo.Click += new System.EventHandler(this.OnGlobalRedo);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 35);
             // 
             // toolStripButtonFullView
             // 
@@ -609,7 +610,7 @@ namespace open3mod
             this.toolStripButtonFullView.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonFullView.Image")));
             this.toolStripButtonFullView.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonFullView.Name = "toolStripButtonFullView";
-            this.toolStripButtonFullView.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonFullView.Size = new System.Drawing.Size(32, 32);
             this.toolStripButtonFullView.Text = "Full View";
             this.toolStripButtonFullView.ToolTipText = "Show full-size 3D view";
             this.toolStripButtonFullView.Click += new System.EventHandler(this.ToggleFullView);
@@ -620,7 +621,7 @@ namespace open3mod
             this.toolStripButtonTwoViews.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonTwoViews.Image")));
             this.toolStripButtonTwoViews.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonTwoViews.Name = "toolStripButtonTwoViews";
-            this.toolStripButtonTwoViews.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonTwoViews.Size = new System.Drawing.Size(32, 32);
             this.toolStripButtonTwoViews.Text = "Two Views";
             this.toolStripButtonTwoViews.ToolTipText = "Split into two 3D views stacked on top of each other";
             this.toolStripButtonTwoViews.Click += new System.EventHandler(this.ToggleTwoViews);
@@ -631,7 +632,7 @@ namespace open3mod
             this.toolStripButtonTwoViewsHor.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonTwoViewsHor.Image")));
             this.toolStripButtonTwoViewsHor.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonTwoViewsHor.Name = "toolStripButtonTwoViewsHor";
-            this.toolStripButtonTwoViewsHor.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonTwoViewsHor.Size = new System.Drawing.Size(32, 32);
             this.toolStripButtonTwoViewsHor.Text = "Two Views (Horizontal)";
             this.toolStripButtonTwoViewsHor.ToolTipText = "Split into two 3D views stacked on top of each other";
             this.toolStripButtonTwoViewsHor.Click += new System.EventHandler(this.ToggleTwoViewsHorizontal);
@@ -642,7 +643,7 @@ namespace open3mod
             this.toolStripButtonFourViews.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonFourViews.Image")));
             this.toolStripButtonFourViews.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonFourViews.Name = "toolStripButtonFourViews";
-            this.toolStripButtonFourViews.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonFourViews.Size = new System.Drawing.Size(32, 32);
             this.toolStripButtonFourViews.Text = "Four Views";
             this.toolStripButtonFourViews.ToolTipText = "Split into four 3D views";
             this.toolStripButtonFourViews.Click += new System.EventHandler(this.ToggleFourViews);
@@ -650,7 +651,7 @@ namespace open3mod
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator.Size = new System.Drawing.Size(6, 35);
             // 
             // toolStripButtonWireframe
             // 
@@ -659,7 +660,7 @@ namespace open3mod
             this.toolStripButtonWireframe.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonWireframe.Image")));
             this.toolStripButtonWireframe.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonWireframe.Name = "toolStripButtonWireframe";
-            this.toolStripButtonWireframe.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonWireframe.Size = new System.Drawing.Size(32, 32);
             this.toolStripButtonWireframe.Text = "Enable Wireframe Mode";
             this.toolStripButtonWireframe.ToolTipText = "Enable wireframe mode";
             this.toolStripButtonWireframe.Click += new System.EventHandler(this.ToggleWireframe);
@@ -671,7 +672,7 @@ namespace open3mod
             this.toolStripButtonShowTextures.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonShowTextures.Image")));
             this.toolStripButtonShowTextures.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonShowTextures.Name = "toolStripButtonShowTextures";
-            this.toolStripButtonShowTextures.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonShowTextures.Size = new System.Drawing.Size(32, 32);
             this.toolStripButtonShowTextures.Text = "Enable Textures";
             this.toolStripButtonShowTextures.ToolTipText = "Enable textures in 3D view";
             this.toolStripButtonShowTextures.Click += new System.EventHandler(this.ToggleTextures);
@@ -683,7 +684,7 @@ namespace open3mod
             this.toolStripButtonShowShaded.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonShowShaded.Image")));
             this.toolStripButtonShowShaded.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonShowShaded.Name = "toolStripButtonShowShaded";
-            this.toolStripButtonShowShaded.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonShowShaded.Size = new System.Drawing.Size(32, 32);
             this.toolStripButtonShowShaded.Text = "Enable Shading";
             this.toolStripButtonShowShaded.ToolTipText = "Enable shading (lighting) in 3D view";
             this.toolStripButtonShowShaded.Click += new System.EventHandler(this.ToggleShading);
@@ -691,7 +692,7 @@ namespace open3mod
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 35);
             // 
             // toolStripButtonShowBB
             // 
@@ -700,7 +701,7 @@ namespace open3mod
             this.toolStripButtonShowBB.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonShowBB.Image")));
             this.toolStripButtonShowBB.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonShowBB.Name = "toolStripButtonShowBB";
-            this.toolStripButtonShowBB.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonShowBB.Size = new System.Drawing.Size(32, 32);
             this.toolStripButtonShowBB.Text = "Show Bounding Boxes";
             this.toolStripButtonShowBB.ToolTipText = "Show axis-aligned bounding boxes for nodes";
             this.toolStripButtonShowBB.Click += new System.EventHandler(this.ToggleShowBb);
@@ -712,7 +713,7 @@ namespace open3mod
             this.toolStripButtonShowNormals.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonShowNormals.Image")));
             this.toolStripButtonShowNormals.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonShowNormals.Name = "toolStripButtonShowNormals";
-            this.toolStripButtonShowNormals.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonShowNormals.Size = new System.Drawing.Size(32, 32);
             this.toolStripButtonShowNormals.Text = "Show Normals";
             this.toolStripButtonShowNormals.ToolTipText = "Show geometric normal vectors";
             this.toolStripButtonShowNormals.Click += new System.EventHandler(this.ToggleShowNormals);
@@ -723,7 +724,7 @@ namespace open3mod
             this.toolStripButtonCulling.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonCulling.Image")));
             this.toolStripButtonCulling.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonCulling.Name = "toolStripButtonCulling";
-            this.toolStripButtonCulling.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonCulling.Size = new System.Drawing.Size(32, 32);
             this.toolStripButtonCulling.Text = "toolStripButton1";
             this.toolStripButtonCulling.ToolTipText = "Cull back faces";
             this.toolStripButtonCulling.Click += new System.EventHandler(this.ToggleCulling);
@@ -735,7 +736,7 @@ namespace open3mod
             this.toolStripButtonShowSkeleton.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonShowSkeleton.Image")));
             this.toolStripButtonShowSkeleton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonShowSkeleton.Name = "toolStripButtonShowSkeleton";
-            this.toolStripButtonShowSkeleton.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonShowSkeleton.Size = new System.Drawing.Size(32, 32);
             this.toolStripButtonShowSkeleton.Text = "Show Skeleton";
             this.toolStripButtonShowSkeleton.ToolTipText = "Show skeleton joints in 3D view";
             this.toolStripButtonShowSkeleton.Click += new System.EventHandler(this.ToggleShowSkeleton);
@@ -743,7 +744,7 @@ namespace open3mod
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 35);
             // 
             // toolStripButtonShowFPS
             // 
@@ -752,7 +753,7 @@ namespace open3mod
             this.toolStripButtonShowFPS.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonShowFPS.Image")));
             this.toolStripButtonShowFPS.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonShowFPS.Name = "toolStripButtonShowFPS";
-            this.toolStripButtonShowFPS.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonShowFPS.Size = new System.Drawing.Size(32, 32);
             this.toolStripButtonShowFPS.Text = "Show Frames per Second (FPS)";
             this.toolStripButtonShowFPS.ToolTipText = "Show frames per second (FPS)";
             this.toolStripButtonShowFPS.Click += new System.EventHandler(this.ToggleFps);
@@ -760,7 +761,7 @@ namespace open3mod
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 35);
             // 
             // toolStripButtonShowSettings
             // 
@@ -768,7 +769,7 @@ namespace open3mod
             this.toolStripButtonShowSettings.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonShowSettings.Image")));
             this.toolStripButtonShowSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonShowSettings.Name = "toolStripButtonShowSettings";
-            this.toolStripButtonShowSettings.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonShowSettings.Size = new System.Drawing.Size(32, 32);
             this.toolStripButtonShowSettings.Text = "Settings";
             this.toolStripButtonShowSettings.ToolTipText = "Open settings dialog";
             this.toolStripButtonShowSettings.Click += new System.EventHandler(this.OnShowSettings);
@@ -776,10 +777,10 @@ namespace open3mod
             // tabControl1
             // 
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 50);
+            this.tabControl1.Location = new System.Drawing.Point(0, 60);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1051, 606);
+            this.tabControl1.Size = new System.Drawing.Size(1051, 596);
             this.tabControl1.TabIndex = 3;
             this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.OnTabSelected);
             this.tabControl1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnShowTabContextMenu);
@@ -812,9 +813,9 @@ namespace open3mod
             this.buttonTabClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.buttonTabClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonTabClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonTabClose.Location = new System.Drawing.Point(1020, 28);
+            this.buttonTabClose.Location = new System.Drawing.Point(1016, 28);
             this.buttonTabClose.Name = "buttonTabClose";
-            this.buttonTabClose.Size = new System.Drawing.Size(28, 22);
+            this.buttonTabClose.Size = new System.Drawing.Size(32, 32);
             this.buttonTabClose.TabIndex = 4;
             this.buttonTabClose.Text = "X";
             this.buttonTabClose.UseVisualStyleBackColor = true;
