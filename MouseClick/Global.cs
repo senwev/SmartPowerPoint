@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MouseClick
 {
-    using Solvers;
+    using Utils;
     class Global
     {
         static public double[] Position = new double[3] {1.213,1.163,1.229};
