@@ -25,11 +25,30 @@ namespace MouseClick
             this.Init();
         }
 
+
+        Form1 mainform;
+
         private void 开启遮挡_Click(object sender, EventArgs e)
         {
             //
-            Form1 mainform = new Form1();
-            mainform.Show();
+            if (开启遮挡.Text == "打开遮罩窗")
+            {
+                if (mainform != null)
+                {
+                    mainform.Visible = true;
+                    mainform.Show();
+                }
+                else
+                {
+                    mainform = new Form1();
+                    mainform.Show();
+                }
+                开启遮挡.Text = "关闭遮罩窗";
+            }
+            else {
+                mainform.Visible = false;
+                开启遮挡.Text = "打开遮罩窗";
+            }
         }
 
         private void IptextBox_TextChanged(object sender, EventArgs e)
@@ -145,9 +164,21 @@ namespace MouseClick
             demoWindow.Show();
         }
 
+        Process eyecareConsoleProcess = new Process();
         private void openEyecare_Click(object sender, EventArgs e)
         {
-            Process process = new Process();
+            Process process = eyecareConsoleProcess;
+
+            if (openEyecare.Text == "关闭智慧眼")
+            {
+                process.Kill();
+                openEyecare.Text = "打开智慧眼";
+                return;
+            }
+            else {
+                openEyecare.Text = "关闭智慧眼";
+            }
+
             try
             {
                 process.StartInfo.UseShellExecute = false;   //是否使用操作系统shell启动 
@@ -177,16 +208,16 @@ namespace MouseClick
                     {
                         if (!string.IsNullOrEmpty(curLine))
                         {
-                            //主线程操作，使用委托
-                            this.Invoke((MethodInvoker)delegate
-                            {
+                            ////主线程操作，使用委托
+                            //this.Invoke((MethodInvoker)delegate
+                            //{
                             
-                            eyeCareOutput.Text += curLine + "\r\n";
-                            eyeCareOutput.Focus();
-                            eyeCareOutput.Select(eyeCareOutput.Text.Length, 0);
-                            eyeCareOutput.ScrollToCaret();
+                            //eyeCareOutput.Text += curLine + "\r\n";
+                            //eyeCareOutput.Focus();
+                            //eyeCareOutput.Select(eyeCareOutput.Text.Length, 0);
+                            //eyeCareOutput.ScrollToCaret();
 
-                            });
+                            //});
 
                         }
                         curLine = reader.ReadLine();
