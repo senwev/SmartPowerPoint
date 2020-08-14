@@ -262,7 +262,7 @@ namespace MouseClick
                             }
                             else if (str0.Equals("ol"))
                             {
-
+                                //请勿在这里改！！！
 
                                 if (iskeydown != lastiskeydown)
                                 {
@@ -291,6 +291,8 @@ namespace MouseClick
                                 var thisRY = float.Parse(str2) - initRotate_Y;
                                 var thisRZ = float.Parse(str3) - initRotate_Z;
 
+                                //测试旋转
+                                //Constant.SendViewer3DOrientation(thisRX, thisRY);
 
                                 var xx = (float)(thisRX);
                                 var yy = (float)(thisRY);
@@ -452,6 +454,7 @@ namespace MouseClick
             }
         }
 
+        static public DateTime last3DOprTime = System.DateTime.Now;
         /// <summary>  
         /// 接收消息  
         /// </summary>  
@@ -512,7 +515,8 @@ namespace MouseClick
                         }
                         else if (str0.Equals("b"))
                         {
-                            
+                            if (Global.shouldShowHideBlock == false)
+                                return;
                             // EyeCare 接受坐标
                             String str3 = "";
 
@@ -538,7 +542,7 @@ namespace MouseClick
                                 {
 
                                     float X = float.Parse(str1);
-                                    float Y = float.Parse(str2)-100;
+                                    float Y = float.Parse(str2) - 100;
 
 
                                     int thisX = (int)X;
@@ -592,7 +596,7 @@ namespace MouseClick
                         }
                         else if (str0.Equals("ol"))
                         {
-
+                            // 鼠标移动调用
 
                             if (iskeydown != lastiskeydown)
                             {
@@ -617,6 +621,35 @@ namespace MouseClick
                             var thisRX = float.Parse(str1) - initRotate_X;
                             var thisRY = float.Parse(str2) - initRotate_Y;
                             var thisRZ = float.Parse(str3) - initRotate_Z;
+
+                            DateTime thisTime = System.DateTime.Now;
+
+                            TimeSpan ts1 = new TimeSpan(thisTime.Ticks);
+                            TimeSpan ts2 = new TimeSpan(last3DOprTime.Ticks);
+
+                            TimeSpan ts = ts1.Subtract(ts2).Duration();
+
+                            
+                            if (ts.Milliseconds>5000)
+                            {
+                                last3DOprTime = System.DateTime.Now;
+                                Debug.WriteLine($"Out Angle  x:{thisRX.ToString("f4")},y:{thisRY.ToString("f4")}");
+                                //测试旋转
+
+
+                                DateTime time1 = System.DateTime.Now;
+
+                                Constant.SendViewer3DOrientation(thisRX, thisRY);
+
+                                DateTime time2 = System.DateTime.Now;
+
+                                TimeSpan t1 = new TimeSpan(thisTime.Ticks);
+                                TimeSpan t2 = new TimeSpan(last3DOprTime.Ticks);
+
+                                TimeSpan t = t1.Subtract(t2).Duration();
+                                Debug.WriteLine("耗时" + String.Concat(t.Milliseconds));
+                            }
+
 
 
                             var xx = (float)(thisRX);
@@ -660,10 +693,6 @@ namespace MouseClick
 
                             float act_screen_distance = posX;//距离屏幕距离
 
-
-                            
-
-
                             float pix_start_x = act_start_x / act_screen_width * pix_screen_width;
                             float pix_start_y = act_start_y / act_screen_height * pix_screen_height;
 
@@ -684,19 +713,11 @@ namespace MouseClick
 
                                 try
                                 {
-                                    //SetPosition((int)(Int32.Parse(str1) - _mainform.Width / 2f), (int)(Int32.Parse(str2) - _mainform.Height / 2f));
                                     int realCursorX = (int)Global.XMovingAverage.Current;
                                     int realCursorY = (int)Global.YMovingAverage.Current;
+                                    //模拟鼠标移动
+                                    SetCursorPos((int)(corsorX), (int)(corsorY));
 
-                                    //SetCursorPos((int)(corsorX - _mainform.Width / 2f), (int)(corsorY - _mainform.Height / 2f));
-                                    SetCursorPos((int)(realCursorX), (int)(realCursorY));
-                                    /*  uint X = (uint)(corsorX - _mainform.Width / 2f);
-                                      uint Y = (uint)(corsorY - _mainform.Height / 2f);
-
-                                      if (iskeydown == 1)
-                                          mouse_event(MOUSEEVENTF_LEFTDOWN, X, Y, 1, 1);
-                                      else
-                                          mouse_event(MOUSEEVENTF_LEFTUP, X, Y, 1, 1);*/
                                 }
                                 catch (Exception ex)
                                 {
@@ -722,7 +743,7 @@ namespace MouseClick
                 }
 
 
-  
+
             }
             catch (Exception ex)
             {

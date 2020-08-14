@@ -14,5 +14,8 @@ namespace MouseClick
         static public MovingAverage XMovingAverage = new MovingAverage(20);
 
         static public MovingAverage YMovingAverage = new MovingAverage(20);
+
+        //配置全局设置
+        static public bool shouldShowHideBlock = false;
     }
 }

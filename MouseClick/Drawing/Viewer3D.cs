@@ -11,8 +11,7 @@ namespace MouseClick
         public Viewer3D()
         {
             InitializeComponent();
-            Constant.Viewer3DOrientationChanged +=
-                new System.EventHandler<System.Tuple<double, double>>(Handle_Viewer3DOrientationChanged);
+            Constant.Viewer3DOrientationChanged = new System.EventHandler<System.Tuple<double, double>>(Handle_Viewer3DOrientationChanged);
         }
 
         private void Viewer3D_FormClosing(object sender, FormClosingEventArgs e)

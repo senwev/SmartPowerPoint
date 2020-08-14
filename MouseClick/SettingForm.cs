@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -22,6 +27,7 @@ namespace MouseClick
 
         private void 开启遮挡_Click(object sender, EventArgs e)
         {
+            //
             Form1 mainform = new Form1();
             mainform.Show();
         }
@@ -40,6 +46,17 @@ namespace MouseClick
         private void SettingForm_Load(object sender, EventArgs e)
         {
             //webBrowser1.ScriptErrorsSuppressed = false;
+            //加载并查看本机IP
+            string name = Dns.GetHostName();
+            IPAddress[] ipadrlist = Dns.GetHostAddresses(name);
+            foreach (IPAddress ipa in ipadrlist)
+            {
+                if (ipa.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    iplist.Items.Add(ipa.ToString());
+                    //Console.WriteLine(ipa.ToString());
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -115,6 +132,89 @@ namespace MouseClick
             this.textBox_Anchor2_Y.Text = anchor2.Item2.ToString("f2");
             this.textBox_Anchor3_X.Text = anchor3.Item1.ToString("f2");
             this.textBox_Anchor3_Y.Text = anchor3.Item2.ToString("f2");
+        }
+
+        private void serialSettingControl2_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form demoWindow = new DemoWindow();
+            demoWindow.Show();
+        }
+
+        private void openEyecare_Click(object sender, EventArgs e)
+        {
+            Process process = new Process();
+            try
+            {
+                process.StartInfo.UseShellExecute = false;   //是否使用操作系统shell启动 
+                process.StartInfo.CreateNoWindow = true;   //是否在新窗口中启动该进程的值 (不显示程序窗口)
+                process.StartInfo.RedirectStandardInput = true;  // 接受来自调用程序的输入信息 
+                process.StartInfo.RedirectStandardOutput = true;  // 由调用程序获取输出信息
+                process.StartInfo.RedirectStandardError = true;  //重定向标准错误输出
+                process.StartInfo.FileName = "cmd.exe";
+                process.Start();                         // 启动程序
+                process.StandardInput.WriteLine("e:\ncd E:\\研究生电子设计大赛\\EyeCare\\detector\nconda activate eyecare\npython webcam_detector.py\n"); //向cmd窗口发送输入信息
+                //process.StandardInput.WriteLine("cd E:\\研究生电子设计大赛\\EyeCare\\detector"); //向cmd窗口发送输入信息
+                //process.StandardInput.WriteLine("conda activate eyecare"); //向cmd窗口发送输入信息
+                //process.StandardInput.WriteLine("python webcam_detector.py"); //向cmd窗口发送输入信息
+
+                process.StandardInput.AutoFlush = true;
+                // 前面一个命令不管是否执行成功都执行后面(exit)命令，如果不执行exit命令，后面调用ReadToEnd()方法会假死
+                //process.StandardInput.WriteLine("exit");
+
+                StreamReader reader = process.StandardOutput;//获取exe处理之后的输出信息
+                string curLine = reader.ReadLine(); //获取错误信息到error
+
+                //开启线程读取输出
+                Thread thread2 = new Thread(() =>
+                {
+                   
+                    while (!reader.EndOfStream)
+                    {
+                        if (!string.IsNullOrEmpty(curLine))
+                        {
+                            //主线程操作，使用委托
+                            this.Invoke((MethodInvoker)delegate
+                            {
+                            
+                            eyeCareOutput.Text += curLine + "\r\n";
+                            eyeCareOutput.Focus();
+                            eyeCareOutput.Select(eyeCareOutput.Text.Length, 0);
+                            eyeCareOutput.ScrollToCaret();
+
+                            });
+
+                        }
+                        curLine = reader.ReadLine();
+                    }
+                    reader.Close(); //close进程
+
+                    process.WaitForExit();  //等待程序执行完退出进程
+                    process.Close();
+                }
+                
+                );
+                thread2.Start();
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            //配置是否开启遮挡
+            Global.shouldShowHideBlock = checkBox1.Checked;
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace MouseClick
 {
-    partial class HomeForm
+    partial class DemoWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -30,14 +30,15 @@
         {
             this.SuspendLayout();
             // 
-            // HomeForm
+            // DemoWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(773, 462);
-            this.Name = "HomeForm";
-            this.Text = "HomeForm";
-            this.Load += new System.EventHandler(this.HomeForm_Load);
+            this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.Name = "DemoWindow";
+            this.Text = "DemoWindow";
+            this.Load += new System.EventHandler(this.DemoWindow_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DemoWindow_KeyPress);
             this.ResumeLayout(false);
 
         }

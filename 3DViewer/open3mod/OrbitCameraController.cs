@@ -125,16 +125,18 @@ namespace open3mod
                         );
             //if (x != 0)
             //{
-            _view *= Matrix4.CreateFromAxisAngle(_up, (float)(x * RotationSpeed * Math.PI / 180.0));
+            _view *= Matrix4.CreateFromAxisAngle(_up, (float)(x * RotationSpeed));// * Math.PI / 180.0));
             //}
 
             //if (y != 0)
-            //{
-            _view *= Matrix4.CreateFromAxisAngle(_right, (float)(y * RotationSpeed * Math.PI / 180.0));
+            //{s
+            _view *= Matrix4.CreateFromAxisAngle(_right, (float)(y * RotationSpeed));// * Math.PI / 180.0));
             //}
 
 
             _dirty = true;
+
+            Debug.WriteLine($"Inner Angle  x:{x.ToString("f4")},y:{y.ToString("f4")}");
 
             // leave the X,Z,Y constrained camera modes if we were in any of them
             SetOrbitOrConstrainedMode(CameraMode.Orbit);

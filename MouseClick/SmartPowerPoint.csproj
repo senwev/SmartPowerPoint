@@ -66,6 +66,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DemoWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DemoWindow.Designer.cs">
+      <DependentUpon>DemoWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="HomeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +127,9 @@
     <Compile Include="WebBrowserForm.Designer.cs">
       <DependentUpon>WebBrowserForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="DemoWindow.resx">
+      <DependentUpon>DemoWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HomeForm.resx">
       <DependentUpon>HomeForm.cs</DependentUpon>
     </EmbeddedResource>

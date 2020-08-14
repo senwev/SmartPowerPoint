@@ -45,12 +45,17 @@
             this.label4 = new System.Windows.Forms.Label();
             this.button_Apply_Anchor = new System.Windows.Forms.Button();
             this.button_Reset_Anchor = new System.Windows.Forms.Button();
-            this.uwbPositionSettingControl1 = new MouseClick.UWBPositionSettingControl();
-            this.serialSettingControl1 = new MouseClick.SerialSettingControl();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.iplist = new System.Windows.Forms.ListBox();
+            this.demoBtn = new System.Windows.Forms.Button();
+            this.openEyecare = new System.Windows.Forms.Button();
+            this.eyeCareOutput = new System.Windows.Forms.TextBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.uwbPositionSettingControl1 = new MouseClick.UWBPositionSettingControl();
+            this.serialSettingControl1 = new MouseClick.SerialSettingControl();
             this.SuspendLayout();
             // 
             // 开启遮挡
@@ -59,7 +64,7 @@
             this.开启遮挡.Name = "开启遮挡";
             this.开启遮挡.Size = new System.Drawing.Size(75, 23);
             this.开启遮挡.TabIndex = 0;
-            this.开启遮挡.Text = "开启遮挡";
+            this.开启遮挡.Text = "打开遮罩窗";
             this.开启遮挡.UseVisualStyleBackColor = true;
             this.开启遮挡.Click += new System.EventHandler(this.开启遮挡_Click);
             // 
@@ -85,7 +90,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(349, 158);
+            this.label1.Location = new System.Drawing.Point(363, 188);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 12);
             this.label1.TabIndex = 5;
@@ -93,28 +98,28 @@
             // 
             // textBox_Anchor1_X
             // 
-            this.textBox_Anchor1_X.Location = new System.Drawing.Point(410, 154);
+            this.textBox_Anchor1_X.Location = new System.Drawing.Point(424, 184);
             this.textBox_Anchor1_X.Name = "textBox_Anchor1_X";
             this.textBox_Anchor1_X.Size = new System.Drawing.Size(81, 21);
             this.textBox_Anchor1_X.TabIndex = 6;
             // 
             // textBox_Anchor1_Y
             // 
-            this.textBox_Anchor1_Y.Location = new System.Drawing.Point(497, 154);
+            this.textBox_Anchor1_Y.Location = new System.Drawing.Point(511, 184);
             this.textBox_Anchor1_Y.Name = "textBox_Anchor1_Y";
             this.textBox_Anchor1_Y.Size = new System.Drawing.Size(81, 21);
             this.textBox_Anchor1_Y.TabIndex = 7;
             // 
             // textBox_Anchor2_Y
             // 
-            this.textBox_Anchor2_Y.Location = new System.Drawing.Point(743, 154);
+            this.textBox_Anchor2_Y.Location = new System.Drawing.Point(757, 184);
             this.textBox_Anchor2_Y.Name = "textBox_Anchor2_Y";
             this.textBox_Anchor2_Y.Size = new System.Drawing.Size(81, 21);
             this.textBox_Anchor2_Y.TabIndex = 10;
             // 
             // textBox_Anchor2_X
             // 
-            this.textBox_Anchor2_X.Location = new System.Drawing.Point(656, 154);
+            this.textBox_Anchor2_X.Location = new System.Drawing.Point(670, 184);
             this.textBox_Anchor2_X.Name = "textBox_Anchor2_X";
             this.textBox_Anchor2_X.Size = new System.Drawing.Size(81, 21);
             this.textBox_Anchor2_X.TabIndex = 9;
@@ -122,7 +127,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(595, 158);
+            this.label2.Location = new System.Drawing.Point(609, 188);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 12);
             this.label2.TabIndex = 8;
@@ -130,14 +135,14 @@
             // 
             // textBox_Anchor0_Y
             // 
-            this.textBox_Anchor0_Y.Location = new System.Drawing.Point(497, 190);
+            this.textBox_Anchor0_Y.Location = new System.Drawing.Point(511, 220);
             this.textBox_Anchor0_Y.Name = "textBox_Anchor0_Y";
             this.textBox_Anchor0_Y.Size = new System.Drawing.Size(81, 21);
             this.textBox_Anchor0_Y.TabIndex = 13;
             // 
             // textBox_Anchor0_X
             // 
-            this.textBox_Anchor0_X.Location = new System.Drawing.Point(410, 190);
+            this.textBox_Anchor0_X.Location = new System.Drawing.Point(424, 220);
             this.textBox_Anchor0_X.Name = "textBox_Anchor0_X";
             this.textBox_Anchor0_X.Size = new System.Drawing.Size(81, 21);
             this.textBox_Anchor0_X.TabIndex = 12;
@@ -145,7 +150,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(349, 194);
+            this.label3.Location = new System.Drawing.Point(363, 224);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 12);
             this.label3.TabIndex = 11;
@@ -153,14 +158,14 @@
             // 
             // textBox_Anchor3_Y
             // 
-            this.textBox_Anchor3_Y.Location = new System.Drawing.Point(743, 190);
+            this.textBox_Anchor3_Y.Location = new System.Drawing.Point(757, 220);
             this.textBox_Anchor3_Y.Name = "textBox_Anchor3_Y";
             this.textBox_Anchor3_Y.Size = new System.Drawing.Size(81, 21);
             this.textBox_Anchor3_Y.TabIndex = 16;
             // 
             // textBox_Anchor3_X
             // 
-            this.textBox_Anchor3_X.Location = new System.Drawing.Point(656, 190);
+            this.textBox_Anchor3_X.Location = new System.Drawing.Point(670, 220);
             this.textBox_Anchor3_X.Name = "textBox_Anchor3_X";
             this.textBox_Anchor3_X.Size = new System.Drawing.Size(81, 21);
             this.textBox_Anchor3_X.TabIndex = 15;
@@ -168,7 +173,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(595, 194);
+            this.label4.Location = new System.Drawing.Point(609, 224);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 12);
             this.label4.TabIndex = 14;
@@ -177,9 +182,9 @@
             // button_Apply_Anchor
             // 
             this.button_Apply_Anchor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_Apply_Anchor.Location = new System.Drawing.Point(835, 153);
+            this.button_Apply_Anchor.Location = new System.Drawing.Point(844, 183);
             this.button_Apply_Anchor.Name = "button_Apply_Anchor";
-            this.button_Apply_Anchor.Size = new System.Drawing.Size(75, 23);
+            this.button_Apply_Anchor.Size = new System.Drawing.Size(252, 23);
             this.button_Apply_Anchor.TabIndex = 17;
             this.button_Apply_Anchor.Text = "Apply";
             this.button_Apply_Anchor.UseVisualStyleBackColor = true;
@@ -188,40 +193,18 @@
             // button_Reset_Anchor
             // 
             this.button_Reset_Anchor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_Reset_Anchor.Location = new System.Drawing.Point(835, 189);
+            this.button_Reset_Anchor.Location = new System.Drawing.Point(844, 219);
             this.button_Reset_Anchor.Name = "button_Reset_Anchor";
-            this.button_Reset_Anchor.Size = new System.Drawing.Size(75, 23);
+            this.button_Reset_Anchor.Size = new System.Drawing.Size(252, 23);
             this.button_Reset_Anchor.TabIndex = 18;
             this.button_Reset_Anchor.Text = "Reset";
             this.button_Reset_Anchor.UseVisualStyleBackColor = true;
             this.button_Reset_Anchor.Click += new System.EventHandler(this.button_Reset_Anchor_Click);
             // 
-            // uwbPositionSettingControl1
-            // 
-            this.uwbPositionSettingControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.uwbPositionSettingControl1.AutoScroll = true;
-            this.uwbPositionSettingControl1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.uwbPositionSettingControl1.Location = new System.Drawing.Point(340, 218);
-            this.uwbPositionSettingControl1.Name = "uwbPositionSettingControl1";
-            this.uwbPositionSettingControl1.Size = new System.Drawing.Size(572, 260);
-            this.uwbPositionSettingControl1.TabIndex = 4;
-            // 
-            // serialSettingControl1
-            // 
-            this.serialSettingControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.serialSettingControl1.Location = new System.Drawing.Point(12, 12);
-            this.serialSettingControl1.Name = "serialSettingControl1";
-            this.serialSettingControl1.Size = new System.Drawing.Size(322, 483);
-            this.serialSettingControl1.TabIndex = 3;
-            this.serialSettingControl1.Load += new System.EventHandler(this.serialSettingControl1_Load);
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(445, 129);
+            this.label5.Location = new System.Drawing.Point(459, 159);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(11, 12);
             this.label5.TabIndex = 19;
@@ -230,7 +213,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(532, 129);
+            this.label6.Location = new System.Drawing.Point(546, 159);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(11, 12);
             this.label6.TabIndex = 20;
@@ -239,7 +222,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(778, 129);
+            this.label7.Location = new System.Drawing.Point(792, 159);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(11, 12);
             this.label7.TabIndex = 22;
@@ -248,17 +231,94 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(691, 129);
+            this.label8.Location = new System.Drawing.Point(705, 159);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(11, 12);
             this.label8.TabIndex = 21;
             this.label8.Text = "X";
             // 
+            // iplist
+            // 
+            this.iplist.FormattingEnabled = true;
+            this.iplist.ItemHeight = 12;
+            this.iplist.Location = new System.Drawing.Point(410, 74);
+            this.iplist.Name = "iplist";
+            this.iplist.Size = new System.Drawing.Size(182, 76);
+            this.iplist.TabIndex = 24;
+            // 
+            // demoBtn
+            // 
+            this.demoBtn.BackColor = System.Drawing.Color.Gold;
+            this.demoBtn.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.demoBtn.Location = new System.Drawing.Point(957, 32);
+            this.demoBtn.Name = "demoBtn";
+            this.demoBtn.Size = new System.Drawing.Size(102, 88);
+            this.demoBtn.TabIndex = 25;
+            this.demoBtn.Text = "演示页面";
+            this.demoBtn.UseVisualStyleBackColor = false;
+            this.demoBtn.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // openEyecare
+            // 
+            this.openEyecare.Location = new System.Drawing.Point(643, 85);
+            this.openEyecare.Name = "openEyecare";
+            this.openEyecare.Size = new System.Drawing.Size(75, 23);
+            this.openEyecare.TabIndex = 26;
+            this.openEyecare.Text = "启动智慧眼";
+            this.openEyecare.UseVisualStyleBackColor = true;
+            this.openEyecare.Click += new System.EventHandler(this.openEyecare_Click);
+            // 
+            // eyeCareOutput
+            // 
+            this.eyeCareOutput.Location = new System.Drawing.Point(724, 12);
+            this.eyeCareOutput.Multiline = true;
+            this.eyeCareOutput.Name = "eyeCareOutput";
+            this.eyeCareOutput.Size = new System.Drawing.Size(206, 138);
+            this.eyeCareOutput.TabIndex = 27;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(646, 114);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(72, 16);
+            this.checkBox1.TabIndex = 28;
+            this.checkBox1.Text = "开启遮挡";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // uwbPositionSettingControl1
+            // 
+            this.uwbPositionSettingControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.uwbPositionSettingControl1.AutoScroll = true;
+            this.uwbPositionSettingControl1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.uwbPositionSettingControl1.Location = new System.Drawing.Point(340, 254);
+            this.uwbPositionSettingControl1.Name = "uwbPositionSettingControl1";
+            this.uwbPositionSettingControl1.Size = new System.Drawing.Size(758, 425);
+            this.uwbPositionSettingControl1.TabIndex = 4;
+            // 
+            // serialSettingControl1
+            // 
+            this.serialSettingControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.serialSettingControl1.Location = new System.Drawing.Point(12, 12);
+            this.serialSettingControl1.Name = "serialSettingControl1";
+            this.serialSettingControl1.Size = new System.Drawing.Size(322, 684);
+            this.serialSettingControl1.TabIndex = 3;
+            this.serialSettingControl1.Load += new System.EventHandler(this.serialSettingControl1_Load);
+            // 
             // SettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(924, 505);
+            this.ClientSize = new System.Drawing.Size(1110, 706);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.eyeCareOutput);
+            this.Controls.Add(this.openEyecare);
+            this.Controls.Add(this.demoBtn);
+            this.Controls.Add(this.iplist);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label6);
@@ -283,7 +343,7 @@
             this.Controls.Add(this.IptextBox);
             this.Controls.Add(this.开启遮挡);
             this.Name = "SettingForm";
-            this.Text = "SettingForm";
+            this.Text = "智影互动设置界面";
             this.Load += new System.EventHandler(this.SettingForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -315,5 +375,10 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ListBox iplist;
+        private System.Windows.Forms.Button demoBtn;
+        private System.Windows.Forms.Button openEyecare;
+        private System.Windows.Forms.TextBox eyeCareOutput;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

@@ -457,7 +457,7 @@ namespace open3mod
             if (this.InvokeRequired)
             {
                 var d = new ModeToAngleHandler(ExecuteOnMoveToAngle);
-                this.Invoke(d);
+                this.Invoke(d, new object[] { x, y });
             }
             else
             {
@@ -479,4 +479,4 @@ namespace open3mod
 
 }
 
-/* vi: set shiftwidth=4 tabstop=4: */ 
+/* vi: set shiftwidth=4 tabstop=4: */
