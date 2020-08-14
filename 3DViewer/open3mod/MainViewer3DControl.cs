@@ -18,7 +18,7 @@
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ///////////////////////////////////////////////////////////////////////////////////
 
-#define USE_APP_IDLE
+//#define USE_APP_IDLE
 
 using System;
 using System.Collections.Specialized;
@@ -642,7 +642,7 @@ namespace open3mod
             Application.Idle += ApplicationIdle;
 #else
             _timer = new System.Windows.Forms.Timer();
-            _timer.Interval = 20;
+            _timer.Interval = 50;
             _timer.Tick += ApplicationIdle;
             _timer.Start();
 #endif

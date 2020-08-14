@@ -14,6 +14,7 @@ using System.Net;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Fleck;
+using System.Runtime.CompilerServices;
 
 namespace MouseClick
 {
@@ -33,6 +34,8 @@ namespace MouseClick
 
         static int debugMode = 0;//0 for socket
 
+        private static Stopwatch stopwatch = new Stopwatch();
+
         public static void SocketServie()
         {
             Console.WriteLine("服务端已启动");
@@ -46,6 +49,7 @@ namespace MouseClick
             running = true;
             var task = Task.Factory.StartNew(ListenClientConnect);
             //Console.ReadLine();
+            stopwatch.Start();
         }
 
         /// <summary>  
@@ -119,6 +123,8 @@ namespace MouseClick
 
         static int lastX = 0;
         static int lastY = 0;
+
+
         /// <summary>  
         /// 接收消息  
         /// </summary>  
@@ -451,10 +457,15 @@ namespace MouseClick
                     myClientSocket.Close();//关闭Socket并释放资源
                     break;*/
                 }
+
+
             }
         }
 
         static public DateTime last3DOprTime = System.DateTime.Now;
+
+        public static long elapsedMs = 0;
+
         /// <summary>  
         /// 接收消息  
         /// </summary>  
@@ -622,34 +633,35 @@ namespace MouseClick
                             var thisRY = float.Parse(str2) - initRotate_Y;
                             var thisRZ = float.Parse(str3) - initRotate_Z;
 
-                            DateTime thisTime = System.DateTime.Now;
+                            //DateTime thisTime = System.DateTime.Now;
 
-                            TimeSpan ts1 = new TimeSpan(thisTime.Ticks);
-                            TimeSpan ts2 = new TimeSpan(last3DOprTime.Ticks);
+                            //TimeSpan ts1 = new TimeSpan(thisTime.Ticks);
+                            //TimeSpan ts2 = new TimeSpan(last3DOprTime.Ticks);
 
-                            TimeSpan ts = ts1.Subtract(ts2).Duration();
+                            //TimeSpan ts = ts1.Subtract(ts2).Duration();
+                            //var currentElapsedMs = stopwatch.ElapsedMilliseconds;
+                            //if (currentElapsedMs - elapsedMs > 200)
+                            //{
+                            //    elapsedMs = stopwatch.ElapsedMilliseconds;
 
-                            
-                            if (ts.Milliseconds>5000)
-                            {
-                                last3DOprTime = System.DateTime.Now;
-                                Debug.WriteLine($"Out Angle  x:{thisRX.ToString("f4")},y:{thisRY.ToString("f4")}");
-                                //测试旋转
+                            //    Debug.WriteLine($"Out Angle  x:{thisRX.ToString("f4")},y:{thisRY.ToString("f4")}");
+                            //    //测试旋转
 
+                            //    //DateTime time1 = System.DateTime.Now;
+                            //    Global.Viewer3DCamera[0] = thisRX;
+                            //    Global.Viewer3DCamera[1] = thisRY;
+                            //    //Constant.SendViewer3DOrientation(thisRX, thisRY);
 
-                                DateTime time1 = System.DateTime.Now;
+                            //    //DateTime time2 = System.DateTime.Now;
 
-                                Constant.SendViewer3DOrientation(thisRX, thisRY);
+                            //    //TimeSpan t1 = new TimeSpan(thisTime.Ticks);
+                            //    //TimeSpan t2 = new TimeSpan(last3DOprTime.Ticks);
 
-                                DateTime time2 = System.DateTime.Now;
-
-                                TimeSpan t1 = new TimeSpan(thisTime.Ticks);
-                                TimeSpan t2 = new TimeSpan(last3DOprTime.Ticks);
-
-                                TimeSpan t = t1.Subtract(t2).Duration();
-                                Debug.WriteLine("耗时" + String.Concat(t.Milliseconds));
-                            }
-
+                            //    //TimeSpan t = t1.Subtract(t2).Duration();
+                            //    //Debug.WriteLine("耗时" + String.Concat(t.Milliseconds));
+                            //}
+                            Global.Viewer3DCamera[0] = thisRZ;
+                            Global.Viewer3DCamera[1] = thisRX;
 
 
                             var xx = (float)(thisRX);
@@ -727,22 +739,13 @@ namespace MouseClick
 
                         }
 
-
-
-
-
-
                     }
                     catch (Exception ex)
                     {
                         ;
                     }
 
-
-
                 }
-
-
 
             }
             catch (Exception ex)
@@ -754,6 +757,7 @@ namespace MouseClick
                 myClientSocket.Close();//关闭Socket并释放资源
                 break;*/
             }
+            //Thread.Sleep(1);
         }
 
         public Form1()
