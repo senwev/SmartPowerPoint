@@ -96,6 +96,7 @@
     <Compile Include="Devices\SerialSettingControl.Designer.cs">
       <DependentUpon>SerialSettingControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="SmoothValueHelper.cs" />
     <Compile Include="Solvers\LSSolver.cs" />
     <Compile Include="Utils\MovingAverage.cs" />
     <Compile Include="Solvers\UWBPositionCalibrator.cs" />

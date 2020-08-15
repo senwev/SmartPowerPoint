@@ -717,25 +717,16 @@ namespace MouseClick
                             int corsorX = (int)Math.Round(pix_start_x - mul_x * Math.Tan(thisRZ));
                             int corsorY = (int)Math.Round(pix_screen_height - pix_start_y - mul_y * Math.Tan(thisRX));
 
-                            Global.XMovingAverage.Push(corsorX);
-                            Global.YMovingAverage.Push(corsorY);
+                            //Global.XMovingAverage.Push(corsorX);
+                            //Global.YMovingAverage.Push(corsorY);
 
-                            _mainform.Invoke((MethodInvoker)delegate
-                            {
 
-                                try
-                                {
-                                    int realCursorX = (int)Global.XMovingAverage.Current;
-                                    int realCursorY = (int)Global.YMovingAverage.Current;
-                                    //模拟鼠标移动
-                                    SetCursorPos((int)(corsorX), (int)(corsorY));
+                            //int realCursorX = (int)Global.XMovingAverage.Current;
+                            //int realCursorY = (int)Global.YMovingAverage.Current;
 
-                                }
-                                catch (Exception ex)
-                                {
-                                }
+                            mousePosUpdater.postValue(new float[] { (float)corsorX, (float)corsorY });
+                            mousePosUpdater.startTrigger();//开始事件通知
 
-                            });
 
                         }
 
@@ -799,6 +790,7 @@ namespace MouseClick
         }
         static List<IWebSocketConnection> allSockets = new List<IWebSocketConnection>();
 
+        static SmoothValueHelper mousePosUpdater;
         private void Form1_Load(object sender, EventArgs e)
         {
             _mainform = this;
@@ -809,32 +801,43 @@ namespace MouseClick
 
             FleckLog.Level = LogLevel.Debug;
 
-            var server = new WebSocketServer("ws://0.0.0.0:5000");
+            mousePosUpdater = new SmoothValueHelper(1000, 2);
+            mousePosUpdater.SmoothValueRefreshed += new EventHandler<float[]>(Handler_SmoothValueRefreshed);
+            
+        }
 
-            server.Start(socket =>
+        private bool inScreenRange(float[] xy)
+        {
+            if (xy[0] <= 1920 && xy[0] >= 0 && xy[1] <= 1080 && xy[1] >= 0)
             {
-                socket.OnOpen = () =>
-                {
-                    Console.WriteLine("Open!");
+                return true;
+            }
+            return false;
+        }
 
-                    socket.Send("success");
+        private void Handler_SmoothValueRefreshed(object sender, float[] e )
+        {
+            _mainform.Invoke((MethodInvoker)delegate
+            {
 
-                    allSockets.Add(socket);
-                };
-                socket.OnClose = () =>
+                try
                 {
-                    Console.WriteLine("Close!");
-                    allSockets.Remove(socket);
-                };
-                socket.OnMessage = message =>
+
+                    //模拟鼠标移动
+                    if (inScreenRange(e))
+                    {
+                        SetCursorPos((int)(e[0]), (int)(e[1]));
+                    }
+                    
+                    //Console.WriteLine(e[0].ToString()+","+ e[1].ToString());
+                }
+                catch (Exception ex)
                 {
-                    Console.WriteLine(message);
-                    allSockets.ToList().ForEach(s => s.Send("Echo: " + message));
-                };
+                }
+
             });
 
 
-            //SendKeys.Send("{ENTER}");
         }
 
         private void Form1_Shown(object sender, EventArgs e)
