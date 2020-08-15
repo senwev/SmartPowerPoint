@@ -5,6 +5,10 @@ using System.Collections;
 using System.Collections.Generic;
 using MouseClick.Solvers;
 using System.Linq;
+using System.Drawing.Drawing2D;
+using MouseClick;
+using System.Threading;
+
 namespace AlgorithmUnitTestProject
 {
     [TestClass]
@@ -124,6 +128,24 @@ namespace AlgorithmUnitTestProject
 
             return new Rectangle((int)x, (int)y, (int)w, (int)h);
 
+        }
+
+
+        [TestMethod]
+        public void TestMethod_SmoothHelper()
+        {
+            SmoothValueHelper helper = new SmoothValueHelper(10, 3);
+            helper.startTrigger();
+            for (int i =0; i < 3;i++)
+            {
+                helper.postValue(new float[] { (float)i, (float)(i-0.5), (float)(i+0.5 )});
+                for (int j = 0; j < 100; j++)
+                {
+                    Console.WriteLine(helper.getSmoothValue()[0].ToString() + "|" + helper.getSmoothValue()[1].ToString() + "|" + helper.getSmoothValue()[2].ToString());
+                    Thread.Sleep(10);
+                }
+                
+            }
         }
 
     }
