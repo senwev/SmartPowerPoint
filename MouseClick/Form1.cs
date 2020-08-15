@@ -542,7 +542,7 @@ namespace MouseClick
                                 {
 
                                     float X = float.Parse(str1);
-                                    float Y = float.Parse(str2) - 100;
+                                    float Y = float.Parse(str2) - 20;
 
 
                                     int thisX = (int)X;
