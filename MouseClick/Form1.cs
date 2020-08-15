@@ -36,8 +36,6 @@ namespace MouseClick
 
         private static Stopwatch stopwatch = new Stopwatch();
 
-        private static UdpClient udpClient;
-
         public static void SocketServie()
         {
             Console.WriteLine("服务端已启动");
@@ -49,11 +47,9 @@ namespace MouseClick
             //Thread myThread = new Thread(ListenClientConnect);//通过多线程监听客户端连接  
             //myThread.Start();
             running = true;
-            //var task = Task.Factory.StartNew(ListenClientConnect);
-            udpClient = new UdpClient();
+            var task = Task.Factory.StartNew(ListenClientConnect);
             //Console.ReadLine();
             stopwatch.Start();
-            Read();
         }
 
         /// <summary>  
@@ -64,47 +60,20 @@ namespace MouseClick
             while (running)
             {
                 //Socket clientSocket = socket.Accept();
-                //var buffer = new byte[1000];
+                var buffer = new byte[1000];
+                EndPoint remote = new IPEndPoint(IPAddress.Any, 0);//用来保存发送方的ip和端口号
 
-                UdpClient udpClient = new UdpClient();
+                int num = socket.ReceiveFrom(buffer, ref remote);
 
-                udpClient.BeginReceive((ar) =>
+                if (remote != null && num > 0)
                 {
-                    IPEndPoint remote = new IPEndPoint(IPAddress.Any, 0);//用来保存发送方的ip和端口号
-
-                    var buffer = udpClient.EndReceive(ar, ref remote);
-                    if (remote != null && buffer != null && buffer.Length > 0)
-                    {
-                        UdpReceiveMessage(buffer, buffer.Length);
-                    }
-                }, null);
-
-                //int num = socket.ReceiveFrom(buffer, ref remote);
-
-                //if (remote != null && num > 0)
-                //{
-                //    //clientSocket.Send(Encoding.UTF8.GetBytes("服务器连接成功"));
-                //    UdpReceiveMessage(buffer, num);
-                //}
+                    //clientSocket.Send(Encoding.UTF8.GetBytes("服务器连接成功"));
+                    UdpReceiveMessage(buffer, num);
+                }
                 //MessageBox.Show("有客户端连接成功！");
                 //Thread receiveThread = new Thread(ReceiveMessage);
                 //receiveThread.Start(clientSocket);
             }
-        }
-
-        private static void Read()
-        {
-            udpClient.BeginReceive((ar) =>
-            {
-                IPEndPoint remote = new IPEndPoint(IPAddress.Any, 0);//用来保存发送方的ip和端口号
-
-                var buffer = udpClient.EndReceive(ar, ref remote);
-                Read();
-                if (remote != null && buffer != null && buffer.Length > 0)
-                {
-                    UdpReceiveMessage(buffer, buffer.Length);
-                }
-            }, null);
         }
 
         /// <summary>
@@ -160,6 +129,8 @@ namespace MouseClick
 
         static public DateTime last3DOprTime = System.DateTime.Now;
 
+        static public bool shouldBlockShow = false;//是否应该显示黑块（依据Python返回）
+
         public static long elapsedMs = 0;
 
         /// <summary>  
@@ -182,43 +153,56 @@ namespace MouseClick
 
                     try
                     {
+                        //判断语音flag
+                        if (dataStr.Length >= 6)
+                        {
+                            if (dataStr.Substring(0, 6).Equals("voice,"))
+                            {
+                                var voicestr = dataStr.Substring(6, dataStr.Length-6);
+                                MessageBox.Show(voicestr);
+                                return;
+                            }
+                        }
+                        
+
                         String str0 = dataStr.Split(',')[0];
                         String str1 = dataStr.Split(',')[1];
                         String str2 = dataStr.Split(',')[2];
+
 
 
                         if (str0.Equals("m"))
                         {
 
 
-                            String str3 = "";
+                            //String str3 = "";
 
-                            if (dataStr.Split(',').Length > 3)
-                                str3 = dataStr.Split(',')[3];
-
-
-                            //鼠标移动定位的代码应该就在这里
-                            _mainform.Invoke((MethodInvoker)delegate
-                            {
-                                if (str3 != "")
-                                {
-                                    _mainform.Width = Int32.Parse(str3);
-                                    _mainform.Height = Int32.Parse(str3);
-                                }
-                                try
-                                {
-                                    //SetPosition((int)(Int32.Parse(str1) - _mainform.Width / 2f), (int)(Int32.Parse(str2) - _mainform.Height / 2f));
-
-                                    float mul = 1920f / 1.12f; //这是2.14是距离屏幕的距离
+                            //if (dataStr.Split(',').Length > 3)
+                            //    str3 = dataStr.Split(',')[3];
 
 
-                                    SetCursorPos((int)(Int32.Parse(str1) - _mainform.Width / 2f), (int)(Int32.Parse(str2) - _mainform.Height / 2f));
-                                }
-                                catch (Exception ex)
-                                {
-                                }
+                            ////鼠标移动定位的代码应该就在这里
+                            //_mainform.Invoke((MethodInvoker)delegate
+                            //{
+                            //    if (str3 != "")
+                            //    {
+                            //        _mainform.Width = Int32.Parse(str3);
+                            //        _mainform.Height = Int32.Parse(str3);
+                            //    }
+                            //    try
+                            //    {
+                            //        //SetPosition((int)(Int32.Parse(str1) - _mainform.Width / 2f), (int)(Int32.Parse(str2) - _mainform.Height / 2f));
 
-                            });
+                            //        float mul = 1920f / 1.12f; //这是2.14是距离屏幕的距离
+
+
+                            //        SetCursorPos((int)(Int32.Parse(str1) - _mainform.Width / 2f), (int)(Int32.Parse(str2) - _mainform.Height / 2f));
+                            //    }
+                            //    catch (Exception ex)
+                            //    {
+                            //    }
+
+                            //});
 
                         }
                         else if (str0.Equals("b"))
@@ -242,12 +226,23 @@ namespace MouseClick
                                 float X = float.Parse(str1);
                                 float Y = float.Parse(str2);
 
-                                float thisX = X - _mainform.Width / 2f;
-                                float thisY = Y - _mainform.Height / 2f;
+                                float thisX = X - w / 2f;
+                                float thisY = Y - h / 2f;
                                 headPosUpdater.postValue(new float[] { thisX, thisY, float.Parse(str3) });
                                 headPosUpdater.startTrigger();
                             }
 
+
+                        }
+                        else if (str0.Equals("nb"))
+                        {
+                            //当未识别到人就隐藏黑块
+                            shouldBlockShow = false;
+
+                            _mainform.Invoke((MethodInvoker)delegate
+                            {
+                                    _mainform.Visible = false;
+                            });
 
 
                         }
@@ -287,125 +282,106 @@ namespace MouseClick
                         }
                         else if (str0.Equals("ol"))
                         {
-                            // 鼠标移动调用
 
-                            if (iskeydown != lastiskeydown)
+                            //改为异步操作？
+                            var task = new Task(() =>
                             {
-                                uint X = (uint)Cursor.Position.X;
-                                uint Y = (uint)Cursor.Position.Y;
-                                if (iskeydown == 1)
-                                    mouse_event(MOUSEEVENTF_LEFTDOWN, X, Y, 1, 1);
+                                if (iskeydown != lastiskeydown)
+                                {
+                                    uint X = (uint)Cursor.Position.X;
+                                    uint Y = (uint)Cursor.Position.Y;
+                                    if (iskeydown == 1)
+                                        mouse_event(MOUSEEVENTF_LEFTDOWN, X, Y, 1, 1);
+                                    else
+                                        mouse_event(MOUSEEVENTF_LEFTUP, X, Y, 1, 1);
+
+
+                                    lastiskeydown = iskeydown;
+                                }
+
+                                String str3 = "";
+                                String str4 = "";
+
+                                str3 = dataStr.Split(',')[3];
+
+                                str4 = dataStr.Split(',')[4];
+
+                                var thisRX = float.Parse(str1) - initRotate_X;
+                                var thisRY = float.Parse(str2) - initRotate_Y;
+                                var thisRZ = float.Parse(str3) - initRotate_Z;
+
+
+                                rotateUpdater.postValue(new float[] { thisRX, thisRY, thisRZ });
+                                rotateUpdater.startTrigger();
+                                //Global.Viewer3DCamera[0] = thisRZ;
+                                //Global.Viewer3DCamera[1] = thisRX;
+
+                                var xx = (float)(thisRX);
+                                var yy = (float)(thisRY);
+                                var zz = (float)(thisRZ);
+
+                                if (str4.Equals("1"))
+                                {
+                                    iskeydown = 1;
+                                }
                                 else
-                                    mouse_event(MOUSEEVENTF_LEFTUP, X, Y, 1, 1);
+                                {
+                                    iskeydown = 0;
+                                }
+
+                                //这里改代码
+
+                                float act_screenBottomHeight = 0.874f;//投影幕布底部距离地面距离
+                                float act_screenLeft = 0.686f;//投影幕布左侧距离坐标原点的水平距离
 
 
-                                lastiskeydown = iskeydown;
-                            }
+                                float posX = (float)Global.Position[0];
+                                float posY = (float)Global.Position[1];
+                                float posZ = (float)Global.Position[2];
 
-                            String str3 = "";
-                            String str4 = "";
-
-                            str3 = dataStr.Split(',')[3];
-
-                            str4 = dataStr.Split(',')[4];
-
-                            var thisRX = float.Parse(str1) - initRotate_X;
-                            var thisRY = float.Parse(str2) - initRotate_Y;
-                            var thisRZ = float.Parse(str3) - initRotate_Z;
-
-                            //DateTime thisTime = System.DateTime.Now;
-
-                            //TimeSpan ts1 = new TimeSpan(thisTime.Ticks);
-                            //TimeSpan ts2 = new TimeSpan(last3DOprTime.Ticks);
-
-                            //TimeSpan ts = ts1.Subtract(ts2).Duration();
-                            //var currentElapsedMs = stopwatch.ElapsedMilliseconds;
-                            //if (currentElapsedMs - elapsedMs > 200)
-                            //{
-                            //    elapsedMs = stopwatch.ElapsedMilliseconds;
-
-                            //    Debug.WriteLine($"Out Angle  x:{thisRX.ToString("f4")},y:{thisRY.ToString("f4")}");
-                            //    //测试旋转
-
-                            //    //DateTime time1 = System.DateTime.Now;
-                            //    Global.Viewer3DCamera[0] = thisRX;
-                            //    Global.Viewer3DCamera[1] = thisRY;
-                            //    //Constant.SendViewer3DOrientation(thisRX, thisRY);
-
-                            //    //DateTime time2 = System.DateTime.Now;
-
-                            //    //TimeSpan t1 = new TimeSpan(thisTime.Ticks);
-                            //    //TimeSpan t2 = new TimeSpan(last3DOprTime.Ticks);
-
-                            //    //TimeSpan t = t1.Subtract(t2).Duration();
-                            //    //Debug.WriteLine("耗时" + String.Concat(t.Milliseconds));
-                            //}
-                            Global.Viewer3DCamera[0] = thisRZ;
-                            Global.Viewer3DCamera[1] = thisRX;
+                                Global.Viewer3DCamera = new double[] { posX, posY, posZ };
 
 
-                            var xx = (float)(thisRX);
-                            var yy = (float)(thisRY);
-                            var zz = (float)(thisRZ);
+                                float act_screen_width = 2.584f;
+                                float act_screen_height = 1.632f;
 
-                            // Set3Dpos(xx, yy, zz);
+                                float pix_screen_width = 1920f;
+                                float pix_screen_height = 1080f;
+
+                                float act_start_x = posY - act_screenLeft;
+                                float act_start_y = posZ - act_screenBottomHeight;
 
 
-                            if (str4.Equals("1"))
-                            {
-                                iskeydown = 1;
-                            }
-                            else
-                            {
-                                iskeydown = 0;
-                            }
+                                float act_screen_distance = posX;//距离屏幕距离
+
+                                float pix_start_x = act_start_x / act_screen_width * pix_screen_width;
+                                float pix_start_y = act_start_y / act_screen_height * pix_screen_height;
+
+                                float act_pix_ratio_x = pix_screen_width / act_screen_width;
+                                float act_pix_ratio_y = pix_screen_height / act_screen_height;
+
+                                float mul_x = act_screen_distance * act_pix_ratio_x;
+                                float mul_y = act_screen_distance * act_pix_ratio_y;
+
+                                int corsorX = (int)Math.Round(pix_start_x - mul_x * Math.Tan(thisRZ));
+                                int corsorY = (int)Math.Round(pix_screen_height - pix_start_y - mul_y * Math.Tan(thisRX));
+
+                                //Global.XMovingAverage.Push(corsorX);
+                                //Global.YMovingAverage.Push(corsorY);
+
+
+                                //int realCursorX = (int)Global.XMovingAverage.Current;
+                                //int realCursorY = (int)Global.YMovingAverage.Current;
+
+                                mousePosUpdater.postValue(new float[] { (float)corsorX, (float)corsorY });
+                                mousePosUpdater.startTrigger();//开始事件通知
 
 
 
-                            //这里改代码
-
-                            float act_screenBottomHeight = 0.874f;//投影幕布底部距离地面距离
-                            float act_screenLeft = 0.686f;//投影幕布左侧距离坐标原点的水平距离
+                            });
+                            task.Start();
 
 
-                            float posX = (float)Global.Position[0];
-                            float posY = (float)Global.Position[1];
-                            float posZ = (float)Global.Position[2];
-
-
-                            float act_screen_width = 2.584f;
-                            float act_screen_height = 1.632f;
-
-                            float pix_screen_width = 1920f;
-                            float pix_screen_height = 1080f;
-
-                            float act_start_x = posY - act_screenLeft;
-                            float act_start_y = posZ - act_screenBottomHeight;
-
-
-                            float act_screen_distance = posX;//距离屏幕距离
-
-                            float pix_start_x = act_start_x / act_screen_width * pix_screen_width;
-                            float pix_start_y = act_start_y / act_screen_height * pix_screen_height;
-
-                            float act_pix_ratio_x = pix_screen_width / act_screen_width;
-                            float act_pix_ratio_y = pix_screen_height / act_screen_height;
-
-                            float mul_x = act_screen_distance * act_pix_ratio_x;
-                            float mul_y = act_screen_distance * act_pix_ratio_y;
-
-                            int corsorX = (int)Math.Round(pix_start_x - mul_x * Math.Tan(thisRZ));
-                            int corsorY = (int)Math.Round(pix_screen_height - pix_start_y - mul_y * Math.Tan(thisRX));
-
-                            //Global.XMovingAverage.Push(corsorX);
-                            //Global.YMovingAverage.Push(corsorY);
-
-
-                            //int realCursorX = (int)Global.XMovingAverage.Current;
-                            //int realCursorY = (int)Global.YMovingAverage.Current;
-
-                            mousePosUpdater.postValue(new float[] { (float)corsorX, (float)corsorY });
-                            mousePosUpdater.startTrigger();//开始事件通知
 
 
                         }
@@ -442,7 +418,7 @@ namespace MouseClick
         /// </summary>
         /// <param name="X"></param>
         /// <param name="Y"></param>
-        static private void SetPosition(int X, int Y)
+        static private void SetBlockPosition(int X, int Y)
         {
             var form = _mainform;
             Point point = new Point(X, Y);
@@ -452,10 +428,10 @@ namespace MouseClick
 
         static private void SetPosition(int X, int Y, Form form)
         {
-
             Point point = new Point(X, Y);
 
             form.Location = point;
+
 
         }
 
@@ -470,8 +446,9 @@ namespace MouseClick
         }
         static List<IWebSocketConnection> allSockets = new List<IWebSocketConnection>();
 
-        static SmoothValueHelper mousePosUpdater;
-        static SmoothValueHelper headPosUpdater;
+        static SmoothValueHelper mousePosUpdater = new SmoothValueHelper(300, 2);
+        static SmoothValueHelper headPosUpdater = new SmoothValueHelper(90, 3);
+        static SmoothValueHelper rotateUpdater = new SmoothValueHelper(25, 3);
         private void Form1_Load(object sender, EventArgs e)
         {
             _mainform = this;
@@ -482,11 +459,10 @@ namespace MouseClick
 
             FleckLog.Level = LogLevel.Debug;
 
-            mousePosUpdater = new SmoothValueHelper(400, 2);
+            //mousePosUpdater = new SmoothValueHelper(200, 2);
             mousePosUpdater.SmoothValueRefreshed += new EventHandler<float[]>(Handler_SmoothValueRefreshed);
-
-            headPosUpdater = new SmoothValueHelper(10, 3);
             headPosUpdater.SmoothValueRefreshed += new EventHandler<float[]>(Handler_SmoothHeadPosRefreshed);
+            rotateUpdater.SmoothValueRefreshed += new EventHandler<float[]>(Handler_SmoothRotateRefreshed);
 
         }
 
@@ -500,51 +476,12 @@ namespace MouseClick
         }
 
 
-        private void Handler_SmoothHeadPosRefreshed(object sender, float[] e)
-        {
-            _mainform.Invoke((MethodInvoker)delegate
-            {
 
-                try
-                {
-                    //移动窗口
-                    _mainform.Invoke((MethodInvoker)delegate
-                    {
-                        // Running on the UI thread
+        
 
-
-
-                        try
-                        {
-
-                            //配置窗口宽度
-
-                            _mainform.Width = (int)e[2];
-                            _mainform.Height = (int)e[2];
-
-
-                            SetPosition((int)e[0], (int)e[1]);
-
-                        }
-                        catch (Exception ex)
-                        {
-
-                        }
-
-                    });
-                }
-                catch (Exception ex)
-                {
-                }
-
-            });
-
-
-        }
+        //下面代码在UI线线程
         private void Handler_SmoothValueRefreshed(object sender, float[] e)
         {
-            _mainform.Invoke((MethodInvoker)delegate
-            {
 
                 try
                 {
@@ -552,7 +489,8 @@ namespace MouseClick
                     //模拟鼠标移动
                     if (inScreenRange(e))
                     {
-                        SetCursorPos((int)(e[0]), (int)(e[1]));
+                        //Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
+                        //SetCursorPos((int)(e[0]), (int)(e[1]));
                     }
 
                     //Console.WriteLine(e[0].ToString()+","+ e[1].ToString());
@@ -561,7 +499,69 @@ namespace MouseClick
                 {
                 }
 
-            });
+
+
+        }
+        private void Handler_SmoothRotateRefreshed(object sender, float[] e)
+        {
+
+            try
+            {
+                //调用旋转3D模型
+                try
+                {
+                    Constant.SendViewer3DOrientation(e[1],e[2]);
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+
+        }
+        private void Handler_SmoothHeadPosRefreshed(object sender, float[] e)
+        {
+
+                try
+                {
+                    //移动窗口
+
+                        try
+                        {
+
+
+                    _mainform.Invoke((MethodInvoker)delegate
+                    {
+                        //当未识别到人就隐藏黑块
+
+                        //if (_mainform.Visible == false)
+                        //    _mainform.Visible = true;
+
+                        _mainform.Width = (int)e[2];
+                        _mainform.Height = (int)e[2];
+
+
+                        SetBlockPosition((int)e[0], (int)e[1]);
+
+                    });
+
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
+
+                }
+                catch (Exception ex)
+                {
+                }
+
 
 
         }
@@ -572,8 +572,19 @@ namespace MouseClick
 
             _mainform = this;
 
-
-
+            while (false)
+            {
+                for (int i = 0; i < 1000; i++)
+                {
+                    SetPosition(100 + i, 600, this);
+                    System.Threading.Thread.Sleep(1 * 3);
+                }
+                for (int i = 0; i < 1000; i++)
+                {
+                    SetPosition(1100 - i, 600, this);
+                    System.Threading.Thread.Sleep(1 * 3);
+                }
+            }
 
 
 
@@ -621,5 +632,8 @@ namespace MouseClick
                 return;
             }
         }
+
+
+
     }
 }

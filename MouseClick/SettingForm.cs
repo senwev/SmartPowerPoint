@@ -212,16 +212,16 @@ namespace MouseClick
                     {
                         if (!string.IsNullOrEmpty(curLine))
                         {
-                            ////主线程操作，使用委托
-                            //this.Invoke((MethodInvoker)delegate
-                            //{
+                            //主线程操作，使用委托
+                            this.Invoke((MethodInvoker)delegate
+                            {
 
-                            //eyeCareOutput.Text += curLine + "\r\n";
-                            //eyeCareOutput.Focus();
-                            //eyeCareOutput.Select(eyeCareOutput.Text.Length, 0);
-                            //eyeCareOutput.ScrollToCaret();
+                                eyeCareOutput.Text += curLine + "\r\n";
+                                //eyeCareOutput.Focus();
+                                //eyeCareOutput.Select(eyeCareOutput.Text.Length, 0);
+                                //eyeCareOutput.ScrollToCaret();
 
-                            //});
+                            });
 
                         }
                         curLine = reader.ReadLine();
@@ -277,5 +277,9 @@ namespace MouseClick
             }
         }
 
+        private void testrotate_Click(object sender, EventArgs e)
+        {
+            SendTest();
+        }
     }
 }
