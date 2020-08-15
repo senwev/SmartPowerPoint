@@ -1,4 +1,5 @@
-﻿using OpenTK.Graphics.OpenGL;
+﻿using MouseClick.Drawing;
+using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -253,7 +254,10 @@ namespace MouseClick
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            SendTest();
+            //SendTest();
+            var paintForm = new PaintPanel();
+            paintForm.ShowDialog();
+
         }
 
         private async void SendTest()

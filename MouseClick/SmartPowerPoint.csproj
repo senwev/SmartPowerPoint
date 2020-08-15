@@ -72,6 +72,12 @@
     <Compile Include="DemoWindow.Designer.cs">
       <DependentUpon>DemoWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Drawing\PaintPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Drawing\PaintPanel.Designer.cs">
+      <DependentUpon>PaintPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="HomeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +136,9 @@
     </Compile>
     <EmbeddedResource Include="DemoWindow.resx">
       <DependentUpon>DemoWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Drawing\PaintPanel.resx">
+      <DependentUpon>PaintPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HomeForm.resx">
       <DependentUpon>HomeForm.cs</DependentUpon>
