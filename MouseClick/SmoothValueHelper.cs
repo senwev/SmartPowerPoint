@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MouseClick
@@ -17,7 +18,6 @@ namespace MouseClick
         private float[] lastMValue;
         private float[] increaseSpeed;
         private float[] mSoomthValue;
-        private float mRefreshHz = 100f;
         private System.Timers.Timer timer;
         private bool isTriggerEnabled = false;
         private int mDim = 3;
@@ -47,18 +47,35 @@ namespace MouseClick
             stopwatch = new Stopwatch();
             stopwatch.Start();
             lastPostTime = stopwatch.ElapsedMilliseconds;
-        }
 
+
+
+        }
+        Task looptask;
         private void initTimer()
         {
-            timer = new System.Timers.Timer();
             int interval = (int)(1000f / mHz);
-            interval = interval <= 0 ? 1 : interval;//限定最小延时
-            timer.AutoReset = true;//一直执行
-            //设置是否执行System.Timers.Timer.Elapsed事件
-            timer.Enabled = true;
-            //绑定Elapsed事件
-            timer.Elapsed += new System.Timers.ElapsedEventHandler(TimerUp);
+            //在线程中循环
+            looptask = new Task(() =>
+            {
+                while (true)
+                {
+                    callOnValueRefresh(mSoomthValue);
+                    Thread.Sleep(interval);
+                }
+                
+            });
+            looptask.Start();
+
+
+            //timer = new System.Timers.Timer();
+            //int interval = (int)(1000f / mHz);
+            //interval = interval <= 0 ? 1 : interval;//限定最小延时
+            //timer.AutoReset = true;//一直执行
+            ////设置是否执行System.Timers.Timer.Elapsed事件
+            //timer.Enabled = true;
+            ////绑定Elapsed事件
+            //timer.Elapsed += new System.Timers.ElapsedEventHandler(TimerUp);
         }
         /// <summary>
         /// 开始触发回调事件，定时输出 维护值
@@ -153,7 +170,12 @@ namespace MouseClick
                 //如果需要触发事件则调用触发
                 if (isTriggerEnabled)
                 {
-                    callOnValueRefresh(mSoomthValue);
+                    var task = new Task(() =>
+                    {
+
+                        callOnValueRefresh(mSoomthValue);
+                    });
+                    task.Start();
                 }
             }
             catch (Exception ex)
