@@ -1,0 +1,20 @@
+﻿<Window
+    x:Class="HomeApp.PaintWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:innerControls="clr-namespace:MouseClick.Drawing;assembly=MouseClick"
+    xmlns:local="clr-namespace:HomeApp"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="PaintWindow"
+    Width="800"
+    Height="450"
+    WindowState="Maximized"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Grid>
+        <WindowsFormsHost>
+            <innerControls:PaintPanelControl x:Name="paintPanelControl" />
+        </WindowsFormsHost>
+    </Grid>
+</Window>

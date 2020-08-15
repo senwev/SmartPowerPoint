@@ -23,5 +23,10 @@ namespace MouseClick
         {
             this.viewer3DControl1?.OnMoveToAngle(e.Item1, e.Item2);
         }
+
+        private void Viewer3D_Load(object sender, EventArgs e)
+        {
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+        }
     }
 }

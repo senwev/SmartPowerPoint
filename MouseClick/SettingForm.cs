@@ -85,8 +85,7 @@ namespace MouseClick
         {
             //new WebBrowserForm().Show();
             var view = new Viewer3D();
-            view.ShowDialog();
-            view.Dispose();
+            view.Show();
         }
 
         private void serialSettingControl1_Load(object sender, EventArgs e)

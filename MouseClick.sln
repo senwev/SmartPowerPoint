@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30330.147
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartPowerPoint", "MouseClick\SmartPowerPoint.csproj", "{FEBB1E23-BCED-4743-B3E9-21E385491EC4}"
 EndProject
@@ -22,6 +22,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KDTree", "3DViewer\libs\kd-sharp\KDTree\KDTree.csproj", "{33A00A90-C02E-474B-A8C0-3B0559873EA0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartThreadPool", "3DViewer\libs\SmartThreadPool\SmartThreadPool\SmartThreadPool.csproj", "{74D4C33F-7CC8-4B2A-A7DF-D8B6E63B6EBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeApp", "HomeApp\HomeApp.csproj", "{21EF3781-75E9-4A95-BB3E-EDFC43839A08}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -425,6 +427,48 @@ Global
 		{74D4C33F-7CC8-4B2A-A7DF-D8B6E63B6EBD}.Release|x64.Build.0 = Release|Any CPU
 		{74D4C33F-7CC8-4B2A-A7DF-D8B6E63B6EBD}.Release|x86.ActiveCfg = Release|Any CPU
 		{74D4C33F-7CC8-4B2A-A7DF-D8B6E63B6EBD}.Release|x86.Build.0 = Release|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Debug|x64.Build.0 = Debug|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Debug|x86.Build.0 = Debug|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Net20-Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Net20-Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Net20-Debug|x64.ActiveCfg = Debug|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Net20-Debug|x64.Build.0 = Debug|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Net20-Debug|x86.ActiveCfg = Debug|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Net20-Debug|x86.Build.0 = Debug|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Net20-Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Net20-Release|Any CPU.Build.0 = Release|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Net20-Release|x64.ActiveCfg = Release|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Net20-Release|x64.Build.0 = Release|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Net20-Release|x86.ActiveCfg = Release|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Net20-Release|x86.Build.0 = Release|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Net45-Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Net45-Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Net45-Debug|x64.ActiveCfg = Debug|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Net45-Debug|x64.Build.0 = Debug|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Net45-Debug|x86.ActiveCfg = Debug|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Net45-Debug|x86.Build.0 = Debug|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Net45-Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Net45-Release|Any CPU.Build.0 = Release|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Net45-Release|x64.ActiveCfg = Release|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Net45-Release|x64.Build.0 = Release|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Net45-Release|x86.ActiveCfg = Release|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Net45-Release|x86.Build.0 = Release|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Publish|Any CPU.ActiveCfg = Release|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Publish|Any CPU.Build.0 = Release|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Publish|x64.ActiveCfg = Release|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Publish|x64.Build.0 = Release|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Publish|x86.ActiveCfg = Release|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Publish|x86.Build.0 = Release|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Release|x64.ActiveCfg = Release|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Release|x64.Build.0 = Release|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Release|x86.ActiveCfg = Release|Any CPU
+		{21EF3781-75E9-4A95-BB3E-EDFC43839A08}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
