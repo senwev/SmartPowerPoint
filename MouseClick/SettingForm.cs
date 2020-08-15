@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenTK.Graphics.OpenGL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -45,7 +46,8 @@ namespace MouseClick
                 }
                 开启遮挡.Text = "关闭遮罩窗";
             }
-            else {
+            else
+            {
                 mainform.Visible = false;
                 开启遮挡.Text = "打开遮罩窗";
             }
@@ -175,7 +177,8 @@ namespace MouseClick
                 openEyecare.Text = "打开智慧眼";
                 return;
             }
-            else {
+            else
+            {
                 openEyecare.Text = "关闭智慧眼";
             }
 
@@ -203,7 +206,7 @@ namespace MouseClick
                 //开启线程读取输出
                 Thread thread2 = new Thread(() =>
                 {
-                   
+
                     while (!reader.EndOfStream)
                     {
                         if (!string.IsNullOrEmpty(curLine))
@@ -211,7 +214,7 @@ namespace MouseClick
                             ////主线程操作，使用委托
                             //this.Invoke((MethodInvoker)delegate
                             //{
-                            
+
                             //eyeCareOutput.Text += curLine + "\r\n";
                             //eyeCareOutput.Focus();
                             //eyeCareOutput.Select(eyeCareOutput.Text.Length, 0);
@@ -227,7 +230,7 @@ namespace MouseClick
                     process.WaitForExit();  //等待程序执行完退出进程
                     process.Close();
                 }
-                
+
                 );
                 thread2.Start();
 
@@ -247,5 +250,28 @@ namespace MouseClick
             //配置是否开启遮挡
             Global.shouldShowHideBlock = checkBox1.Checked;
         }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            SendTest();
+        }
+
+        private async void SendTest()
+        {
+            await Task.Delay(10000);
+            Random random = new Random();
+            double x = -1.57;
+            double y = -1.57;
+            while (true)
+            {
+                //x += random.NextDouble() /10;//Global.Viewer3DCamera[0];
+                //y += random.NextDouble() /10;//Global.Viewer3DCamera[1];
+                x = Global.Viewer3DCamera[0];
+                y = Global.Viewer3DCamera[1];
+                Constant.SendViewer3DOrientation(x, y);
+                await Task.Delay(10);
+            }
+        }
+
     }
 }

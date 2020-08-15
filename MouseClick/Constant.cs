@@ -28,7 +28,8 @@ namespace MouseClick
 
         public static void SendViewer3DOrientation(double x, double y)
         {
-            Viewer3DOrientationChanged?.Invoke(null, new Tuple<double, double>(x, y));
+            Viewer3DOrientationChanged?.Invoke(null, 
+                new Tuple<double, double>(x, y));
         }
 
     }

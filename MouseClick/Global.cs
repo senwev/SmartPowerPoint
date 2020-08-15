@@ -9,7 +9,9 @@ namespace MouseClick
     using Utils;
     class Global
     {
-        static public double[] Position = new double[3] {1.213,1.163,1.229};
+        static public double[] Position = new double[3] { 1.213, 1.163, 1.229 };
+
+        static public volatile double[] Viewer3DCamera = new double[2];
 
         static public MovingAverage XMovingAverage = new MovingAverage(20);
 

@@ -454,15 +454,15 @@ namespace open3mod
 
         public void OnMoveToAngle(double x, double y)
         {
-            if (this.InvokeRequired)
-            {
-                var d = new ModeToAngleHandler(ExecuteOnMoveToAngle);
-                this.Invoke(d, new object[] { x, y });
-            }
-            else
-            {
-                ExecuteOnMoveToAngle(x, y);
-            }
+            //if (this.InvokeRequired)
+            //{
+            //    var d = new ModeToAngleHandler(ExecuteOnMoveToAngle);
+            //    this.Invoke(d, new object[] { x, y });
+            //}
+            //else
+            //{
+            ExecuteOnMoveToAngle(x, y);
+            //}
         }
 
         private delegate void ModeToAngleHandler(double x, double y);
@@ -471,7 +471,7 @@ namespace open3mod
         {
             if (UiState.ActiveTab.ActiveCameraController != null)
             {
-                UiState.ActiveTab.ActiveCameraController.MouseMoveToPoint(y, y);
+                UiState.ActiveTab.ActiveCameraController.MouseMoveToPoint(x, y);
             }
         }
 
