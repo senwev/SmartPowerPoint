@@ -78,6 +78,18 @@
     <Compile Include="Drawing\PaintPanel.Designer.cs">
       <DependentUpon>PaintPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Drawing\PaintPanelControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Drawing\PaintPanelControl.Designer.cs">
+      <DependentUpon>PaintPanelControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Drawing\Viewer3DControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Drawing\Viewer3DControl.Designer.cs">
+      <DependentUpon>Viewer3DControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="HomeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,6 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Drawing\PaintPanel.resx">
       <DependentUpon>PaintPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Drawing\PaintPanelControl.resx">
+      <DependentUpon>PaintPanelControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HomeForm.resx">
       <DependentUpon>HomeForm.cs</DependentUpon>

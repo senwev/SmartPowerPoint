@@ -1,0 +1,197 @@
+﻿<Window
+    x:Class="HomeApp.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:local="clr-namespace:HomeApp"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    Foreground="White"
+    WindowState="Maximized"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LargeTileStyle" TargetType="controls:Tile">
+                <Setter Property="Height" Value="auto" />
+                <Setter Property="Width" Value="auto" />
+                <!--<Setter Property="Height" Value="125" />-->
+                <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+                <Setter Property="TextOptions.TextRenderingMode" Value="ClearType" />
+                <Setter Property="TitleFontSize" Value="14" />
+                <Setter Property="Padding" Value="30" />
+                <!--<Setter Property="Width" Value="300" />-->
+            </Style>
+
+            <Style x:Key="SmallTileStyle" TargetType="controls:Tile">
+                <Setter Property="Height" Value="auto" />
+                <Setter Property="Width" Value="auto" />
+                <!--<Setter Property="Height" Value="125" />-->
+                <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+                <Setter Property="TextOptions.TextRenderingMode" Value="ClearType" />
+                <Setter Property="TitleFontSize" Value="10" />
+                <!--<Setter Property="Width" Value="147" />-->
+            </Style>
+
+            <Style x:Key="PackIconMaterialStyle" TargetType="iconPacks:PackIconMaterial">
+                <Setter Property="Width" Value="100" />
+                <Setter Property="Height" Value="100" />
+            </Style>
+            <Style x:Key="PackIconModernStyle" TargetType="iconPacks:PackIconModern">
+                <Setter Property="Width" Value="100" />
+                <Setter Property="Height" Value="100" />
+            </Style>
+            <Style x:Key="PackIconFontAwesomeStyle" TargetType="iconPacks:PackIconFontAwesome">
+                <Setter Property="Width" Value="100" />
+                <Setter Property="Height" Value="100" />
+            </Style>
+            <Style x:Key="StandardLogoImage" TargetType="Image">
+                <Setter Property="Width" Value="120" />
+                <Setter Property="Height" Value="120" />
+            </Style>
+
+            <Style x:Key="BigLogoImage" TargetType="Image">
+                <Setter Property="Width" Value="240" />
+                <Setter Property="Height" Value="120" />
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Margin="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Height="180">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel
+                Grid.Column="0"
+                Margin="10"
+                HorizontalAlignment="Left"
+                Orientation="Horizontal">
+                <Image
+                    Margin="10,5"
+                    Source="Images/organ-logo.png"
+                    Style="{StaticResource BigLogoImage}" />
+            </StackPanel>
+            <Grid Grid.Column="1" VerticalAlignment="Center">
+                <StackPanel>
+
+                    <Image Height="100" Source="Images/theme-logo.png" />
+                    <!--<Separator />-->
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        FontSize="30"
+                        Foreground="Black"
+                        Text="智能交互友好型投影解决方案" />
+
+                </StackPanel>
+            </Grid>
+            <StackPanel
+                Grid.Column="2"
+                Margin="10"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <Image
+                    Margin="10,5"
+                    Source="Images/campus logo.png"
+                    Style="{StaticResource StandardLogoImage}" />
+                <Separator
+                    BorderBrush="LightGray"
+                    BorderThickness="1"
+                    Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+
+                <Image
+                    Margin="10,5"
+                    MouseLeftButtonDown="App_Exit_MouseLeftButtonDown"
+                    Source="Images/EnFuture logo.png"
+                    Style="{StaticResource StandardLogoImage}" />
+
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <controls:Tile
+                Title="Marker"
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="3"
+                controls:ControlsHelper.MouseOverBorderBrush="Blue"
+                Background="Teal"
+                Click="Tile1_Click"
+                HorizontalTitleAlignment="Right"
+                Style="{StaticResource LargeTileStyle}">
+                <iconPacks:PackIconModern Kind="DrawMarker" Style="{StaticResource PackIconModernStyle}" />
+            </controls:Tile>
+            <controls:Tile
+                Title="Game"
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="3"
+                controls:ControlsHelper.MouseOverBorderBrush="Blue"
+                Background="CornflowerBlue"
+                Style="{StaticResource LargeTileStyle}">
+                <iconPacks:PackIconFontAwesome Kind="GamepadSolid" Style="{StaticResource PackIconFontAwesomeStyle}" />
+            </controls:Tile>
+            <controls:Tile
+                Title="3D Viewer"
+                Grid.Row="0"
+                Grid.Column="2"
+                Background="DimGray"
+                Style="{StaticResource LargeTileStyle}">
+                <iconPacks:PackIconModern Kind="_3dObj" Style="{StaticResource PackIconModernStyle}" />
+            </controls:Tile>
+            <controls:Tile
+                Title="Medicine Teaching"
+                Grid.Row="1"
+                Grid.Column="0"
+                Background="LimeGreen"
+                Style="{StaticResource LargeTileStyle}">
+                <iconPacks:PackIconModern Kind="Foot" Style="{StaticResource PackIconModernStyle}" />
+            </controls:Tile>
+            <controls:Tile
+                Title="Speaker"
+                Grid.Row="1"
+                Grid.Column="1"
+                Background="#D2691E"
+                HorizontalTitleAlignment="Right"
+                Style="{StaticResource LargeTileStyle}">
+                <iconPacks:PackIconModern Kind="Speakerphone" Style="{StaticResource PackIconModernStyle}" />
+            </controls:Tile>
+            <controls:Tile
+                Title="Eye Protection"
+                Grid.Row="1"
+                Grid.Column="2"
+                Background="Purple"
+                Style="{StaticResource LargeTileStyle}">
+                <iconPacks:PackIconMaterial Kind="EyeOff" Style="{StaticResource PackIconMaterialStyle}" />
+            </controls:Tile>
+
+
+        </Grid>
+
+    </Grid>
+
+
+</Window>
