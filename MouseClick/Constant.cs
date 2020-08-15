@@ -26,10 +26,17 @@ namespace MouseClick
 
         public static EventHandler<Tuple<double, double>> Viewer3DOrientationChanged;
 
+        public static EventHandler<double> Viewer3DDistanceChanged;
+
         public static void SendViewer3DOrientation(double x, double y)
         {
-            Viewer3DOrientationChanged?.Invoke(null, 
+            Viewer3DOrientationChanged?.Invoke(null,
                 new Tuple<double, double>(x, y));
+        }
+
+        public static void SendViewer3DOrientation(double z)
+        {
+            Viewer3DDistanceChanged?.Invoke(null, z);
         }
 
     }

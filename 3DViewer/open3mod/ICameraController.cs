@@ -38,7 +38,7 @@ namespace open3mod
         Pick = 5,
 
         _Max = 6,
-        
+
     }
 
     /// <summary>
@@ -78,11 +78,25 @@ namespace open3mod
         void MouseMoveToPoint(double x, double y);
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        void AdjustToEulerAngle(double x, double y, double z);
+
+        /// <summary>
         /// Processes scroll events
         /// </summary>
         /// <param name="z">Signed scroll delta (knocks * DELTA_.. constants
         ///   from WinFors)</param>
         void Scroll(float z);
+
+        /// <summary>
+        /// Processes scroll events
+        /// </summary>
+        /// <param name="z">Signed scroll delta (knocks * DELTA_.. constants
+        ///   from WinFors)</param>
+        void ScrollToDistance(float z);
 
         /// <summary>
         /// Processes pan events (i.e. mousewheel pressed)

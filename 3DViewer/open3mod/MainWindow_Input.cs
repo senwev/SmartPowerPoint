@@ -296,7 +296,6 @@ namespace open3mod
                 UiState.ActiveTab.ActiveCameraController.Scroll(e.Delta);
             }
 
-
             // hack: the renderer handles the input for the HUD, so forward the event
             var index = MousePosToViewportIndex(e.X, e.Y);
             if (index == Tab.ViewIndex._Max)
@@ -452,7 +451,7 @@ namespace open3mod
         }
 
 
-        public void OnMoveToAngle(double x, double y)
+        public void OnAdjustToAngle(double x, double y, double z)
         {
             //if (this.InvokeRequired)
             //{
@@ -461,17 +460,17 @@ namespace open3mod
             //}
             //else
             //{
-            ExecuteOnMoveToAngle(x, y);
+            ExecuteOnAdjustToAngle(x, y, z);
             //}
         }
 
-        private delegate void ModeToAngleHandler(double x, double y);
+        private delegate void AdjustToAngleHandler(double x, double y,double z);
 
-        private void ExecuteOnMoveToAngle(double x, double y)
+        private void ExecuteOnAdjustToAngle(double x, double y, double z)
         {
             if (UiState.ActiveTab.ActiveCameraController != null)
             {
-                UiState.ActiveTab.ActiveCameraController.MouseMoveToPoint(x, y);
+                UiState.ActiveTab.ActiveCameraController.AdjustToEulerAngle(x, y, z);
             }
         }
 

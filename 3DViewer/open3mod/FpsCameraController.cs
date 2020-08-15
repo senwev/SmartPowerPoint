@@ -158,6 +158,16 @@ namespace open3mod
         {
 
         }
+
+        public void ScrollToDistance(float z)
+        {
+
+        }
+
+        public void AdjustToEulerAngle(double x, double y, double z)
+        {
+
+        }
     }
 }
 

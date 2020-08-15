@@ -141,6 +141,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\IconSizeBindingConverter.cs" />
     <Compile Include="PaintWindow.xaml.cs">
       <DependentUpon>PaintWindow.xaml</DependentUpon>
     </Compile>
@@ -160,6 +161,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="PaintWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\IconDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

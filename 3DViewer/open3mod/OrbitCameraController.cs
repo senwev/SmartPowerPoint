@@ -75,8 +75,6 @@ namespace open3mod
             _dirty = true;
         }
 
-
-
         public Matrix4 GetView()
         {
             if (_dirty)
@@ -85,7 +83,6 @@ namespace open3mod
             }
             return _viewWithOffset;
         }
-
 
         public void MouseMove(int x, int y)
         {
@@ -161,7 +158,6 @@ namespace open3mod
             SetOrbitOrConstrainedMode(CameraMode.Orbit);
         }
 
-
         public void Scroll(float z)
         {
             _cameraDistance *= (float)Math.Pow(ZoomSpeed, -z);
@@ -169,6 +165,13 @@ namespace open3mod
             _dirty = true;
         }
 
+        public void ScrollToDistance(float z)
+        {
+            //_cameraDistance = (float)Math.Pow(ZoomSpeed, -z);
+            //_cameraDistance = InitialCameraDistance;
+            _cameraDistance = z;//Math.Max(_cameraDistance, MinimumCameraDistance);
+            _dirty = true;
+        }
 
         public void Pan(float x, float y)
         {
@@ -275,6 +278,22 @@ namespace open3mod
 
             // leave the X,Z,Y constrained camera modes if we were in any of them
             SetOrbitOrConstrainedMode(CameraMode.Orbit);
+        }
+
+        public void AdjustToEulerAngle(double x, double y, double z)
+        {
+            _view = new Matrix4(
+            0, 0, 1, 0,
+            0, 1, 0, 0,
+           -1, 0, 0, 0,
+            0, 0, 0, 1
+            );
+
+            _view *= Matrix4.CreateFromAxisAngle(_up, (float)(x * RotationSpeed * Math.PI / 180.0));
+
+            _view *= Matrix4.CreateFromAxisAngle(_right, (float)(y * RotationSpeed * Math.PI / 180.0));
+
+            _view *= Matrix4.CreateFromAxisAngle(_front, (float)(z * RotationSpeed * Math.PI / 180.0));
         }
     }
 }

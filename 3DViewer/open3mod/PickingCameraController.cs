@@ -91,6 +91,16 @@ namespace open3mod
         public void MouseMoveToPoint(double x, double y)
         {
         }
+
+        public void ScrollToDistance(float z)
+        {
+
+        }
+
+        public void AdjustToEulerAngle(double x, double y, double z)
+        {
+            
+        }
     }
 }
 
