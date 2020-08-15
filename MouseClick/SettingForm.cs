@@ -271,7 +271,7 @@ namespace MouseClick
                 //y += random.NextDouble() /10;//Global.Viewer3DCamera[1];
                 x = Global.Viewer3DCamera[0];
                 y = Global.Viewer3DCamera[1];
-                Constant.SendViewer3DOrientation(x, y);
+                Constant.SendViewer3DOrientation(x, y, 0);
                 await Task.Delay(10);
             }
         }

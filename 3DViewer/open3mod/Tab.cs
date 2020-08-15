@@ -43,7 +43,8 @@ namespace open3mod
         /// <summary>
         /// Enum of all supported tab states.
         /// </summary>
-        public enum TabState { 
+        public enum TabState
+        {
 
             Empty = 0,
             Loading,
@@ -125,7 +126,8 @@ namespace open3mod
                 }
                 return _activeViews;
             }
-            set{
+            set
+            {
                 _activeViews = value;
             }
         }
@@ -139,44 +141,45 @@ namespace open3mod
         {
             get { return _activeViewMode; }
             set
-            { 
+            {
                 // hardcoded table of viewport sizes. This is the only location
                 // so changing these constants is sufficient to adjust viewport defaults
                 _activeViewMode = value;
-                CoreSettings.CoreSettings.Default.DefaultViewMode = (int) value;
-                switch(_activeViewMode)
+                CoreSettings.CoreSettings.Default.DefaultViewMode = (int)value;
+                switch (_activeViewMode)
                 {
                     case ViewMode.Single:
-                        ActiveViews = new []
+                        ActiveViews = new[]
                         {
                             new Viewport(new Vector4(0.0f, 0.0f, 1.0f, 1.0f), CameraMode.Orbit), 
+                            //new Viewport(new Vector4(0f, 0.0f, 1.0f, 1.0f), CameraMode.Z),
                             null,
                             null,
                             null
                         };
                         break;
                     case ViewMode.Two:
-                        ActiveViews = new []
+                        ActiveViews = new[]
                         {
-                            new Viewport(new Vector4(0.0f, 0.0f, 1.0f, 0.5f), CameraMode.Orbit), 
+                            new Viewport(new Vector4(0.0f, 0.0f, 1.0f, 0.5f), CameraMode.Orbit),
                             null,
-                            new Viewport(new Vector4(0.0f, 0.5f, 1.0f, 1.0f), CameraMode.X), 
+                            new Viewport(new Vector4(0.0f, 0.5f, 1.0f, 1.0f), CameraMode.X),
                             null
-                        };            
+                        };
                         break;
                     case ViewMode.TwoHorizontal:
                         ActiveViews = new[]
                         {
-                            new Viewport(new Vector4(0.0f, 0.0f, 0.5f, 1.0f), CameraMode.Orbit), 
+                            new Viewport(new Vector4(0.0f, 0.0f, 0.5f, 1.0f), CameraMode.Orbit),
                             new Viewport(new Vector4(0.5f, 0.0f, 1.0f, 1.0f), CameraMode.X),
-                            null, 
+                            null,
                             null
                         };
                         break;
                     case ViewMode.Four:
-                        ActiveViews = new []
+                        ActiveViews = new[]
                         {
-                            new Viewport(new Vector4(0.0f, 0.0f, 0.5f, 0.5f), CameraMode.Orbit), 
+                            new Viewport(new Vector4(0.0f, 0.0f, 0.5f, 0.5f), CameraMode.Orbit),
                             new Viewport(new Vector4(0.5f, 0.0f, 1.0f, 0.5f), CameraMode.Z),
                             new Viewport(new Vector4(0.0f, 0.5f, 0.5f, 1.0f), CameraMode.X),
                             new Viewport(new Vector4(0.5f, 0.5f, 1.0f, 1.0f), CameraMode.Y)
@@ -192,7 +195,7 @@ namespace open3mod
                     ActiveViewIndex = ViewIndex.Index0;
                 }
             }
-        }       
+        }
 
 
         /// <summary>
@@ -200,7 +203,8 @@ namespace open3mod
         /// the controller for the current active view and current active camera
         /// mode. This may be a null.
         /// </summary>
-        public ICameraController ActiveCameraController {
+        public ICameraController ActiveCameraController
+        {
             get { return ActiveCameraControllerForView(ActiveViewIndex); }
         }
 
@@ -250,7 +254,7 @@ namespace open3mod
         {
             get { return _errorMessage; }
         }
-       
+
 
 
         /// <summary>
@@ -288,16 +292,16 @@ namespace open3mod
         public Tab(object id, string fileBeingLoaded)
         {
             var vm = CoreSettings.CoreSettings.Default.DefaultViewMode;
-            if(vm <= 2 && vm >= 0)
+            if (vm <= 2 && vm >= 0)
             {
-                ActiveViewMode = (ViewMode) vm;
+                ActiveViewMode = (ViewMode)vm;
             }
             else
             {
                 ActiveViewMode = ViewMode.Four;
-                CoreSettings.CoreSettings.Default.DefaultViewMode = (int) ViewMode.Four;
+                CoreSettings.CoreSettings.Default.DefaultViewMode = (int)ViewMode.Four;
             }
-            
+
             State = fileBeingLoaded == null ? TabState.Empty : TabState.Loading;
             File = fileBeingLoaded;
             Id = id;
@@ -312,7 +316,7 @@ namespace open3mod
         /// <returns>ICameraController or null if there is no implementation</returns>
         public ICameraController ActiveCameraControllerForView(ViewIndex targetView)
         {
-            return ActiveViews[(int)targetView] == null ? null : ActiveViews[(int) targetView].ActiveCameraControllerForView();
+            return ActiveViews[(int)targetView] == null ? null : ActiveViews[(int)targetView].ActiveCameraControllerForView();
         }
 
 
@@ -367,9 +371,9 @@ namespace open3mod
         public void ChangeCameraModeForView(ViewIndex viewIndex, CameraMode cameraMode)
         {
             Debug.Assert(ActiveViews[(int)viewIndex] != null);
-            var view = ActiveViews[(int) viewIndex];
+            var view = ActiveViews[(int)viewIndex];
 
-            view.ChangeCameraModeForView(cameraMode);           
+            view.ChangeCameraModeForView(cameraMode);
         }
 
 
@@ -475,9 +479,9 @@ namespace open3mod
             {
                 f = MinimumViewportSplit;
             }
-            else if (f > 1.0f-MinimumViewportSplit)
+            else if (f > 1.0f - MinimumViewportSplit)
             {
-                f = 1.0f-MinimumViewportSplit;
+                f = 1.0f - MinimumViewportSplit;
             }
 
             _horizontalSplitPos = f;

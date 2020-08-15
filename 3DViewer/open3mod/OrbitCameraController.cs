@@ -136,7 +136,7 @@ namespace open3mod
             Debug.WriteLine($"Inner Angle  x:{(x * 180 / 3.14).ToString("f4")},y:{(y * 180 / 3.14).ToString("f4")}");
 
             // leave the X,Z,Y constrained camera modes if we were in any of them
-            SetOrbitOrConstrainedMode(CameraMode.Orbit);
+            SetOrbitOrConstrainedMode(CameraMode.Z);
         }
 
         public void MouseMoveToAngle(int x, int y)
@@ -283,17 +283,17 @@ namespace open3mod
         public void AdjustToEulerAngle(double x, double y, double z)
         {
             _view = new Matrix4(
-            0, 0, 1, 0,
-            0, 1, 0, 0,
-           -1, 0, 0, 0,
-            0, 0, 0, 1
-            );
+                1, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1, 0,
+                0, 0, 0, 1
+                );
 
-            _view *= Matrix4.CreateFromAxisAngle(_up, (float)(x * RotationSpeed * Math.PI / 180.0));
+            _view *= Matrix4.CreateFromAxisAngle(_up, (float)(-y));
 
-            _view *= Matrix4.CreateFromAxisAngle(_right, (float)(y * RotationSpeed * Math.PI / 180.0));
+            _view *= Matrix4.CreateFromAxisAngle(_right, (float)(z));
 
-            _view *= Matrix4.CreateFromAxisAngle(_front, (float)(z * RotationSpeed * Math.PI / 180.0));
+            _view *= Matrix4.CreateFromAxisAngle(_front, (float)(x));
         }
     }
 }

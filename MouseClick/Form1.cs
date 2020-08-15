@@ -158,12 +158,12 @@ namespace MouseClick
                         {
                             if (dataStr.Substring(0, 6).Equals("voice,"))
                             {
-                                var voicestr = dataStr.Substring(6, dataStr.Length-6);
+                                var voicestr = dataStr.Substring(6, dataStr.Length - 6);
                                 MessageBox.Show(voicestr);
                                 return;
                             }
                         }
-                        
+
 
                         String str0 = dataStr.Split(',')[0];
                         String str1 = dataStr.Split(',')[1];
@@ -241,7 +241,7 @@ namespace MouseClick
 
                             _mainform.Invoke((MethodInvoker)delegate
                             {
-                                    _mainform.Visible = false;
+                                _mainform.Visible = false;
                             });
 
 
@@ -477,27 +477,27 @@ namespace MouseClick
 
 
 
-        
+
 
         //下面代码在UI线线程
         private void Handler_SmoothValueRefreshed(object sender, float[] e)
         {
 
-                try
-                {
+            try
+            {
 
-                    //模拟鼠标移动
-                    if (inScreenRange(e))
-                    {
-                        //Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
-                        //SetCursorPos((int)(e[0]), (int)(e[1]));
-                    }
-
-                    //Console.WriteLine(e[0].ToString()+","+ e[1].ToString());
-                }
-                catch (Exception ex)
+                //模拟鼠标移动
+                if (inScreenRange(e))
                 {
+                    //Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
+                    //SetCursorPos((int)(e[0]), (int)(e[1]));
                 }
+
+                //Console.WriteLine(e[0].ToString()+","+ e[1].ToString());
+            }
+            catch (Exception ex)
+            {
+            }
 
 
 
@@ -510,7 +510,7 @@ namespace MouseClick
                 //调用旋转3D模型
                 try
                 {
-                    Constant.SendViewer3DOrientation(e[1],e[2]);
+                    Constant.SendViewer3DOrientation(e[0], e[1], e[2]);
                 }
                 catch (Exception ex)
                 {
@@ -528,12 +528,12 @@ namespace MouseClick
         private void Handler_SmoothHeadPosRefreshed(object sender, float[] e)
         {
 
+            try
+            {
+                //移动窗口
+
                 try
                 {
-                    //移动窗口
-
-                        try
-                        {
 
 
                     _mainform.Invoke((MethodInvoker)delegate
@@ -551,16 +551,16 @@ namespace MouseClick
 
                     });
 
-                        }
-                        catch (Exception ex)
-                        {
-
-                        }
-
                 }
                 catch (Exception ex)
                 {
+
                 }
+
+            }
+            catch (Exception ex)
+            {
+            }
 
 
 
