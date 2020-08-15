@@ -36,6 +36,8 @@ namespace MouseClick
 
         private static Stopwatch stopwatch = new Stopwatch();
 
+        private static UdpClient udpClient;
+
         public static void SocketServie()
         {
             Console.WriteLine("服务端已启动");
@@ -47,9 +49,11 @@ namespace MouseClick
             //Thread myThread = new Thread(ListenClientConnect);//通过多线程监听客户端连接  
             //myThread.Start();
             running = true;
-            var task = Task.Factory.StartNew(ListenClientConnect);
+            //var task = Task.Factory.StartNew(ListenClientConnect);
+            udpClient = new UdpClient();
             //Console.ReadLine();
             stopwatch.Start();
+            Read();
         }
 
         /// <summary>  
@@ -86,6 +90,21 @@ namespace MouseClick
                 //Thread receiveThread = new Thread(ReceiveMessage);
                 //receiveThread.Start(clientSocket);
             }
+        }
+
+        private static void Read()
+        {
+            udpClient.BeginReceive((ar) =>
+            {
+                IPEndPoint remote = new IPEndPoint(IPAddress.Any, 0);//用来保存发送方的ip和端口号
+
+                var buffer = udpClient.EndReceive(ar, ref remote);
+                Read();
+                if (remote != null && buffer != null && buffer.Length > 0)
+                {
+                    UdpReceiveMessage(buffer, buffer.Length);
+                }
+            }, null);
         }
 
         /// <summary>
