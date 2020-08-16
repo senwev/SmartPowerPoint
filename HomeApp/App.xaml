@@ -4,6 +4,12 @@
              xmlns:local="clr-namespace:HomeApp"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary Source="pack://application:,,,/HomeApp;Component/Resources/IconDictionary.xaml"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/HomeApp;Component/Resources/IconDictionary.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/HomeApp;Component/Resources/AnimationDictionary.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

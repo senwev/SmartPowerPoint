@@ -123,7 +123,6 @@ namespace open3mod
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.label1 = new System.Windows.Forms.Label();
             this.trackBarBrightness = new System.Windows.Forms.TrackBar();
             this.glControl1 = new open3mod.RenderControl();
             this.menuStrip1.SuspendLayout();
@@ -858,8 +857,7 @@ namespace open3mod
             // 
             this.toolStripStatusLabel1.BackColor = System.Drawing.Color.Transparent;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(336, 17);
-            this.toolStripStatusLabel1.Text = "| Keep right mouse button pressed to move light source";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
             // 
             // directorySearcher1
             // 
@@ -867,24 +865,12 @@ namespace open3mod
             this.directorySearcher1.ServerPageTimeLimit = System.TimeSpan.Parse("-00:00:01");
             this.directorySearcher1.ServerTimeLimit = System.TimeSpan.Parse("-00:00:01");
             // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.label1.Location = new System.Drawing.Point(806, 658);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 19);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Brightness";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // trackBarBrightness
             // 
             this.trackBarBrightness.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.trackBarBrightness.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.trackBarBrightness.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::open3mod.GraphicsSettings.Default, "OutputBrightness", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.trackBarBrightness.Location = new System.Drawing.Point(863, 658);
+            this.trackBarBrightness.Location = new System.Drawing.Point(860, 656);
             this.trackBarBrightness.Margin = new System.Windows.Forms.Padding(0);
             this.trackBarBrightness.Maximum = 100;
             this.trackBarBrightness.Name = "trackBarBrightness";
@@ -924,7 +910,6 @@ namespace open3mod
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.trackBarBrightness);
             this.Controls.Add(this.buttonTabClose);
             this.Controls.Add(this.glControl1);
@@ -1012,7 +997,6 @@ namespace open3mod
         private ToolStripMenuItem toolStripMenuItem3;
         private ToolStripSeparator toolStripSeparator11;
         private TrackBar trackBarBrightness;
-        private Label label1;
         private ToolStripStatusLabel toolStripStatusLabel1;
         private ToolStripMenuItem toolStripMenuItem4;
         private ToolStripMenuItem wusonToolStripMenuItem;
