@@ -263,20 +263,26 @@ namespace MouseClick
         {
             await Task.Delay(10000);
             Random random = new Random();
-            double x = -1.57;
-            double y = -1.57;
+            double x = 0;
+            double y = 0;
+            double z = 0;
             while (true)
             {
-                //x += random.NextDouble() /10;//Global.Viewer3DCamera[0];
+                x += random.NextDouble() /10;//Global.Viewer3DCamera[0];
                 //y += random.NextDouble() /10;//Global.Viewer3DCamera[1];
-                x = Global.Viewer3DCamera[0];
-                y = Global.Viewer3DCamera[1];
-                Constant.SendViewer3DOrientation(x, y, 0);
+                //x = Global.Viewer3DCamera[0];
+                //y = Global.Viewer3DCamera[1];
+                Constant.SendViewer3DOrientation(x, y, z);
                 await Task.Delay(10);
             }
         }
 
         private void testrotate_Click(object sender, EventArgs e)
+        {
+            SendTest();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
         {
             SendTest();
         }

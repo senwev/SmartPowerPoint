@@ -289,11 +289,14 @@ namespace open3mod
                 0, 0, 0, 1
                 );
 
-            _view *= Matrix4.CreateFromAxisAngle(_up, (float)(-y));
+            //z
+            _view *= Matrix4.CreateFromAxisAngle(_up, (float)(z));
+            
+            //x
+            _view *= Matrix4.CreateFromAxisAngle(_right, (float)(x));
 
-            _view *= Matrix4.CreateFromAxisAngle(_right, (float)(z));
-
-            _view *= Matrix4.CreateFromAxisAngle(_front, (float)(x));
+            //y
+            _view *= Matrix4.CreateFromAxisAngle(_front, (float)(y));
         }
     }
 }

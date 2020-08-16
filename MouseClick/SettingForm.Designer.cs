@@ -58,6 +58,7 @@
             this.uwbPositionSettingControl1 = new MouseClick.UWBPositionSettingControl();
             this.serialSettingControl1 = new MouseClick.SerialSettingControl();
             this.testrotate = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // 开启遮挡
@@ -331,11 +332,22 @@
             this.testrotate.UseVisualStyleBackColor = true;
             this.testrotate.Click += new System.EventHandler(this.testrotate_Click);
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(957, 132);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 31;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // SettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1110, 706);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.testrotate);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.checkBox1);
@@ -406,5 +418,6 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button testrotate;
+        private System.Windows.Forms.Button button3;
     }
 }
