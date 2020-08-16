@@ -77,8 +77,8 @@ namespace MouseClick
             var point = Transform(p, this.UWBAnchorArea.Axes, newArea);
             var brush = new SolidBrush(this.UWBAnchorArea.TargetColor);
             
-            g.FillEllipse(brush, new RectangleF(point.Y, point.X, PointWidth, PointHeight));
-            g.DrawString($"Cursor\r\nx:{p.X},y:{p.Y}", new Font("宋体", 10), new SolidBrush(this.UWBAnchorArea.TargetColor), point.Y - 25, point.X + 15);
+            g.FillEllipse(brush, new RectangleF(point, new SizeF(PointWidth, PointHeight)));
+            g.DrawString($"Cursor\r\nx:{p.Y},y:{p.X}", new Font("宋体", 10), new SolidBrush(this.UWBAnchorArea.TargetColor), point.X - 25, point.Y + 15);
 
             brush.Dispose();
         }

@@ -106,7 +106,7 @@ namespace MouseClick.Models
 
         private Tuple<double, double> ConvertToTuple(Point p)
         {
-            var t = new Tuple<double, double>(p.X, p.Y);
+            var t = new Tuple<double, double>(p.Y, p.X);
             return t;
         }
     }
