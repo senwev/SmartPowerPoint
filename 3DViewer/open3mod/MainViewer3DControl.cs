@@ -141,6 +141,56 @@ namespace open3mod
             StartUndoRedoUiStatePollLoop();
         }
 
+        public MainViewer3DControl(string fileName)
+        {
+            // create delegate used for asynchronous calls 
+            _delegateSelectTab = SelectTab;
+            _delegatePopulateInspector = PopulateInspector;
+
+            InitializeComponent();
+            _captionStub = Text;
+
+            //AddEmptyTab();
+            AddTab(fileName, true, true);
+            // initialize UI state shelf with a default tab
+            //_ui = new UiState(new Tab(_emptyTab, null));
+            _fps = new FpsTracker();
+
+            //// sync global UI with UIState
+            //framerateToolStripMenuItem.Checked = toolStripButtonShowFPS.Checked = _ui.ShowFps;
+            //lightingToolStripMenuItem.Checked = toolStripButtonShowShaded.Checked = _ui.RenderLit;
+            //cullingToolStripMenuItem.Checked = toolStripButtonCulling.Checked = GraphicsSettings.Default.BackFaceCulling;
+            //texturedToolStripMenuItem.Checked = toolStripButtonShowTextures.Checked = _ui.RenderTextured;
+            //wireframeToolStripMenuItem.Checked = toolStripButtonWireframe.Checked = _ui.RenderWireframe;
+            //showNormalVectorsToolStripMenuItem.Checked = toolStripButtonShowNormals.Checked = _ui.ShowNormals;
+            //showBoundingBoxesToolStripMenuItem.Checked = toolStripButtonShowBB.Checked = _ui.ShowBBs;
+            //showAnimationSkeletonToolStripMenuItem.Checked = toolStripButtonShowSkeleton.Checked = _ui.ShowSkeleton;
+
+            // manually register the MouseWheel handler
+            glControl1.MouseWheel += OnMouseMove;
+
+            InitRecentList();
+
+#if LEAP
+            //LeapMotion Support
+            _leapListener = new LeapListener(this as MainWindow);
+            _leapController = new Controller(_leapListener);
+#endif
+
+            // register listener for tab changs
+            tabControl1.SelectedIndexChanged += (object o, EventArgs e) =>
+            {
+                if (SelectedTabChanged != null)
+                {
+                    SelectedTabChanged(UiState.TabForId(tabControl1.SelectedTab));
+                }
+            };
+
+            _initialized = true;
+            StartUndoRedoUiStatePollLoop();
+        }
+
+
         public override sealed string Text
         {
             get { return base.Text; }

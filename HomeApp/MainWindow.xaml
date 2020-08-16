@@ -21,6 +21,8 @@
 
             <Style x:Key="LargeTileStyle"
                    TargetType="controls:Tile">
+                <Setter Property="Margin"
+                        Value="5" />
                 <Setter Property="Height"
                         Value="auto" />
                 <Setter Property="Width"
@@ -34,6 +36,17 @@
                         Value="45" />
                 <Setter Property="Padding"
                         Value="30" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver"
+                             Value="True">
+                        <Setter Property="RenderTransform">
+                            <Setter.Value>
+                                <ScaleTransform ScaleX="1.025"
+                                                ScaleY="1.025" />
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                </Style.Triggers>
                 <!--<Setter Property="Width" Value="300" />-->
             </Style>
             <Style x:Key="SmallTileStyle"
@@ -157,7 +170,6 @@
             <controls:Tile Title="隔空标注"
                            Grid.Row="0"
                            Grid.Column="0"
-                           Margin="3"
                            controls:ControlsHelper.MouseOverBorderBrush="Blue"
                            Background="Teal"
                            Click="TileMarker_Click"
@@ -169,7 +181,6 @@
             <controls:Tile Title="体感游戏"
                            Grid.Row="0"
                            Grid.Column="1"
-                           Margin="3"
                            Click="TileSomatosensoryGames_Click"
                            controls:ControlsHelper.MouseOverBorderBrush="Blue"
                            Background="CornflowerBlue"

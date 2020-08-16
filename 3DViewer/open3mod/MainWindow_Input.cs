@@ -323,7 +323,7 @@ namespace open3mod
                 }
                 else
                 {
-                    UiState.ActiveTab.ActiveCameraController.MouseMove(vy, vy);
+                    UiState.ActiveTab.ActiveCameraController.MouseMove(vx, vy);
                 }
             }
             _previousMousePosX = e.X;
