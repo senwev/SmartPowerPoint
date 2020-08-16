@@ -18,6 +18,11 @@ namespace MouseClick
         static public MovingAverage YMovingAverage = new MovingAverage(20);
 
         //配置全局设置
+
+        static public bool shouldControlMouse = false;
         static public bool shouldShowHideBlock = false;
+        static public bool shouldRotate = false;
+
+
     }
 }

@@ -60,7 +60,33 @@ namespace MouseClick
             {
                 while (true)
                 {
-                    callOnValueRefresh(mSoomthValue);
+
+                    try
+                    {
+                        //每次到时间就执行维护值的计算
+                        mSoomthValue = getSmoothValue();
+
+                        //添加行
+                        if(isTriggerEnabled)
+                        callOnValueRefresh(mSoomthValue);
+                        //添加行
+
+                        ////如果需要触发事件则调用触发
+                        //if (isTriggerEnabled)
+                        //{
+                        //    var task = new Task(() =>
+                        //    {
+
+                        //        callOnValueRefresh(mSoomthValue);
+
+                        //    });
+                        //    task.Start();
+                        //}
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.ToString());
+                    }
                     Thread.Sleep(interval);
                 }
                 
@@ -160,29 +186,7 @@ namespace MouseClick
             return mSoomthValue;
         }
 
-        private void TimerUp(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            try
-            {
-                //每次到时间就执行维护值的计算
-                mSoomthValue = getSmoothValue();
 
-                //如果需要触发事件则调用触发
-                if (isTriggerEnabled)
-                {
-                    var task = new Task(() =>
-                    {
-
-                        callOnValueRefresh(mSoomthValue);
-                    });
-                    task.Start();
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-        }
 
         /// <summary>
         /// 当调用startTrigger方法后系统会定时调用本方法，注意是在子线程中

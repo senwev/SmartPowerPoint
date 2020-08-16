@@ -266,9 +266,35 @@ namespace MouseClick
             double x = 0;
             double y = 0;
             double z = 0;
+            int i = 0;
+            int flag = 1;
+            int count = random.Next(400, 600);
             while (true)
             {
-                x += random.NextDouble() /10;//Global.Viewer3DCamera[0];
+                if (i < count && flag % 3 == 1)
+                {
+                    x += 1.0 / 100;
+                }
+
+
+                if (i < count && flag % 3 == 2)
+                {
+                    y += 1.0 / 100;
+                }
+
+                if (i < count && flag % 3 == 0)
+                {
+                    z += 1.0 / 100;
+                }
+
+                if (i >= count)
+                {
+                    i = 0;
+                    count = random.Next(400, 600);
+                    flag++;
+                }
+                i++;
+                //y += random.NextDouble() / 10;//Global.Viewer3DCamera[0];
                 //y += random.NextDouble() /10;//Global.Viewer3DCamera[1];
                 //x = Global.Viewer3DCamera[0];
                 //y = Global.Viewer3DCamera[1];
