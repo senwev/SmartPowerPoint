@@ -126,13 +126,16 @@
                 <StackPanel>
 
                     <Image Height="130"
+                           HorizontalAlignment="Center"
                            Source="Images/theme-logo.png" />
 
-                    <TextBlock HorizontalAlignment="Center"
+                    <TextBlock 
                                FontSize="38"
+                               HorizontalAlignment="Center"
+                        
                                FontWeight="Heavy"
                                Foreground="Black"
-                               Text="智能交互友好型投影解决方案" />
+                               Text="智 能 交 互 友 好 型 投 影 解 决 方 案" />
 
                 </StackPanel>
             </Grid>
@@ -171,7 +174,7 @@
                            Grid.Row="0"
                            Grid.Column="0"
                            controls:ControlsHelper.MouseOverBorderBrush="Blue"
-                           Background="Teal"
+                           Background="PaleVioletRed"
                            Click="TileMarker_Click"
                            HorizontalTitleAlignment="Center"
                            Style="{StaticResource LargeTileStyle}">
@@ -192,7 +195,7 @@
             <controls:Tile Title="3D 查看"
                            Grid.Row="0"
                            Grid.Column="2"
-                           Background="DimGray"
+                           Background="Orange"
                            Click="TileViwer3D_Click"
                            HorizontalTitleAlignment="Center"
                            Style="{StaticResource LargeTileStyle}">
@@ -202,7 +205,7 @@
             <controls:Tile Title="医学课堂"
                            Grid.Row="1"
                            Grid.Column="0"
-                           Background="LimeGreen"
+                           Background="Purple"
                            Click="TileMedicalLesson_Click"
                            HorizontalTitleAlignment="Center"
                            Style="{StaticResource LargeTileStyle}">
@@ -219,10 +222,10 @@
                 <Image Source="{StaticResource SpeakToSentence}"
                        Height="{Binding ActualHeight,Converter={StaticResource iconSizeBindingConverter}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:Tile}}}" />
             </controls:Tile>
-            <controls:Tile Title="实施护眼"
+            <controls:Tile Title="实时护眼"
                            Grid.Row="1"
                            Grid.Column="2"
-                           Background="Purple"
+                           Background="green"
                            Click="TileEyesProtection_Click"
                            HorizontalTitleAlignment="Center"
                            Style="{StaticResource LargeTileStyle}">
