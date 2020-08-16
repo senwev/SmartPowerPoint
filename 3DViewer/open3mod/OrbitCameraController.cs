@@ -31,6 +31,7 @@ namespace open3mod
         private float _cameraDistance;
         private float _pitchAngle = 0.8f;
         private float _rollAngle = 0.0f;
+        private float _yawAngle = 0.0f;
         private readonly Vector3 _right;
         private readonly Vector3 _up;
         private readonly Vector3 _front;
@@ -196,8 +197,20 @@ namespace open3mod
 
         private void UpdateViewMatrix()
         {
-            var viewWithPitchAndRoll = _view * Matrix4.CreateFromAxisAngle(_right, _pitchAngle) * Matrix4.CreateFromAxisAngle(_front, _rollAngle);
-            _viewWithOffset = Matrix4.LookAt(viewWithPitchAndRoll.Column2.Xyz * _cameraDistance + _pivot, _pivot, viewWithPitchAndRoll.Column1.Xyz);
+            //var viewWithPitchAndRoll = _view * Matrix4.CreateFromAxisAngle(_right, _pitchAngle)
+            //                     * Matrix4.CreateFromAxisAngle(_front, _rollAngle)
+                               
+            //_viewWithOffset = Matrix4.LookAt(viewWithPitchAndRoll.Column2.Xyz * _cameraDistance + _pivot, _pivot, viewWithPitchAndRoll.Column1.Xyz);
+            //_viewWithOffset *= Matrix4.CreateTranslation(_panVector);
+
+            //_dirty = false;
+
+            var viewWithPitchAndRoll = _view * Matrix4.CreateFromAxisAngle(_right, _pitchAngle)
+                                             * Matrix4.CreateFromAxisAngle(_front, _rollAngle)
+                                             * Matrix4.CreateFromAxisAngle(_up, _yawAngle);
+            _viewWithOffset = Matrix4.LookAt(viewWithPitchAndRoll.Column2.Xyz * _cameraDistance + _pivot,
+                                            _pivot,
+                                            viewWithPitchAndRoll.Column1.Xyz);
             _viewWithOffset *= Matrix4.CreateTranslation(_panVector);
 
             _dirty = false;
@@ -289,14 +302,17 @@ namespace open3mod
                 0, 0, 0, 1
                 );
 
+            _pitchAngle = (float)x;
+            _yawAngle = (float)y;
+            _rollAngle = (float)z;
             //z
-            _view *= Matrix4.CreateFromAxisAngle(_up, (float)(z));
+            //_view *= Matrix4.CreateFromAxisAngle(_up, (float)(z));
             
             //x
-            _view *= Matrix4.CreateFromAxisAngle(_right, (float)(x));
+            //_view *= Matrix4.CreateFromAxisAngle(_right, (float)(x));
 
             //y
-            _view *= Matrix4.CreateFromAxisAngle(_front, (float)(y));
+            //_view *= Matrix4.CreateFromAxisAngle(_front, (float)(y));
         }
     }
 }

@@ -263,12 +263,12 @@ namespace MouseClick
         {
             await Task.Delay(10000);
             Random random = new Random();
-            double x = 0;
-            double y = 0;
+            double x = 1;
+            double y = 1;
             double z = 0;
             while (true)
             {
-                x += random.NextDouble() /10;//Global.Viewer3DCamera[0];
+                z += random.NextDouble() /10;//Global.Viewer3DCamera[0];
                 //y += random.NextDouble() /10;//Global.Viewer3DCamera[1];
                 //x = Global.Viewer3DCamera[0];
                 //y = Global.Viewer3DCamera[1];
