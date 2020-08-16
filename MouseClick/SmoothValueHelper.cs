@@ -186,6 +186,11 @@ namespace MouseClick
             return mSoomthValue;
         }
 
+        public float[] getNotSmoothValue()
+        {
+            return lastMValue;
+        }
+
 
 
         /// <summary>

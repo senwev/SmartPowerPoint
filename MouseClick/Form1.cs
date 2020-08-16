@@ -87,6 +87,10 @@ namespace MouseClick
         /// </summary>
         [DllImport("user32.dll")]
         private static extern int SetCursorPos(int x, int y);
+
+
+
+
         /// <summary>
         /// 移动鼠标到指定的坐标点
         /// </summary>
@@ -176,7 +180,21 @@ namespace MouseClick
                                     Process pro = Process.Start(info);
                                     //pro.WaitForExit();
                                 }
-                                else {
+                                else if (voicestr.Contains("请问"))
+                                {
+                                    if (voicestr.Contains("时间"))
+                                    {
+                                        Global.toastString = "现在是北京时间：凌晨2点";
+                                    }
+                                    else if (voicestr.Contains("天气"))
+                                    {
+                                        Global.toastString = "现在是北京时间：凌晨2点";
+                                    }
+                                    ToastWindow toastWindow = new ToastWindow();
+                                    toastWindow.Show();
+                                }
+                                else
+                                {
                                     //设置到剪贴板
                                     _mainform.Invoke((MethodInvoker)delegate
                                     {
@@ -203,10 +221,18 @@ namespace MouseClick
                         }
                         else if (dataStr.Equals("eyecare_on"))
                         {
-                            headPosUpdater.startTrigger();
+                            _mainform.Invoke((MethodInvoker)delegate
+                            {
+                                _mainform.Visible = true;
+                            });
+                                headPosUpdater.startTrigger();
                         }
                         else if (dataStr.Equals("eyecare_off"))
                         {
+                            _mainform.Invoke((MethodInvoker)delegate
+                            {
+                                _mainform.Visible = false;
+                            });
                             headPosUpdater.stopTrigger();
                         }
                         else if (dataStr.Equals("3d_on"))
@@ -227,18 +253,6 @@ namespace MouseClick
                         {
 
 
-                            if (iskeydown != lastiskeydown)
-                            {
-                                uint X = (uint)Cursor.Position.X;
-                                uint Y = (uint)Cursor.Position.Y;
-                                if (iskeydown == 1)
-                                    mouse_event(MOUSEEVENTF_LEFTDOWN, X, Y, 1, 1);
-                                else
-                                    mouse_event(MOUSEEVENTF_LEFTUP, X, Y, 1, 1);
-
-
-                                lastiskeydown = iskeydown;
-                            }
 
                             String str3 = "";
                             String str4 = "";
@@ -252,7 +266,7 @@ namespace MouseClick
                             var thisRZ = float.Parse(str3) - initRotate_Z;
 
 
-                            rotateUpdater.postValue(new float[] { thisRX, thisRZ,thisRY });
+                            rotateUpdater.postValue(new float[] { thisRX + (float)Math.PI / 2f, thisRZ + (float)Math.PI, thisRY });
                             //rotateUpdater.startTrigger();
                             //Global.Viewer3DCamera[0] = thisRZ;
                             //Global.Viewer3DCamera[1] = thisRX;
@@ -261,14 +275,7 @@ namespace MouseClick
                             var yy = (float)(thisRY);
                             var zz = (float)(thisRZ);
 
-                            if (str4.Equals("1"))
-                            {
-                                iskeydown = 1;
-                            }
-                            else
-                            {
-                                iskeydown = 0;
-                            }
+
 
                             //这里改代码
 
@@ -317,13 +324,46 @@ namespace MouseClick
                             mousePosUpdater.postValue(new float[] { (float)corsorX, (float)corsorY });
                             //mousePosUpdater.startTrigger();//开始事件通知
 
+                            if (str4.Equals("1"))
+                            {
+                                //1代表按下瞬间
+                                mouse_event(MOUSEEVENTF_LEFTDOWN, (uint)corsorX, (uint)corsorY, 1, 1);
+                            }
+                            else if (str4.Equals("2"))
+                            {
+                                mouse_event(MOUSEEVENTF_LEFTUP, (uint)corsorX, (uint)corsorY, 1, 1);
+                            }
+
                             return;
 
 
 
 
 
-                        }else if (str0.Equals("m"))
+                        }
+                        else if (str0.Equals("ax"))
+                        {
+
+                            String str3 = "";
+                            String str4 = "";
+
+                            str3 = dataStr.Split(',')[3];
+
+                            str4 = dataStr.Split(',')[4];
+
+                            var thisRX = float.Parse(str1);
+                            var thisRY = float.Parse(str2);
+                            var thisRZ = float.Parse(str3);
+                            var thisRW = float.Parse(str4);
+
+                            //接受轴向角的信息
+                            rotateUpdater.postValue(new float[] { thisRX, thisRY, thisRZ, thisRW });
+
+                            return;
+
+
+                        }
+                        else if (str0.Equals("m"))
                         {
 
 
@@ -359,8 +399,8 @@ namespace MouseClick
                         }
                         else if (str0.Equals("b"))
                         {
-                            if (Global.shouldShowHideBlock == false)
-                                return;
+                            //if (Global.shouldShowHideBlock == false)
+                            //    return;
                             // EyeCare 接受坐标
                             String str3 = "";
 
@@ -381,7 +421,7 @@ namespace MouseClick
                                 float thisX = X - w / 2f;
                                 float thisY = Y - h / 2f;
                                 headPosUpdater.postValue(new float[] { thisX, thisY, float.Parse(str3) });
-                                //headPosUpdater.startTrigger();
+                                headPosUpdater.startTrigger();//当识别到人就触发窗口更新
                             }
 
 
@@ -389,26 +429,15 @@ namespace MouseClick
                         else if (str0.Equals("nb"))
                         {
                             //当未识别到人就隐藏黑块
-                            shouldBlockShow = false;
+                            //shouldBlockShow = false;
 
                             _mainform.Invoke((MethodInvoker)delegate
                             {
-                                _mainform.Visible = false;
+                                //_mainform.Visible = false;
+                                headPosUpdater.stopTrigger();//当没识别到人就停止出发窗口更新
                             });
 
 
-                        }
-                        else if (str0.Equals("ld"))
-                        {
-                            uint X = (uint)Cursor.Position.X;
-                            uint Y = (uint)Cursor.Position.Y;
-                            mouse_event(MOUSEEVENTF_LEFTDOWN, X, Y, 1, 1);
-                        }
-                        else if (str0.Equals("lu"))
-                        {
-                            uint X = (uint)Cursor.Position.X;
-                            uint Y = (uint)Cursor.Position.Y;
-                            mouse_event(MOUSEEVENTF_LEFTUP, X, Y, 1, 1);
                         }
                         else if (str0.Equals("reset"))
                         {
@@ -499,8 +528,8 @@ namespace MouseClick
         static List<IWebSocketConnection> allSockets = new List<IWebSocketConnection>();
 
         static SmoothValueHelper mousePosUpdater = new SmoothValueHelper(200, 2);
-        static SmoothValueHelper headPosUpdater = new SmoothValueHelper(90, 3);
-        static SmoothValueHelper rotateUpdater = new SmoothValueHelper(25, 3);
+        static SmoothValueHelper headPosUpdater = new SmoothValueHelper(60, 3);
+        static SmoothValueHelper rotateUpdater = new SmoothValueHelper(25, 4);
         private void Form1_Load(object sender, EventArgs e)
         {
             _mainform = this;
@@ -515,7 +544,6 @@ namespace MouseClick
             mousePosUpdater.SmoothValueRefreshed += new EventHandler<float[]>(Handler_SmoothValueRefreshed);
             headPosUpdater.SmoothValueRefreshed += new EventHandler<float[]>(Handler_SmoothHeadPosRefreshed);
             rotateUpdater.SmoothValueRefreshed += new EventHandler<float[]>(Handler_SmoothRotateRefreshed);
-
         }
 
         private bool inScreenRange(float[] xy)
@@ -565,7 +593,7 @@ namespace MouseClick
                 try
                 {
                     //Constant.SendViewer3DOrientation(x+=0.01f, 0, 0);
-                    Constant.SendViewer3DOrientation(e[0], e[1], e[2]);
+                    Constant.SendViewer3DOrientation(e[0], e[1], e[2],e[3]);
                 }
                 catch (Exception ex)
                 {
@@ -601,9 +629,8 @@ namespace MouseClick
                         _mainform.Width = (int)e[2];
                         _mainform.Height = (int)e[2];
 
-
+                        _mainform.Visible = true;
                         SetBlockPosition((int)e[0], (int)e[1]);
-
                     });
 
                 }
