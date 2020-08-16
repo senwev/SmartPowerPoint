@@ -32,18 +32,18 @@ namespace open3mod
         private Matrix4 _view;
         public PickingCameraController(Matrix4 view)
         {
-            _view = view;    
+            _view = view;
         }
 
 
         public PickingCameraController()
         {
-            
+
         }
 
 
         public void SetPivot(Vector3 pivot)
-        {}
+        { }
 
         public void SetView(Matrix4 view)
         {
@@ -52,7 +52,7 @@ namespace open3mod
 
 
         public Matrix4 GetView()
-        {            
+        {
             return _view;
         }
 
@@ -97,11 +97,11 @@ namespace open3mod
 
         }
 
-        public void AdjustToEulerAngle(double x, double y, double z)
+        public void AdjustToEulerAngle(float x, float y, float z, float w)
         {
-            
+
         }
     }
 }
 
-/* vi: set shiftwidth=4 tabstop=4: */ 
+/* vi: set shiftwidth=4 tabstop=4: */

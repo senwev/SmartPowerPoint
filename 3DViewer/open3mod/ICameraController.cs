@@ -82,7 +82,7 @@ namespace open3mod
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        void AdjustToEulerAngle(double x, double y, double z);
+        void AdjustToEulerAngle(float x, float y, float z, float w);
 
         /// <summary>
         /// Processes scroll events
@@ -135,4 +135,4 @@ namespace open3mod
     }
 }
 
-/* vi: set shiftwidth=4 tabstop=4: */ 
+/* vi: set shiftwidth=4 tabstop=4: */

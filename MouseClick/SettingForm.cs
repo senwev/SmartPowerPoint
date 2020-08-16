@@ -211,19 +211,26 @@ namespace MouseClick
                     {
                         if (!string.IsNullOrEmpty(curLine))
                         {
-                            //主线程操作，使用委托
-                            this.Invoke((MethodInvoker)delegate
+                            ////主线程操作，使用委托
+                            //this.Invoke((MethodInvoker)delegate
+                            //{
+
+                            //    eyeCareOutput.Text += curLine + "\r\n";
+                            //    //eyeCareOutput.Focus();
+                            //    //eyeCareOutput.Select(eyeCareOutput.Text.Length, 0);
+                            //    //eyeCareOutput.ScrollToCaret();
+
+                            //});
+
+                            if (curLine.Contains("画面OK了"))
                             {
-
-                                eyeCareOutput.Text += curLine + "\r\n";
-                                //eyeCareOutput.Focus();
-                                //eyeCareOutput.Select(eyeCareOutput.Text.Length, 0);
-                                //eyeCareOutput.ScrollToCaret();
-
-                            });
+                                MessageBox.Show("智慧眼开启成功");
+                                break;
+                            }
 
                         }
                         curLine = reader.ReadLine();
+                        Thread.Sleep(1);
                     }
                     reader.Close(); //close进程
 
@@ -263,12 +270,13 @@ namespace MouseClick
         {
             await Task.Delay(10000);
             Random random = new Random();
-            double x = 1;
-            double y = 0;
-            double z = 1;
+            float x = 1;
+            float y = 0;
+            float z = 1;
             int i = 0;
             int flag = 1;
             int count = random.Next(400, 600);
+            int w = 0;
             while (true)
             {
                 //if (i < count && flag % 3 == 1)
@@ -294,11 +302,11 @@ namespace MouseClick
                 //    flag++;
                 //}
                 //i++;
-                y += random.NextDouble() / 10;//Global.Viewer3DCamera[0];
+                //y += random.NextDouble() / 10;//Global.Viewer3DCamera[0];
                 //y += random.NextDouble() /10;//Global.Viewer3DCamera[1];
                 //x = Global.Viewer3DCamera[0];
                 //y = Global.Viewer3DCamera[1];
-                Constant.SendViewer3DOrientation(x, y, z);
+                Constant.SendViewer3DOrientation(x, y, z, w);
                 await Task.Delay(10);
             }
         }

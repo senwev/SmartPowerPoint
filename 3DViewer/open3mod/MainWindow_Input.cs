@@ -447,21 +447,21 @@ namespace open3mod
             }
         }
 
-        private delegate void AdjustToAngleHandler(double x, double y,double z);
+        private delegate void AdjustToAngleHandler(double x, double y, double z);
 
-        private void ExecuteOnAdjustToAngle(double x, double y, double z)
+        private void ExecuteOnAdjustToAngle(float x, float y, float z, float w)
         {
             if (UiState.ActiveTab.ActiveCameraController != null)
             {
-                UiState.ActiveTab.ActiveCameraController.AdjustToEulerAngle(x, y, z);
+                UiState.ActiveTab.ActiveCameraController.AdjustToEulerAngle(x, y, z, w);
             }
         }
 
-        public void OnAdjustToAngle(double x, double y, double z)
+        public void OnAdjustToAngle(float x, float y, float z, float w)
         {
             if (!bOpenInteraction) return;
 
-            ExecuteOnAdjustToAngle(x, y, z);
+            ExecuteOnAdjustToAngle(x, y, z, w);
 
         }
 

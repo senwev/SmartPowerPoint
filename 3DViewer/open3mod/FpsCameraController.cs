@@ -164,11 +164,11 @@ namespace open3mod
 
         }
 
-        public void AdjustToEulerAngle(double x, double y, double z)
+        public void AdjustToEulerAngle(float x, float y, float z, float w)
         {
 
         }
     }
 }
 
-/* vi: set shiftwidth=4 tabstop=4: */ 
+/* vi: set shiftwidth=4 tabstop=4: */

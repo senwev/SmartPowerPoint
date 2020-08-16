@@ -24,14 +24,14 @@ namespace MouseClick
 
         public static SerialHelper SerialHelper = new SerialHelper();
 
-        public static EventHandler<Tuple<double, double, double>> Viewer3DOrientationChanged;
+        public static EventHandler<Tuple<float, float, float, float>> Viewer3DOrientationChanged;
 
         public static EventHandler<double> Viewer3DDistanceChanged;
 
-        public static void SendViewer3DOrientation(double x, double y, double z)
+        public static void SendViewer3DOrientation(float x, float y, float z, float w)
         {
             Viewer3DOrientationChanged?.Invoke(null,
-                new Tuple<double, double, double>(x, y, z));
+                new Tuple<float, float, float, float>(x, y, z, w));
         }
 
         public static void SendViewer3DOrientation(double d)

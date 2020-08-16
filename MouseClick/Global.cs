@@ -17,6 +17,8 @@ namespace MouseClick
 
         static public MovingAverage YMovingAverage = new MovingAverage(20);
 
+        static public string toastString = "";
+
         //配置全局设置
 
         static public bool shouldControlMouse = false;

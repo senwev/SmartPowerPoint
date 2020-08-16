@@ -116,6 +116,12 @@
     </Compile>
     <Compile Include="SmoothValueHelper.cs" />
     <Compile Include="Solvers\LSSolver.cs" />
+    <Compile Include="ToastWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToastWindow.Designer.cs">
+      <DependentUpon>ToastWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\MovingAverage.cs" />
     <Compile Include="Solvers\UWBPositionCalibrator.cs" />
     <Compile Include="Solvers\UWBPositionSolver3D.cs" />
@@ -184,6 +190,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Drawing\UWBPositionSettingControl.resx">
       <DependentUpon>UWBPositionSettingControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToastWindow.resx">
+      <DependentUpon>ToastWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WebBrowserForm.resx">
       <DependentUpon>WebBrowserForm.cs</DependentUpon>
