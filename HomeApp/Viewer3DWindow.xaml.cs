@@ -10,32 +10,32 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace HomeApp
 {
     /// <summary>
-    /// PaintWindow.xaml 的交互逻辑
+    /// Viewer3DWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class PaintWindow : Window
+    public partial class Viewer3DWindow : Window
     {
-        public PaintWindow()
+        public Viewer3DWindow()
         {
             InitializeComponent();
-            this.paintPanelControl.OnCloseWindow += new EventHandler(Handle_OnCloseWindow);
-        }
-
-        private void Handle_OnCloseWindow(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private void Window_KeyUp(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Escape)
+            if (e.Key == Key.Escape)
             {
                 this.Close();
             }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.viewer3DPanel.Close();
         }
     }
 }

@@ -143,8 +143,10 @@ namespace MouseClick.Drawing
         private void ResetPen()
         {
             this.SelectedPen = new Pen(this.SelectedBrush, this.m_thicknessType);
-            this.SelectedPen.LineJoin = LineJoin.Round;
+            this.SelectedPen.LineJoin = LineJoin.MiterClipped;
             this.SelectedPen.Alignment = PenAlignment.Center;
+            this.SelectedPen.StartCap = LineCap.Round;
+            this.SelectedPen.EndCap = LineCap.Round;
         }
 
         public static Color ChangeColor(Color color, float correctionFactor)
@@ -247,9 +249,9 @@ namespace MouseClick.Drawing
                     using (var g = this.panel_DrawArea.CreateGraphics())
                     {
                         g.SmoothingMode = SmoothingMode.AntiAlias;
-                        g.InterpolationMode = InterpolationMode.High;
+                        g.InterpolationMode = InterpolationMode.NearestNeighbor;
                         g.CompositingQuality = CompositingQuality.HighQuality;
-
+                        
                         g.DrawLine(SelectedPen, startPointX, startPointY, e.X, e.Y);
                         startPointX = e.X;
                         startPointY = e.Y;

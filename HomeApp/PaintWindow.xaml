@@ -9,6 +9,7 @@
     Title="PaintWindow"
     Width="800"
     Height="450"
+    KeyUp="Window_KeyUp"
     WindowState="Maximized"
     WindowStyle="None"
     mc:Ignorable="d">

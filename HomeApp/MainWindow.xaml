@@ -104,6 +104,7 @@
                         HorizontalAlignment="Left"
                         Orientation="Horizontal">
                 <Image Margin="10,5"
+                       MouseLeftButtonDown="OpenSettingForm_MouseLeftButtonDown"
                        Source="Images/organ-logo.png"
                        Style="{StaticResource BigLogoImage}" />
             </StackPanel>
@@ -111,11 +112,11 @@
                   VerticalAlignment="Center">
                 <StackPanel>
 
-                    <Image Height="150"
+                    <Image Height="130"
                            Source="Images/theme-logo.png" />
 
                     <TextBlock HorizontalAlignment="Center"
-                               FontSize="34"
+                               FontSize="38"
                                FontWeight="Heavy"
                                Foreground="Black"
                                Text="智能交互友好型投影解决方案" />
@@ -159,8 +160,8 @@
                            Margin="3"
                            controls:ControlsHelper.MouseOverBorderBrush="Blue"
                            Background="Teal"
-                           Click="Tile1_Click"
-                           HorizontalTitleAlignment="Right"
+                           Click="TileMarker_Click"
+                           HorizontalTitleAlignment="Center"
                            Style="{StaticResource LargeTileStyle}">
                 <Image Source="{StaticResource Marker}"
                        Height="{Binding ActualHeight,Converter={StaticResource iconSizeBindingConverter}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:Tile}}}" />
@@ -169,8 +170,10 @@
                            Grid.Row="0"
                            Grid.Column="1"
                            Margin="3"
+                           Click="TileSomatosensoryGames_Click"
                            controls:ControlsHelper.MouseOverBorderBrush="Blue"
                            Background="CornflowerBlue"
+                           HorizontalTitleAlignment="Center"
                            Style="{StaticResource LargeTileStyle}">
                 <Image Source="{StaticResource BodySenseGame}"
                        Height="{Binding ActualHeight,Converter={StaticResource iconSizeBindingConverter}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:Tile}}}" />
@@ -179,6 +182,8 @@
                            Grid.Row="0"
                            Grid.Column="2"
                            Background="DimGray"
+                           Click="TileViwer3D_Click"
+                           HorizontalTitleAlignment="Center"
                            Style="{StaticResource LargeTileStyle}">
                 <Image Source="{StaticResource 3DViewer}"
                        Height="{Binding ActualHeight,Converter={StaticResource iconSizeBindingConverter}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:Tile}}}" />
@@ -187,6 +192,8 @@
                            Grid.Row="1"
                            Grid.Column="0"
                            Background="LimeGreen"
+                           Click="TileMedicalLesson_Click"
+                           HorizontalTitleAlignment="Center"
                            Style="{StaticResource LargeTileStyle}">
                 <Image Source="{StaticResource MedicalLesson}"
                        Height="{Binding ActualHeight,Converter={StaticResource iconSizeBindingConverter}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:Tile}}}" />
@@ -195,7 +202,8 @@
                            Grid.Row="1"
                            Grid.Column="1"
                            Background="#D2691E"
-                           HorizontalTitleAlignment="Right"
+                           HorizontalTitleAlignment="Center"
+                           Click="TileSpeakToWord_Click"
                            Style="{StaticResource LargeTileStyle}">
                 <Image Source="{StaticResource SpeakToSentence}"
                        Height="{Binding ActualHeight,Converter={StaticResource iconSizeBindingConverter}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:Tile}}}" />
@@ -204,6 +212,8 @@
                            Grid.Row="1"
                            Grid.Column="2"
                            Background="Purple"
+                           Click="TileEyesProtection_Click"
+                           HorizontalTitleAlignment="Center"
                            Style="{StaticResource LargeTileStyle}">
                 <Image Source="{StaticResource EyesProtection}"
                        Height="{Binding ActualHeight,Converter={StaticResource iconSizeBindingConverter}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:Tile}}}" />

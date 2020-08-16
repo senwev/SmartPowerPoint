@@ -323,10 +323,7 @@ namespace open3mod
                 }
                 else
                 {
-                    //UiState.ActiveTab.ActiveCameraController.MouseMove(vx, vy);
-                    //var realX = e.X - glControl1.ClientSize.Width / 2;
-                    //var realY = e.Y - glControl1.ClientSize.Height / 2;
-                    UiState.ActiveTab.ActiveCameraController.MouseMoveToPoint(vy, vy);
+                    UiState.ActiveTab.ActiveCameraController.MouseMove(vy, vy);
                 }
             }
             _previousMousePosX = e.X;
@@ -450,20 +447,6 @@ namespace open3mod
             }
         }
 
-
-        public void OnAdjustToAngle(double x, double y, double z)
-        {
-            //if (this.InvokeRequired)
-            //{
-            //    var d = new ModeToAngleHandler(ExecuteOnMoveToAngle);
-            //    this.Invoke(d, new object[] { x, y });
-            //}
-            //else
-            //{
-            ExecuteOnAdjustToAngle(x, y, z);
-            //}
-        }
-
         private delegate void AdjustToAngleHandler(double x, double y,double z);
 
         private void ExecuteOnAdjustToAngle(double x, double y, double z)
@@ -472,6 +455,14 @@ namespace open3mod
             {
                 UiState.ActiveTab.ActiveCameraController.AdjustToEulerAngle(x, y, z);
             }
+        }
+
+        public void OnAdjustToAngle(double x, double y, double z)
+        {
+            if (!bOpenInteraction) return;
+
+            ExecuteOnAdjustToAngle(x, y, z);
+
         }
 
     }

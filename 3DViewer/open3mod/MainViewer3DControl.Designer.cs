@@ -111,6 +111,7 @@ namespace open3mod
             this.toolStripButtonShowFPS = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonShowSettings = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_OpenInteraction = new System.Windows.Forms.ToolStripButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -556,7 +557,8 @@ namespace open3mod
             this.toolStripSeparator5,
             this.toolStripButtonShowFPS,
             this.toolStripSeparator9,
-            this.toolStripButtonShowSettings});
+            this.toolStripButtonShowSettings,
+            this.toolStripButton_OpenInteraction});
             this.toolStripSelectRenderer.Location = new System.Drawing.Point(0, 25);
             this.toolStripSelectRenderer.Name = "toolStripSelectRenderer";
             this.toolStripSelectRenderer.Size = new System.Drawing.Size(1051, 35);
@@ -772,8 +774,17 @@ namespace open3mod
             this.toolStripButtonShowSettings.Size = new System.Drawing.Size(32, 32);
             this.toolStripButtonShowSettings.Text = "Settings";
             this.toolStripButtonShowSettings.ToolTipText = "Open settings dialog";
-            this.toolStripButtonShowSettings.Visible = false;
             this.toolStripButtonShowSettings.Click += new System.EventHandler(this.OnShowSettings);
+            // 
+            // toolStripButton_OpenInteraction
+            // 
+            this.toolStripButton_OpenInteraction.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton_OpenInteraction.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_OpenInteraction.Image")));
+            this.toolStripButton_OpenInteraction.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_OpenInteraction.Name = "toolStripButton_OpenInteraction";
+            this.toolStripButton_OpenInteraction.Size = new System.Drawing.Size(32, 32);
+            this.toolStripButton_OpenInteraction.Text = "开启交互";
+            this.toolStripButton_OpenInteraction.Click += new System.EventHandler(this.toolStripButton_OpenInteraction_Click);
             // 
             // tabControl1
             // 
@@ -1026,6 +1037,7 @@ namespace open3mod
         private ToolStripMenuItem twoViewsToolStripMenuItem;
         private ToolStripButton toolStripButtonCulling;
         private ToolStripMenuItem cullingToolStripMenuItem;
+        private ToolStripButton toolStripButton_OpenInteraction;
     }
 }
 

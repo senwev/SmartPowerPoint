@@ -34,9 +34,9 @@ namespace MouseClick
                 new Tuple<double, double, double>(x, y, z));
         }
 
-        public static void SendViewer3DOrientation(double z)
+        public static void SendViewer3DOrientation(double d)
         {
-            Viewer3DDistanceChanged?.Invoke(null, z);
+            Viewer3DDistanceChanged?.Invoke(null, d);
         }
 
     }

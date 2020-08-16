@@ -45,6 +45,8 @@ namespace open3mod
         private readonly FpsTracker _fps;
         private LogViewer _logViewer;
 
+        private bool bOpenInteraction;
+
         private delegate void DelegateSelectTab(TabPage tab);
         private readonly DelegateSelectTab _delegateSelectTab;
 
@@ -88,9 +90,7 @@ namespace open3mod
             get { return _renderer; }
         }
 
-
         public const int MaxRecentItems = 12;
-
 
         public MainViewer3DControl()
         {
@@ -588,6 +588,7 @@ namespace open3mod
                 BeginInvoke(_delegatePopulateInspector, new object[] { tab });
                 BeginInvoke(updateTitle);
             }
+
         }
 
 
@@ -1054,7 +1055,7 @@ namespace open3mod
         public void OnClosing()
         {
             CoreSettings.CoreSettings.Default.Save();
-            
+            this.Dispose();
 #if LEAP
             //Cleanup LeapMotion Controller
             _leapController.RemoveListener(_leapListener);
@@ -1150,7 +1151,6 @@ namespace open3mod
             const string installed = "testscenes/lost-empire/lost_empire.obj";
             AddTab(File.Exists(repos) ? repos : installed);
         }
-
 
         private void StartUndoRedoUiStatePollLoop()
         {
@@ -1281,6 +1281,20 @@ namespace open3mod
         {
             // Keep in sync with CoreSettings.settings.
             CoreSettings.CoreSettings.Default.BackgroundColor = Color.DarkGray;
+        }
+
+        private void toolStripButton_OpenInteraction_Click(object sender, EventArgs e)
+        {
+            if (!bOpenInteraction)
+            {
+                this.toolStripButton_OpenInteraction.Checked = true;
+                this.bOpenInteraction = true;
+            }
+            else
+            {
+                this.toolStripButton_OpenInteraction.Checked = false;
+                this.bOpenInteraction = false;
+            }
         }
     }
 }
