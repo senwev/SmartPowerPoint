@@ -193,13 +193,137 @@ namespace MouseClick
                             }
                         }
 
+                        if (dataStr.Equals("mouse_on"))
+                        {
+                            mousePosUpdater.startTrigger();
+                        }
+                        else if (dataStr.Equals("mouse_off"))
+                        {
+                            mousePosUpdater.stopTrigger();
+                        }
+                        else if (dataStr.Equals("eyecare_on"))
+                        {
+                            headPosUpdater.startTrigger();
+                        }
+                        else if (dataStr.Equals("eyecare_off"))
+                        {
+                            headPosUpdater.stopTrigger();
+                        }
+                        else if (dataStr.Equals("3d_on"))
+                        {
+                            rotateUpdater.startTrigger();
+                        }
+                        else if (dataStr.Equals("3d_off"))
+                        {
+                            rotateUpdater.stopTrigger();
+                        }
+
+
                         String str0 = dataStr.Split(',')[0];
                         String str1 = dataStr.Split(',')[1];
                         String str2 = dataStr.Split(',')[2];
 
+                        if (str0.Equals("ol"))
+                        {
 
 
-                        if (str0.Equals("m"))
+                            if (iskeydown != lastiskeydown)
+                            {
+                                uint X = (uint)Cursor.Position.X;
+                                uint Y = (uint)Cursor.Position.Y;
+                                if (iskeydown == 1)
+                                    mouse_event(MOUSEEVENTF_LEFTDOWN, X, Y, 1, 1);
+                                else
+                                    mouse_event(MOUSEEVENTF_LEFTUP, X, Y, 1, 1);
+
+
+                                lastiskeydown = iskeydown;
+                            }
+
+                            String str3 = "";
+                            String str4 = "";
+
+                            str3 = dataStr.Split(',')[3];
+
+                            str4 = dataStr.Split(',')[4];
+
+                            var thisRX = float.Parse(str1) - initRotate_X;
+                            var thisRY = float.Parse(str2) - initRotate_Y;
+                            var thisRZ = float.Parse(str3) - initRotate_Z;
+
+
+                            rotateUpdater.postValue(new float[] { thisRX, thisRZ,thisRY });
+                            //rotateUpdater.startTrigger();
+                            //Global.Viewer3DCamera[0] = thisRZ;
+                            //Global.Viewer3DCamera[1] = thisRX;
+
+                            var xx = (float)(thisRX);
+                            var yy = (float)(thisRY);
+                            var zz = (float)(thisRZ);
+
+                            if (str4.Equals("1"))
+                            {
+                                iskeydown = 1;
+                            }
+                            else
+                            {
+                                iskeydown = 0;
+                            }
+
+                            //这里改代码
+
+                            float act_screenBottomHeight = 0.874f;//投影幕布底部距离地面距离
+                            float act_screenLeft = 0.686f;//投影幕布左侧距离坐标原点的水平距离
+
+
+                            float posX = (float)Global.Position[0];
+                            float posY = (float)Global.Position[1];
+                            float posZ = (float)Global.Position[2];
+
+                            Global.Viewer3DCamera = new double[] { posX, posY, posZ };
+
+
+                            float act_screen_width = 2.584f;
+                            float act_screen_height = 1.632f;
+
+                            float pix_screen_width = 1920f;
+                            float pix_screen_height = 1080f;
+
+                            float act_start_x = posY - act_screenLeft;
+                            float act_start_y = posZ - act_screenBottomHeight;
+
+
+                            float act_screen_distance = posX;//距离屏幕距离
+
+                            float pix_start_x = act_start_x / act_screen_width * pix_screen_width;
+                            float pix_start_y = act_start_y / act_screen_height * pix_screen_height;
+
+                            float act_pix_ratio_x = pix_screen_width / act_screen_width;
+                            float act_pix_ratio_y = pix_screen_height / act_screen_height;
+
+                            float mul_x = act_screen_distance * act_pix_ratio_x;
+                            float mul_y = act_screen_distance * act_pix_ratio_y;
+
+                            int corsorX = (int)Math.Round(pix_start_x - mul_x * Math.Tan(thisRZ));
+                            int corsorY = (int)Math.Round(pix_screen_height - pix_start_y - mul_y * Math.Tan(thisRX));
+
+                            //Global.XMovingAverage.Push(corsorX);
+                            //Global.YMovingAverage.Push(corsorY);
+
+
+                            //int realCursorX = (int)Global.XMovingAverage.Current;
+                            //int realCursorY = (int)Global.YMovingAverage.Current;
+
+                            mousePosUpdater.postValue(new float[] { (float)corsorX, (float)corsorY });
+                            //mousePosUpdater.startTrigger();//开始事件通知
+
+                            return;
+
+
+
+
+
+                        }else if (str0.Equals("m"))
                         {
 
 
@@ -257,7 +381,7 @@ namespace MouseClick
                                 float thisX = X - w / 2f;
                                 float thisY = Y - h / 2f;
                                 headPosUpdater.postValue(new float[] { thisX, thisY, float.Parse(str3) });
-                                headPosUpdater.startTrigger();
+                                //headPosUpdater.startTrigger();
                             }
 
 
@@ -295,8 +419,13 @@ namespace MouseClick
                             str3 = dataStr.Split(',')[3];
 
                             str4 = dataStr.Split(',')[4];
-                            initRotate_X = float.Parse(str1);
-                            initRotate_Y = float.Parse(str2);
+                            //initRotate_X = float.Parse(str1);
+                            //initRotate_Y = float.Parse(str2);
+                            //initRotate_Z = float.Parse(str3);
+
+
+                            initRotate_X = 0;
+                            initRotate_Y = 0;
                             initRotate_Z = float.Parse(str3);
 
                             if (str4.Equals("1"))
@@ -307,111 +436,6 @@ namespace MouseClick
                             {
                                 iskeydown = 0;
                             }
-                        }
-                        else if (str0.Equals("ol"))
-                        {
-
-                            //改为异步操作？
-                            var task = new Task(() =>
-                            {
-                                if (iskeydown != lastiskeydown)
-                                {
-                                    uint X = (uint)Cursor.Position.X;
-                                    uint Y = (uint)Cursor.Position.Y;
-                                    if (iskeydown == 1)
-                                        mouse_event(MOUSEEVENTF_LEFTDOWN, X, Y, 1, 1);
-                                    else
-                                        mouse_event(MOUSEEVENTF_LEFTUP, X, Y, 1, 1);
-
-
-                                    lastiskeydown = iskeydown;
-                                }
-
-                                String str3 = "";
-                                String str4 = "";
-
-                                str3 = dataStr.Split(',')[3];
-
-                                str4 = dataStr.Split(',')[4];
-
-                                var thisRX = float.Parse(str1) - initRotate_X;
-                                var thisRY = float.Parse(str2) - initRotate_Y;
-                                var thisRZ = float.Parse(str3) - initRotate_Z;
-
-
-                                rotateUpdater.postValue(new float[] { thisRX, thisRY, thisRZ });
-                                rotateUpdater.startTrigger();
-                                //Global.Viewer3DCamera[0] = thisRZ;
-                                //Global.Viewer3DCamera[1] = thisRX;
-
-                                var xx = (float)(thisRX);
-                                var yy = (float)(thisRY);
-                                var zz = (float)(thisRZ);
-
-                                if (str4.Equals("1"))
-                                {
-                                    iskeydown = 1;
-                                }
-                                else
-                                {
-                                    iskeydown = 0;
-                                }
-
-                                //这里改代码
-
-                                float act_screenBottomHeight = 0.874f;//投影幕布底部距离地面距离
-                                float act_screenLeft = 0.686f;//投影幕布左侧距离坐标原点的水平距离
-
-
-                                float posX = (float)Global.Position[0];
-                                float posY = (float)Global.Position[1];
-                                float posZ = (float)Global.Position[2];
-
-                                Global.Viewer3DCamera = new double[] { posX, posY, posZ };
-
-
-                                float act_screen_width = 2.584f;
-                                float act_screen_height = 1.632f;
-
-                                float pix_screen_width = 1920f;
-                                float pix_screen_height = 1080f;
-
-                                float act_start_x = posY - act_screenLeft;
-                                float act_start_y = posZ - act_screenBottomHeight;
-
-
-                                float act_screen_distance = posX;//距离屏幕距离
-
-                                float pix_start_x = act_start_x / act_screen_width * pix_screen_width;
-                                float pix_start_y = act_start_y / act_screen_height * pix_screen_height;
-
-                                float act_pix_ratio_x = pix_screen_width / act_screen_width;
-                                float act_pix_ratio_y = pix_screen_height / act_screen_height;
-
-                                float mul_x = act_screen_distance * act_pix_ratio_x;
-                                float mul_y = act_screen_distance * act_pix_ratio_y;
-
-                                int corsorX = (int)Math.Round(pix_start_x - mul_x * Math.Tan(thisRZ));
-                                int corsorY = (int)Math.Round(pix_screen_height - pix_start_y - mul_y * Math.Tan(thisRX));
-
-                                //Global.XMovingAverage.Push(corsorX);
-                                //Global.YMovingAverage.Push(corsorY);
-
-
-                                //int realCursorX = (int)Global.XMovingAverage.Current;
-                                //int realCursorY = (int)Global.YMovingAverage.Current;
-
-                                mousePosUpdater.postValue(new float[] { (float)corsorX, (float)corsorY });
-                                mousePosUpdater.startTrigger();//开始事件通知
-
-
-
-                            });
-                            task.Start();
-
-
-
-
                         }
 
                     }
@@ -530,6 +554,8 @@ namespace MouseClick
 
 
         }
+
+        //static float x = 0;
         private void Handler_SmoothRotateRefreshed(object sender, float[] e)
         {
 
@@ -538,6 +564,7 @@ namespace MouseClick
                 //调用旋转3D模型
                 try
                 {
+                    //Constant.SendViewer3DOrientation(x+=0.01f, 0, 0);
                     Constant.SendViewer3DOrientation(e[0], e[1], e[2]);
                 }
                 catch (Exception ex)
