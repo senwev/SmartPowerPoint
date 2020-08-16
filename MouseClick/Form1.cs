@@ -42,7 +42,6 @@ namespace MouseClick
             string host = SettingForm.config_Host;//IP地址
             int port = 2000;//端口
             socket.Bind(new IPEndPoint(IPAddress.Parse(host), port));
-
             //socket.Listen(100);//设定最多100个排队连接请求   
             //Thread myThread = new Thread(ListenClientConnect);//通过多线程监听客户端连接  
             //myThread.Start();
@@ -61,15 +60,21 @@ namespace MouseClick
             {
                 //Socket clientSocket = socket.Accept();
                 var buffer = new byte[1000];
+
                 EndPoint remote = new IPEndPoint(IPAddress.Any, 0);//用来保存发送方的ip和端口号
 
                 int num = socket.ReceiveFrom(buffer, ref remote);
+                
+
 
                 if (remote != null && num > 0)
                 {
                     //clientSocket.Send(Encoding.UTF8.GetBytes("服务器连接成功"));
-                    UdpReceiveMessage(buffer, num);
+                    UdpReceiveMessage(buffer.Take(num).ToArray(), num);
                 }
+
+                //空出时间周期
+                //Thread.Sleep(2);
                 //MessageBox.Show("有客户端连接成功！");
                 //Thread receiveThread = new Thread(ReceiveMessage);
                 //receiveThread.Start(clientSocket);
@@ -143,7 +148,8 @@ namespace MouseClick
             {
 
                 //弹窗提示消息
-                string receiveStr1 = Encoding.UTF8.GetString(buffer, 0, length);
+                string receiveStr1 = Encoding.UTF8.GetString(buffer);
+                //string receiveStr1 = Encoding.UTF8.GetString(buffer);
 
 
                 string[] dataStrs = receiveStr1.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
@@ -159,11 +165,33 @@ namespace MouseClick
                             if (dataStr.Substring(0, 6).Equals("voice,"))
                             {
                                 var voicestr = dataStr.Substring(6, dataStr.Length - 6);
-                                MessageBox.Show(voicestr);
+
+
+                                if (voicestr.Contains("水果忍者"))
+                                {
+                                    ProcessStartInfo info = new ProcessStartInfo();
+                                    info.FileName = @"E:\\研究生电子设计大赛\\水果忍者\\水果忍者.exe";
+                                    info.Arguments = "";
+                                    info.WindowStyle = ProcessWindowStyle.Minimized;
+                                    Process pro = Process.Start(info);
+                                    //pro.WaitForExit();
+                                }
+                                else {
+                                    //设置到剪贴板
+                                    _mainform.Invoke((MethodInvoker)delegate
+                                    {
+                                        Clipboard.SetText(voicestr);
+                                        SendKeys.Send("^{V}");
+                                    });
+                                }
+                                
+                                    
+
+
+                                //MessageBox.Show("粘贴成功:"+voicestr);
                                 return;
                             }
                         }
-
 
                         String str0 = dataStr.Split(',')[0];
                         String str1 = dataStr.Split(',')[1];
@@ -446,7 +474,7 @@ namespace MouseClick
         }
         static List<IWebSocketConnection> allSockets = new List<IWebSocketConnection>();
 
-        static SmoothValueHelper mousePosUpdater = new SmoothValueHelper(300, 2);
+        static SmoothValueHelper mousePosUpdater = new SmoothValueHelper(200, 2);
         static SmoothValueHelper headPosUpdater = new SmoothValueHelper(90, 3);
         static SmoothValueHelper rotateUpdater = new SmoothValueHelper(25, 3);
         private void Form1_Load(object sender, EventArgs e)
@@ -490,7 +518,7 @@ namespace MouseClick
                 if (inScreenRange(e))
                 {
                     //Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
-                    //SetCursorPos((int)(e[0]), (int)(e[1]));
+                    SetCursorPos((int)(e[0]), (int)(e[1]));
                 }
 
                 //Console.WriteLine(e[0].ToString()+","+ e[1].ToString());
