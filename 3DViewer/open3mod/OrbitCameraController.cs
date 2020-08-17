@@ -164,12 +164,14 @@ namespace open3mod
         {
             _cameraDistance *= (float)Math.Pow(ZoomSpeed, -z);
             _cameraDistance = Math.Max(_cameraDistance, MinimumCameraDistance);
+            Debug.WriteLine($"Distance:{_cameraDistance}");
             _dirty = true;
         }
 
         public void ScrollToDistance(float z)
         {
             _cameraDistance = z;
+            Debug.WriteLine($"Distance:{_cameraDistance}");
             _dirty = true;
         }
 

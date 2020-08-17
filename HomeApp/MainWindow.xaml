@@ -17,7 +17,7 @@
         mc:Ignorable="d">
     <Window.Resources>
         <ResourceDictionary>
-
+            
             <converter:IconSizeBindingConverter x:Key="iconSizeBindingConverter" />
 
             <Style x:Key="LargeTileStyle"
@@ -99,7 +99,7 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid Margin="0">
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
