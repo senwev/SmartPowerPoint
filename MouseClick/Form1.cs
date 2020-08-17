@@ -142,6 +142,12 @@ namespace MouseClick
 
         public static long elapsedMs = 0;
 
+        public static Process shuiguorenzhe;
+
+
+        [DllImport("USER32.DLL")]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
+
         /// <summary>  
         /// 接收消息  
         /// </summary>  
@@ -171,24 +177,23 @@ namespace MouseClick
                                 var voicestr = dataStr.Substring(6, dataStr.Length - 6);
 
 
-                                if (voicestr.Contains("水果忍者"))
+                                if (voicestr.Contains("打开水果忍者"))
                                 {
-                                    ProcessStartInfo info = new ProcessStartInfo();
-                                    info.FileName = @"E:\\研究生电子设计大赛\\水果忍者\\水果忍者.exe";
-                                    info.Arguments = "";
-                                    info.WindowStyle = ProcessWindowStyle.Minimized;
-                                    Process pro = Process.Start(info);
-                                    //pro.WaitForExit();
+                                    StartHelper.OpenGame();
+                                }
+                                else if (voicestr.Contains("关闭水果忍者"))
+                                {
+                                    StartHelper.CloseGame(_mainform);
                                 }
                                 else if (voicestr.Contains("请问"))
                                 {
-                                    if (voicestr.Contains("时间"))
+                                    if (voicestr.Contains("时间")|| voicestr.Contains("几点"))
                                     {
                                         Global.toastString = "现在是北京时间：凌晨2点";
                                     }
                                     else if (voicestr.Contains("天气"))
                                     {
-                                        Global.toastString = "现在是北京时间：凌晨2点";
+                                        Global.toastString = "今天多云，27摄氏度至35摄氏度微风，空气质量良好。";
                                     }
                                     ToastWindow toastWindow = new ToastWindow();
                                     toastWindow.Show();
@@ -225,7 +230,7 @@ namespace MouseClick
                             {
                                 _mainform.Visible = true;
                             });
-                                headPosUpdater.startTrigger();
+                            headPosUpdater.startTrigger();
                         }
                         else if (dataStr.Equals("eyecare_off"))
                         {
@@ -243,6 +248,56 @@ namespace MouseClick
                         {
                             rotateUpdater.stopTrigger();
                         }
+                        else if (dataStr.Equals("game_start"))
+                        {
+                            //调用打开水果忍者
+                            StartHelper.OpenGame();
+                        }
+                        else if (dataStr.Equals("app_confirm"))
+                        {
+                            StartHelper.KeyEnter(_mainform);
+                        }
+                        else if (dataStr.Equals("app_exit"))
+                        {
+                            StartHelper.CloseGame(_mainform);
+                        }
+                        else if (dataStr.Equals("note_open"))
+                        {
+                            StartHelper.OpenNote();
+                        }
+                        else if (dataStr.Equals("app_save"))
+                        {
+                            StartHelper.KeySave(_mainform);
+                        }
+                        else if (dataStr.Equals("open_office"))
+                        {
+                            StartHelper.OpenOffice();
+                        }
+                        else if (dataStr.Equals("play_ppt"))
+                        {
+                            StartHelper.KeyPlayPPT(_mainform);
+                        }
+                        else if (dataStr.Equals("ppt_painter"))
+                        {
+                            StartHelper.KeyToPaint(_mainform);
+                        }
+                        else if (dataStr.Equals("ppt_laser"))
+                        {
+                            StartHelper.KeyToLaser(_mainform);
+                        }
+                        else if (dataStr.Equals("key_left"))
+                        {
+                            StartHelper.KeyLeft(_mainform);
+                        }
+                        else if (dataStr.Equals("key_right"))
+                        {
+                            StartHelper.KeyRight(_mainform);
+                        }
+                        else if (dataStr.Equals("play_video"))
+                        {
+                            StartHelper.PlayVideo();
+                        }
+
 
 
                         String str0 = dataStr.Split(',')[0];

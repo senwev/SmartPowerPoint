@@ -320,5 +320,12 @@ namespace MouseClick
         {
             SendTest();
         }
+
+        private void toast_Click(object sender, EventArgs e)
+        {
+            ToastWindow toastWindow = new ToastWindow();
+            Global.toastString = "测试输出";
+            toastWindow.Show();
+        }
     }
 }
