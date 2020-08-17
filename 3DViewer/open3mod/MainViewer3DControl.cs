@@ -138,6 +138,10 @@ namespace open3mod
             };
 
             _initialized = true;
+
+            this.toolStripButton_OpenInteraction.Checked = true;
+            this.bOpenInteraction = true;
+
             StartUndoRedoUiStatePollLoop();
         }
 

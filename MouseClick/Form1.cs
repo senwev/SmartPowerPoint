@@ -30,6 +30,8 @@ namespace MouseClick
         static DateTime lasttime = DateTime.Now;
         static bool inprocess = false;
 
+        static public bool isMouseDown = false;
+
         static volatile bool running = false;
 
         static int debugMode = 0;//0 for socket
@@ -144,6 +146,9 @@ namespace MouseClick
 
         public static Process shuiguorenzhe;
 
+        //记录鼠标最新位置
+        public static float lastMouseX = 0;
+        public static float lastMouseY = 0;
 
         [DllImport("USER32.DLL")]
         public static extern bool SetForegroundWindow(IntPtr hWnd);
@@ -224,6 +229,22 @@ namespace MouseClick
                         {
                             mousePosUpdater.stopTrigger();
                         }
+                        else if (dataStr.Equals("mouse_down"))
+                        {
+                            //鼠标点下
+                            isMouseDown = true;
+                                mouse_event(MOUSEEVENTF_LEFTDOWN, (uint)lastMouseX, (uint)lastMouseY, 1, 1);
+                            return;
+
+                        }
+                        else if (dataStr.Equals("mouse_up"))
+                        {
+                            //鼠标抬起
+                            isMouseDown = false ;
+                            mouse_event(MOUSEEVENTF_LEFTUP, (uint)lastMouseX, (uint)lastMouseY, 1, 1);
+                            return;
+
+                        }
                         else if (dataStr.Equals("eyecare_on"))
                         {
                             _mainform.Invoke((MethodInvoker)delegate
@@ -299,11 +320,17 @@ namespace MouseClick
                         }
                         else if (dataStr.Equals("open_3d"))
                         {
-                            StartHelper.Open3DView();
+                            _mainform.Invoke((MethodInvoker)delegate
+                            {
+                                StartHelper.Open3DView();
+                            });
                         }
                         else if (dataStr.Equals("close_3d"))
                         {
-                            StartHelper.Close3DView();
+                            _mainform.Invoke((MethodInvoker)delegate
+                            {
+                                StartHelper.Close3DView();
+                            });
                         }
 
 
@@ -387,15 +414,15 @@ namespace MouseClick
                             mousePosUpdater.postValue(new float[] { (float)corsorX, (float)corsorY });
                             //mousePosUpdater.startTrigger();//开始事件通知
 
-                            if (str4.Equals("1"))
-                            {
-                                //1代表按下瞬间
-                                mouse_event(MOUSEEVENTF_LEFTDOWN, (uint)corsorX, (uint)corsorY, 1, 1);
-                            }
-                            else if (str4.Equals("2"))
-                            {
-                                mouse_event(MOUSEEVENTF_LEFTUP, (uint)corsorX, (uint)corsorY, 1, 1);
-                            }
+                            //if (str4.Equals("1"))
+                            //{
+                            //    //1代表按下瞬间
+                            //    mouse_event(MOUSEEVENTF_LEFTDOWN, (uint)corsorX, (uint)corsorY, 1, 1);
+                            //}
+                            //else if (str4.Equals("2"))
+                            //{
+                            //    mouse_event(MOUSEEVENTF_LEFTUP, (uint)corsorX, (uint)corsorY, 1, 1);
+                            //}
 
                             return;
 
@@ -483,8 +510,12 @@ namespace MouseClick
 
                                 float thisX = X - w / 2f;
                                 float thisY = Y - h / 2f;
+
+                                //更新记录最新坐标
+                                lastMouseX = thisX;
+                                lastMouseY = thisY;
                                 headPosUpdater.postValue(new float[] { thisX, thisY, float.Parse(str3) });
-                                headPosUpdater.startTrigger();//当识别到人就触发窗口更新
+                                //headPosUpdater.startTrigger();//当识别到人就触发窗口更新
                             }
 
 
@@ -497,7 +528,7 @@ namespace MouseClick
                             _mainform.Invoke((MethodInvoker)delegate
                             {
                                 //_mainform.Visible = false;
-                                headPosUpdater.stopTrigger();//当没识别到人就停止出发窗口更新
+                                //headPosUpdater.stopTrigger();//当没识别到人就停止出发窗口更新
                             });
 
 
@@ -528,6 +559,26 @@ namespace MouseClick
                             {
                                 iskeydown = 0;
                             }
+                        }
+                        else if (str0.Equals("dp"))
+                        {
+                            //执行校准
+                            String str3 = "";
+                            String str4 = "";
+
+                            str3 = dataStr.Split(',')[3];
+
+                            str4 = dataStr.Split(',')[4];
+                            //initRotate_X = float.Parse(str1);
+                            //initRotate_Y = float.Parse(str2);
+                            //initRotate_Z = float.Parse(str3);
+
+                            //这里调用景深
+                            float depth = float.Parse(str3);
+
+                            Constant.SendViewer3DDistance(depth);
+                            return;
+                            
                         }
 
                     }
@@ -630,11 +681,22 @@ namespace MouseClick
             {
 
                 //模拟鼠标移动
-                if (inScreenRange(e))
+                //if (inScreenRange(e))
+                //{
+                //Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
+
+                if (isMouseDown)
                 {
-                    //Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
-                    SetCursorPos((int)(e[0]), (int)(e[1]));
+                    mouse_event(MOUSEEVENTF_LEFTDOWN, (uint)lastMouseX, (uint)lastMouseY, 1, 1);
+
                 }
+                else
+                {
+                    mouse_event(MOUSEEVENTF_LEFTUP, (uint)lastMouseX, (uint)lastMouseY, 1, 1);
+
+                }
+                SetCursorPos((int)(e[0]), (int)(e[1]));
+                //}
 
                 //Console.WriteLine(e[0].ToString()+","+ e[1].ToString());
             }

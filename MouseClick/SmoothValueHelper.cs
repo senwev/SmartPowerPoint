@@ -64,10 +64,11 @@ namespace MouseClick
                     try
                     {
                         //每次到时间就执行维护值的计算
-                        mSoomthValue = getSmoothValue();
+                        //mSoomthValue = getSmoothValue();
+                        mSoomthValue = getNotSmoothValue();
 
                         //添加行
-                        if(isTriggerEnabled)
+                        if (isTriggerEnabled)
                         callOnValueRefresh(mSoomthValue);
                         //添加行
 
