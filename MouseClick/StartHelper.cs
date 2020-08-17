@@ -33,7 +33,7 @@ namespace MouseClick
             //设置到剪贴板
             form.Invoke((MethodInvoker)delegate
             {
-                
+
                 SendKeys.Send("%{F4}");
             });
         }
@@ -128,5 +128,25 @@ namespace MouseClick
         }
 
 
+        static Viewer3D viewer3D;
+
+
+        public static void Open3DView()
+        {
+            viewer3D = new Viewer3D();
+            var directory = Environment.CurrentDirectory;
+            var fileName = System.IO.Path.Combine(directory, "Resources/Coronavirus_obj/covid19.obj");
+            viewer3D.Show();
+            if (System.IO.File.Exists(fileName))
+            {
+                viewer3D.OpenFile(fileName);
+            }
+        }
+
+        public static void Close3DView()
+        {
+            viewer3D?.Close();
+            viewer3D?.Dispose();
+        }
     }
 }

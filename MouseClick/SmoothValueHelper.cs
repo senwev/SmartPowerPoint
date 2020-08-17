@@ -169,7 +169,9 @@ namespace MouseClick
             if (interval > 0)
                 increaseSpeed = valuesDivNum(dif, interval);
             else
-                increaseSpeed = new float[] { 0f,0f,0f};
+            {
+                increaseSpeed = new float[mDim];//初值为0
+            }
         }
 
 

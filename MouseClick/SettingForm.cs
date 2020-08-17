@@ -84,8 +84,14 @@ namespace MouseClick
         private void button1_Click(object sender, EventArgs e)
         {
             //new WebBrowserForm().Show();
-            var view = new Viewer3D();
-            view.Show();
+            var viewer3D = new Viewer3D();
+            var directory = Environment.CurrentDirectory;
+            var fileName = System.IO.Path.Combine(directory, "Resources/Coronavirus_obj/covid19.obj");
+            viewer3D.Show();
+            if (System.IO.File.Exists(fileName))
+            {
+                viewer3D.OpenFile(fileName);
+            }
         }
 
         private void serialSettingControl1_Load(object sender, EventArgs e)
@@ -327,19 +333,19 @@ namespace MouseClick
 
         private void button4_Click(object sender, EventArgs e)
         {
-            float d = float.Parse(textBox_D.Text);
-            Constant.SendViewer3DDistance(d);
+            //float d = float.Parse(textBox_D.Text);
+            //Constant.SendViewer3DDistance(d);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            float x = float.Parse(textBox_X.Text);
-            float y = float.Parse(textBox_Y.Text);
-            float z = float.Parse(textBox_Z.Text);
-            Constant.SendViewer3DOrientation(x, y, z, 0);
+            //float x = float.Parse(textBox_X.Text);
+            //float y = float.Parse(textBox_Y.Text);
+            //float z = float.Parse(textBox_Z.Text);
+            //Constant.SendViewer3DOrientation(x, y, z, 0);
         }
 
-        private void toast_Click(object sender, EventArgs e)
+        private void toasst_Click(object sender, EventArgs e)
         {
             ToastWindow toastWindow = new ToastWindow();
             Global.toastString = "测试输出";

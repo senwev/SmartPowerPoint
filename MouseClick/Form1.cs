@@ -297,6 +297,14 @@ namespace MouseClick
                         {
                             StartHelper.PlayVideo();
                         }
+                        else if (dataStr.Equals("open_3d"))
+                        {
+                            StartHelper.Open3DView();
+                        }
+                        else if (dataStr.Equals("close_3d"))
+                        {
+                            StartHelper.Close3DView();
+                        }
 
 
 
@@ -320,7 +328,7 @@ namespace MouseClick
                             var thisRY = float.Parse(str2) - initRotate_Y;
                             var thisRZ = float.Parse(str3) - initRotate_Z;
 
-
+                            rotateUpdater.postValue(new float[] { thisRX , thisRZ , thisRY,0 });
                             //rotateUpdater.postValue(new float[] { thisRX + (float)Math.PI / 2f, thisRZ + (float)Math.PI, thisRY });
                             //rotateUpdater.startTrigger();
                             //Global.Viewer3DCamera[0] = thisRZ;
@@ -396,28 +404,28 @@ namespace MouseClick
 
 
                         }
-                        else if (str0.Equals("ax"))
-                        {
+                        //else if (str0.Equals("ax"))
+                        //{
 
-                            String str3 = "";
-                            String str4 = "";
+                        //    String str3 = "";
+                        //    String str4 = "";
 
-                            str3 = dataStr.Split(',')[3];
+                        //    str3 = dataStr.Split(',')[3];
 
-                            str4 = dataStr.Split(',')[4];
+                        //    str4 = dataStr.Split(',')[4];
 
-                            var thisRX = float.Parse(str1);
-                            var thisRY = float.Parse(str2);
-                            var thisRZ = float.Parse(str3);
-                            var thisRW = float.Parse(str4);
+                        //    var thisRX = float.Parse(str1);
+                        //    var thisRY = float.Parse(str2);
+                        //    var thisRZ = float.Parse(str3);
+                        //    var thisRW = float.Parse(str4);
 
-                            //接受轴向角的信息
-                            rotateUpdater.postValue(new float[] { thisRX, thisRY, thisRZ, thisRW });
+                        //    //接受轴向角的信息
+                        //    rotateUpdater.postValue(new float[] { thisRX, thisRY, thisRZ, thisRW });
 
-                            return;
+                        //    return;
 
 
-                        }
+                        //}
                         else if (str0.Equals("m"))
                         {
 

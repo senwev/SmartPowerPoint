@@ -351,7 +351,7 @@
             this.toast.TabIndex = 32;
             this.toast.Text = "Toast测试";
             this.toast.UseVisualStyleBackColor = true;
-            this.toast.Click += new System.EventHandler(this.toast_Click);
+            //this.toast.Click += new System.EventHandler(this.toast_Click);
             // 
             // SettingForm
             // 
