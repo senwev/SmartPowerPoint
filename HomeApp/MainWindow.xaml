@@ -10,6 +10,7 @@
         Title="MainWindow"
         Width="1920"
         Height="1080"
+        Icon="/Images/EnFuture logo.png"
         Foreground="White"
         WindowState="Maximized"
         WindowStyle="None"

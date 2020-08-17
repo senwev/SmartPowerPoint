@@ -447,13 +447,23 @@ namespace open3mod
             }
         }
 
-        private delegate void AdjustToAngleHandler(double x, double y, double z);
+        private delegate void AdjustToAngleHandler(float x, float y, float z);
 
         private void ExecuteOnAdjustToAngle(float x, float y, float z, float w)
         {
             if (UiState.ActiveTab.ActiveCameraController != null)
             {
                 UiState.ActiveTab.ActiveCameraController.AdjustToEulerAngle(x, y, z, w);
+            }
+        }
+
+        private delegate void AdjustToDistanceHandler(double x);
+
+        private void ExecuteOnAdjustToDistance(float d)
+        {
+            if (UiState.ActiveTab.ActiveCameraController != null)
+            {
+                UiState.ActiveTab.ActiveCameraController.ScrollToDistance(d);
             }
         }
 
@@ -464,7 +474,18 @@ namespace open3mod
             ExecuteOnAdjustToAngle(x, y, z, w);
 
         }
+        public void OnAdjustToDistance(float d)
+        {
+            if (!bOpenInteraction) return;
 
+            ExecuteOnAdjustToDistance(d);
+
+        }
+
+        public void OpenFile(string fileName)
+        {
+            AddTab(fileName, true, true);
+        }
     }
 
 }

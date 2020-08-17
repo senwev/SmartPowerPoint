@@ -268,15 +268,17 @@ namespace MouseClick
 
         private async void SendTest()
         {
-            await Task.Delay(10000);
+            //await Task.Delay(10000);
             Random random = new Random();
-            float x = 1;
-            float y = 0;
-            float z = 1;
+            float x = 0;
+            float y = 0.785f;
+            float z = -0.785f;
             int i = 0;
             int flag = 1;
             int count = random.Next(400, 600);
             int w = 0;
+            Constant.SendViewer3DOrientation(x, y, z, w);
+            
             while (true)
             {
                 //if (i < count && flag % 3 == 1)
@@ -302,7 +304,7 @@ namespace MouseClick
                 //    flag++;
                 //}
                 //i++;
-                //y += random.NextDouble() / 10;//Global.Viewer3DCamera[0];
+                x += 1.0f / 10;//Global.Viewer3DCamera[0];
                 //y += random.NextDouble() /10;//Global.Viewer3DCamera[1];
                 //x = Global.Viewer3DCamera[0];
                 //y = Global.Viewer3DCamera[1];
@@ -318,7 +320,17 @@ namespace MouseClick
 
         private void button3_Click(object sender, EventArgs e)
         {
-            SendTest();
+            //SendTest();
+            float x = float.Parse(textBox_X.Text);
+            float y = float.Parse(textBox_Y.Text);
+            float z = float.Parse(textBox_Z.Text);
+            Constant.SendViewer3DOrientation(x, y, z, 0); 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            float d = float.Parse(textBox_D.Text);
+            Constant.SendViewer3DDistance(d);
         }
     }
 }

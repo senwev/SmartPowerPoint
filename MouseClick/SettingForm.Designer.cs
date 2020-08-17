@@ -55,10 +55,15 @@
             this.eyeCareOutput = new System.Windows.Forms.TextBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.uwbPositionSettingControl1 = new MouseClick.UWBPositionSettingControl();
-            this.serialSettingControl1 = new MouseClick.SerialSettingControl();
             this.testrotate = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.textBox_X = new System.Windows.Forms.TextBox();
+            this.textBox_Y = new System.Windows.Forms.TextBox();
+            this.textBox_Z = new System.Windows.Forms.TextBox();
+            this.uwbPositionSettingControl1 = new MouseClick.UWBPositionSettingControl();
+            this.serialSettingControl1 = new MouseClick.SerialSettingControl();
+            this.textBox_D = new System.Windows.Forms.TextBox();
+            this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // 开启遮挡
@@ -300,6 +305,47 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
+            // testrotate
+            // 
+            this.testrotate.Location = new System.Drawing.Point(646, 133);
+            this.testrotate.Name = "testrotate";
+            this.testrotate.Size = new System.Drawing.Size(75, 23);
+            this.testrotate.TabIndex = 30;
+            this.testrotate.Text = "测试旋转";
+            this.testrotate.UseVisualStyleBackColor = true;
+            this.testrotate.Click += new System.EventHandler(this.testrotate_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(180, 562);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 31;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // textBox_X
+            // 
+            this.textBox_X.Location = new System.Drawing.Point(60, 520);
+            this.textBox_X.Name = "textBox_X";
+            this.textBox_X.Size = new System.Drawing.Size(63, 21);
+            this.textBox_X.TabIndex = 32;
+            // 
+            // textBox_Y
+            // 
+            this.textBox_Y.Location = new System.Drawing.Point(129, 520);
+            this.textBox_Y.Name = "textBox_Y";
+            this.textBox_Y.Size = new System.Drawing.Size(63, 21);
+            this.textBox_Y.TabIndex = 33;
+            // 
+            // textBox_Z
+            // 
+            this.textBox_Z.Location = new System.Drawing.Point(198, 520);
+            this.textBox_Z.Name = "textBox_Z";
+            this.textBox_Z.Size = new System.Drawing.Size(63, 21);
+            this.textBox_Z.TabIndex = 34;
+            // 
             // uwbPositionSettingControl1
             // 
             this.uwbPositionSettingControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -322,31 +368,33 @@
             this.serialSettingControl1.TabIndex = 3;
             this.serialSettingControl1.Load += new System.EventHandler(this.serialSettingControl1_Load);
             // 
-            // testrotate
+            // textBox_D
             // 
-            this.testrotate.Location = new System.Drawing.Point(646, 133);
-            this.testrotate.Name = "testrotate";
-            this.testrotate.Size = new System.Drawing.Size(75, 23);
-            this.testrotate.TabIndex = 30;
-            this.testrotate.Text = "测试旋转";
-            this.testrotate.UseVisualStyleBackColor = true;
-            this.testrotate.Click += new System.EventHandler(this.testrotate_Click);
+            this.textBox_D.Location = new System.Drawing.Point(267, 520);
+            this.textBox_D.Name = "textBox_D";
+            this.textBox_D.Size = new System.Drawing.Size(63, 21);
+            this.textBox_D.TabIndex = 35;
             // 
-            // button3
+            // button4
             // 
-            this.button3.Location = new System.Drawing.Point(957, 132);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 31;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button4.Location = new System.Drawing.Point(261, 562);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 36;
+            this.button4.Text = "button4";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // SettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1110, 706);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.textBox_D);
+            this.Controls.Add(this.textBox_Z);
+            this.Controls.Add(this.textBox_Y);
+            this.Controls.Add(this.textBox_X);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.testrotate);
             this.Controls.Add(this.button2);
@@ -419,5 +467,10 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button testrotate;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TextBox textBox_X;
+        private System.Windows.Forms.TextBox textBox_Y;
+        private System.Windows.Forms.TextBox textBox_Z;
+        private System.Windows.Forms.TextBox textBox_D;
+        private System.Windows.Forms.Button button4;
     }
 }

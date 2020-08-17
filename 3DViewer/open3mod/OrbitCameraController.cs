@@ -168,9 +168,7 @@ namespace open3mod
 
         public void ScrollToDistance(float z)
         {
-            //_cameraDistance = (float)Math.Pow(ZoomSpeed, -z);
-            //_cameraDistance = InitialCameraDistance;
-            _cameraDistance = z;//Math.Max(_cameraDistance, MinimumCameraDistance);
+            _cameraDistance = z;
             _dirty = true;
         }
 
@@ -194,15 +192,14 @@ namespace open3mod
             return _mode;
         }
 
-
         private void UpdateViewMatrix()
         {
             var viewWithPitchAndRoll = _view
-                * Matrix4.CreateFromAxisAngle(_right, _pitchAngle)
-                * Matrix4.CreateFromAxisAngle(_front, _rollAngle)
-                * Matrix4.CreateFromAxisAngle(_up, _yawAngle);
+                    * Matrix4.CreateFromAxisAngle(_right, _pitchAngle)
+                    * Matrix4.CreateFromAxisAngle(_front, _rollAngle)
+                    * Matrix4.CreateFromAxisAngle(_up, _yawAngle);
 
-            _viewWithOffset = Matrix4.LookAt(viewWithPitchAndRoll.Column2.Xyz * _cameraDistance + _pivot, 
+            _viewWithOffset = Matrix4.LookAt(viewWithPitchAndRoll.Column2.Xyz * _cameraDistance + _pivot,
                 _pivot,
                 viewWithPitchAndRoll.Column1.Xyz);
             _viewWithOffset *= Matrix4.CreateTranslation(_panVector);
@@ -298,6 +295,7 @@ namespace open3mod
             _yawAngle = y;
             _pitchAngle = x;
             _rollAngle = z;
+
         }
     }
 }
