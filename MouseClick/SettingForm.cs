@@ -270,8 +270,8 @@ namespace MouseClick
         {
             //await Task.Delay(10000);
             Random random = new Random();
-            float x = 0;
-            float y = 0.785f;
+            float x = 0f;
+            float y = 0;
             float z = -0.785f;
             int i = 0;
             int flag = 1;
@@ -304,7 +304,8 @@ namespace MouseClick
                 //    flag++;
                 //}
                 //i++;
-                x += 1.0f / 10;//Global.Viewer3DCamera[0];
+                y += 1.0f / 10;//Global.Viewer3DCamera[0];
+                z += 1.0f / 10;
                 //y += random.NextDouble() /10;//Global.Viewer3DCamera[1];
                 //x = Global.Viewer3DCamera[0];
                 //y = Global.Viewer3DCamera[1];
@@ -320,17 +321,22 @@ namespace MouseClick
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //SendTest();
-            float x = float.Parse(textBox_X.Text);
-            float y = float.Parse(textBox_Y.Text);
-            float z = float.Parse(textBox_Z.Text);
-            Constant.SendViewer3DOrientation(x, y, z, 0); 
+            SendTest();
+
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             float d = float.Parse(textBox_D.Text);
             Constant.SendViewer3DDistance(d);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            float x = float.Parse(textBox_X.Text);
+            float y = float.Parse(textBox_Y.Text);
+            float z = float.Parse(textBox_Z.Text);
+            Constant.SendViewer3DOrientation(x, y, z, 0);
         }
     }
 }
