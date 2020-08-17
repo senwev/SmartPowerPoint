@@ -266,7 +266,7 @@ namespace MouseClick
                             var thisRZ = float.Parse(str3) - initRotate_Z;
 
 
-                            rotateUpdater.postValue(new float[] { thisRX + (float)Math.PI / 2f, thisRZ + (float)Math.PI, thisRY });
+                            //rotateUpdater.postValue(new float[] { thisRX + (float)Math.PI / 2f, thisRZ + (float)Math.PI, thisRY });
                             //rotateUpdater.startTrigger();
                             //Global.Viewer3DCamera[0] = thisRZ;
                             //Global.Viewer3DCamera[1] = thisRX;
