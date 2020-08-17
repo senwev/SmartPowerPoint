@@ -142,6 +142,12 @@ namespace MouseClick
 
         public static long elapsedMs = 0;
 
+        public static Process shuiguorenzhe;
+
+
+        [DllImport("USER32.DLL")]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
+
         /// <summary>  
         /// 接收消息  
         /// </summary>  
@@ -171,24 +177,23 @@ namespace MouseClick
                                 var voicestr = dataStr.Substring(6, dataStr.Length - 6);
 
 
-                                if (voicestr.Contains("水果忍者"))
+                                if (voicestr.Contains("打开水果忍者"))
                                 {
-                                    ProcessStartInfo info = new ProcessStartInfo();
-                                    info.FileName = @"E:\\研究生电子设计大赛\\水果忍者\\水果忍者.exe";
-                                    info.Arguments = "";
-                                    info.WindowStyle = ProcessWindowStyle.Minimized;
-                                    Process pro = Process.Start(info);
-                                    //pro.WaitForExit();
+                                    StartHelper.OpenGame();
+                                }
+                                else if (voicestr.Contains("关闭水果忍者"))
+                                {
+                                    StartHelper.CloseGame(_mainform);
                                 }
                                 else if (voicestr.Contains("请问"))
                                 {
-                                    if (voicestr.Contains("时间"))
+                                    if (voicestr.Contains("时间")|| voicestr.Contains("几点"))
                                     {
                                         Global.toastString = "现在是北京时间：凌晨2点";
                                     }
                                     else if (voicestr.Contains("天气"))
                                     {
-                                        Global.toastString = "现在是北京时间：凌晨2点";
+                                        Global.toastString = "今天多云，27摄氏度至35摄氏度微风，空气质量良好。";
                                     }
                                     ToastWindow toastWindow = new ToastWindow();
                                     toastWindow.Show();
@@ -225,7 +230,7 @@ namespace MouseClick
                             {
                                 _mainform.Visible = true;
                             });
-                                headPosUpdater.startTrigger();
+                            headPosUpdater.startTrigger();
                         }
                         else if (dataStr.Equals("eyecare_off"))
                         {
@@ -243,6 +248,64 @@ namespace MouseClick
                         {
                             rotateUpdater.stopTrigger();
                         }
+                        else if (dataStr.Equals("game_start"))
+                        {
+                            //调用打开水果忍者
+                            StartHelper.OpenGame();
+                        }
+                        else if (dataStr.Equals("app_confirm"))
+                        {
+                            StartHelper.KeyEnter(_mainform);
+                        }
+                        else if (dataStr.Equals("app_exit"))
+                        {
+                            StartHelper.CloseGame(_mainform);
+                        }
+                        else if (dataStr.Equals("note_open"))
+                        {
+                            StartHelper.OpenNote();
+                        }
+                        else if (dataStr.Equals("app_save"))
+                        {
+                            StartHelper.KeySave(_mainform);
+                        }
+                        else if (dataStr.Equals("open_office"))
+                        {
+                            StartHelper.OpenOffice();
+                        }
+                        else if (dataStr.Equals("play_ppt"))
+                        {
+                            StartHelper.KeyPlayPPT(_mainform);
+                        }
+                        else if (dataStr.Equals("ppt_painter"))
+                        {
+                            StartHelper.KeyToPaint(_mainform);
+                        }
+                        else if (dataStr.Equals("ppt_laser"))
+                        {
+                            StartHelper.KeyToLaser(_mainform);
+                        }
+                        else if (dataStr.Equals("key_left"))
+                        {
+                            StartHelper.KeyLeft(_mainform);
+                        }
+                        else if (dataStr.Equals("key_right"))
+                        {
+                            StartHelper.KeyRight(_mainform);
+                        }
+                        else if (dataStr.Equals("play_video"))
+                        {
+                            StartHelper.PlayVideo();
+                        }
+                        else if (dataStr.Equals("open_3d"))
+                        {
+                            StartHelper.Open3DView();
+                        }
+                        else if (dataStr.Equals("close_3d"))
+                        {
+                            StartHelper.Close3DView();
+                        }
+
 
 
                         String str0 = dataStr.Split(',')[0];
@@ -265,7 +328,7 @@ namespace MouseClick
                             var thisRY = float.Parse(str2) - initRotate_Y;
                             var thisRZ = float.Parse(str3) - initRotate_Z;
 
-
+                            rotateUpdater.postValue(new float[] { thisRX , thisRZ , thisRY,0 });
                             //rotateUpdater.postValue(new float[] { thisRX + (float)Math.PI / 2f, thisRZ + (float)Math.PI, thisRY });
                             //rotateUpdater.startTrigger();
                             //Global.Viewer3DCamera[0] = thisRZ;
@@ -341,28 +404,28 @@ namespace MouseClick
 
 
                         }
-                        else if (str0.Equals("ax"))
-                        {
+                        //else if (str0.Equals("ax"))
+                        //{
 
-                            String str3 = "";
-                            String str4 = "";
+                        //    String str3 = "";
+                        //    String str4 = "";
 
-                            str3 = dataStr.Split(',')[3];
+                        //    str3 = dataStr.Split(',')[3];
 
-                            str4 = dataStr.Split(',')[4];
+                        //    str4 = dataStr.Split(',')[4];
 
-                            var thisRX = float.Parse(str1);
-                            var thisRY = float.Parse(str2);
-                            var thisRZ = float.Parse(str3);
-                            var thisRW = float.Parse(str4);
+                        //    var thisRX = float.Parse(str1);
+                        //    var thisRY = float.Parse(str2);
+                        //    var thisRZ = float.Parse(str3);
+                        //    var thisRW = float.Parse(str4);
 
-                            //接受轴向角的信息
-                            rotateUpdater.postValue(new float[] { thisRX, thisRY, thisRZ, thisRW });
+                        //    //接受轴向角的信息
+                        //    rotateUpdater.postValue(new float[] { thisRX, thisRY, thisRZ, thisRW });
 
-                            return;
+                        //    return;
 
 
-                        }
+                        //}
                         else if (str0.Equals("m"))
                         {
 

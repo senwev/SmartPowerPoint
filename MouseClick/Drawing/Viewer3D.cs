@@ -37,5 +37,11 @@ namespace MouseClick
         {
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
         }
+
+        public void OpenFile(string fileName)
+        {
+            this.viewer3DControl1.OpenFile(fileName);
+        }
+
     }
 }

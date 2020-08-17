@@ -116,6 +116,7 @@
     </Compile>
     <Compile Include="SmoothValueHelper.cs" />
     <Compile Include="Solvers\LSSolver.cs" />
+    <Compile Include="StartHelper.cs" />
     <Compile Include="ToastWindow.cs">
       <SubType>Form</SubType>
     </Compile>
