@@ -8,6 +8,8 @@ using System.Linq;
 using System.Drawing.Drawing2D;
 using MouseClick;
 using System.Threading;
+using OpenTK;
+using System.Numerics;
 
 namespace AlgorithmUnitTestProject
 {
@@ -136,16 +138,26 @@ namespace AlgorithmUnitTestProject
         {
             SmoothValueHelper helper = new SmoothValueHelper(10, 3);
             helper.startTrigger();
-            for (int i =0; i < 3;i++)
+            for (int i = 0; i < 3; i++)
             {
-                helper.postValue(new float[] { (float)i, (float)(i-0.5), (float)(i+0.5 )});
+                helper.postValue(new float[] { (float)i, (float)(i - 0.5), (float)(i + 0.5) });
                 for (int j = 0; j < 100; j++)
                 {
                     Console.WriteLine(helper.getSmoothValue()[0].ToString() + "|" + helper.getSmoothValue()[1].ToString() + "|" + helper.getSmoothValue()[2].ToString());
                     Thread.Sleep(10);
                 }
-                
+
             }
+        }
+
+        [TestMethod]
+        public void TestOpen3ModEuler()
+        {
+            var x = -0.785f;
+            var y = 0f;
+            var z = -0.785f;
+            var matrix = Matrix4x4.CreateFromYawPitchRoll(y, x, z);
+
         }
 
     }

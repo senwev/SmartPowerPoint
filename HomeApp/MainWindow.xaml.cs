@@ -95,8 +95,15 @@ namespace HomeApp
         /// <param name="e"></param>
         private void TileViwer3D_Click(object sender, RoutedEventArgs e)
         {
+            var directory = Environment.CurrentDirectory;
+            var fileName = System.IO.Path.Combine(directory, "Resources/Earth_fbx/earth.fbx");
+
             Viewer3DWindow window = new Viewer3DWindow();
             window.Show();
+            if (System.IO.File.Exists(fileName))
+            {
+                window.viewer3DPanel.OpenFile(fileName);
+            }
         }
 
         /// <summary>
@@ -106,7 +113,15 @@ namespace HomeApp
         /// <param name="e"></param>
         private void TileMedicalLesson_Click(object sender, RoutedEventArgs e)
         {
+            var directory = Environment.CurrentDirectory;
+            var fileName = System.IO.Path.Combine(directory, "Resources/Coronavirus_obj/covid19.obj");
 
+            Viewer3DWindow window = new Viewer3DWindow();
+            window.Show();
+            if (System.IO.File.Exists(fileName))
+            {
+                window.viewer3DPanel.OpenFile(fileName);
+            }
         }
 
         /// <summary>

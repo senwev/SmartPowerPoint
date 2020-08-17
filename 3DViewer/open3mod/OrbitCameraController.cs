@@ -20,6 +20,7 @@
 
 using System;
 using System.Diagnostics;
+using Assimp;
 using OpenTK;
 
 namespace open3mod
@@ -168,9 +169,7 @@ namespace open3mod
 
         public void ScrollToDistance(float z)
         {
-            //_cameraDistance = (float)Math.Pow(ZoomSpeed, -z);
-            //_cameraDistance = InitialCameraDistance;
-            _cameraDistance = z;//Math.Max(_cameraDistance, MinimumCameraDistance);
+            _cameraDistance = z;
             _dirty = true;
         }
 
@@ -194,15 +193,18 @@ namespace open3mod
             return _mode;
         }
 
-
         private void UpdateViewMatrix()
         {
-            var viewWithPitchAndRoll = _view
-                * Matrix4.CreateFromAxisAngle(_right, _pitchAngle)
-                * Matrix4.CreateFromAxisAngle(_front, _rollAngle)
-                * Matrix4.CreateFromAxisAngle(_up, _yawAngle);
+            //var viewWithPitchAndRoll = _view
+            //        * Matrix4.CreateFromAxisAngle(_front, _rollAngle)
+            //        * Matrix4.CreateFromAxisAngle(_right, _pitchAngle)
+            //        * Matrix4.CreateFromAxisAngle(_up, _yawAngle);
+            //Assimp
+            var viewWithPitchAndRoll = _view * ConvertToMatrix4(Assimp.Matrix4x4.FromEulerAnglesXYZ(_pitchAngle, _yawAngle, _rollAngle));
+            //Microsoft
+            //var viewWithPitchAndRoll = _view * ConvertToMatrix4(System.Numerics.Matrix4x4.CreateFromYawPitchRoll(_yawAngle, _pitchAngle, _rollAngle));
 
-            _viewWithOffset = Matrix4.LookAt(viewWithPitchAndRoll.Column2.Xyz * _cameraDistance + _pivot, 
+            _viewWithOffset = Matrix4.LookAt(viewWithPitchAndRoll.Column2.Xyz * _cameraDistance + _pivot,
                 _pivot,
                 viewWithPitchAndRoll.Column1.Xyz);
             _viewWithOffset *= Matrix4.CreateTranslation(_panVector);
@@ -210,6 +212,25 @@ namespace open3mod
             _dirty = false;
         }
 
+        private Matrix4 ConvertToMatrix4(Assimp.Matrix4x4 m)
+        {
+            var row1 = new Vector4(m.A1, m.A2, m.A3, m.A4);
+            var row2 = new Vector4(m.B1, m.B2, m.B3, m.B4);
+            var row3 = new Vector4(m.C1, m.C2, m.C3, m.C4);
+            var row4 = new Vector4(m.D1, m.D2, m.D3, m.D4);
+            var m4 = new Matrix4(row1, row2, row3, row4);
+            return m4;
+        }
+
+        private Matrix4 ConvertToMatrix4(System.Numerics.Matrix4x4 m)
+        {
+            var row1 = new Vector4(m.M11, m.M12, m.M13, m.M14);
+            var row2 = new Vector4(m.M21, m.M22, m.M23, m.M24);
+            var row3 = new Vector4(m.M31, m.M32, m.M33, m.M34);
+            var row4 = new Vector4(m.M41, m.M42, m.M43, m.M44);
+            var m4 = new Matrix4(row1, row2, row3, row4);
+            return m4;
+        }
 
         /// <summary>
         /// Switches the camera controller between the X,Z,Y and Orbit modes.
@@ -298,6 +319,7 @@ namespace open3mod
             _yawAngle = y;
             _pitchAngle = x;
             _rollAngle = z;
+
         }
     }
 }
