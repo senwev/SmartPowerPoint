@@ -78,7 +78,9 @@ namespace MouseClick.Models
             this.Axes = new Rectangle(0, 0, (int)width, (int)height);
             Random rand = new Random();
 
-            this.TargetCursor = new Point(rand.Next(0, this.Axes.Width), rand.Next(0, this.Axes.Height));
+            var p= new Point((int)(Global.Position[0] * 1000), (int)(Global.Position[1] * 1000));
+
+            this.TargetCursor = p;
         }
 
         public void UpdateCursor(double pointX, double pointY)

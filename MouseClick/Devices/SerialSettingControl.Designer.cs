@@ -189,6 +189,8 @@
             // textBox_Rec
             // 
             this.textBox_Rec.AcceptsReturn = true;
+            this.textBox_Rec.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox_Rec.Location = new System.Drawing.Point(49, 326);
             this.textBox_Rec.Multiline = true;
             this.textBox_Rec.Name = "textBox_Rec";

@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MouseClick" GeneratedClassName="AppSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Anchor0_X" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1800</Value>
+    </Setting>
+    <Setting Name="Anchor0_Y" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Anchor1_X" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Anchor1_Y" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Anchor2_X" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Anchor2_Y" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">4200</Value>
+    </Setting>
+    <Setting Name="Anchor3_X" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1800</Value>
+    </Setting>
+    <Setting Name="Anchor3_Y" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">4200</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

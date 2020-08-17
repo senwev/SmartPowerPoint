@@ -24,7 +24,6 @@ namespace MouseClick
         public SettingForm()
         {
             InitializeComponent();
-            this.Init();
         }
 
 
@@ -79,11 +78,12 @@ namespace MouseClick
                     //Console.WriteLine(ipa.ToString());
                 }
             }
+
+            this.LoadAppSettings();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //new WebBrowserForm().Show();
             var viewer3D = new Viewer3D();
             var directory = Environment.CurrentDirectory;
             var fileName = System.IO.Path.Combine(directory, "Resources/Coronavirus_obj/covid19.obj");
@@ -119,11 +119,17 @@ namespace MouseClick
 
             Constant.UWBAnchorArea.Render(p0, p1, p2, p3);
             Constant.DrawingHelper.Paint(Constant.UWBAnchorArea);
+
+            //保存用户配置
+            this.SaveAppSettings();
         }
 
         private void button_Reset_Anchor_Click(object sender, EventArgs e)
         {
-            Init();
+            //加载用户配置
+            this.LoadAppSettings();
+
+            //重新初始化基站区域
             Constant.UWBAnchorArea = new Models.UWBAnchorArea();
 
             var anchor0_x = Convert.ToDouble(this.textBox_Anchor0_X.Text);
@@ -140,17 +146,32 @@ namespace MouseClick
             var p2 = new Tuple<double, double>(anchor2_x, anchor2_y);
             var p3 = new Tuple<double, double>(anchor3_x, anchor3_y);
 
+            //重新渲染
             Constant.UWBAnchorArea.Render(p0, p1, p2, p3);
+
+            //重新绘制
             Constant.DrawingHelper.Paint(Constant.UWBAnchorArea);
+
         }
 
-        private void Init()
+        private void LoadAppSettings()
         {
-            var anchor0 = new Tuple<double, double>(1800, 0);
-            var anchor1 = new Tuple<double, double>(0, 0);
-            var anchor2 = new Tuple<double, double>(0, 4200);
-            var anchor3 = new Tuple<double, double>(1800, 4200);
+            //初始化布局
+            Constant.UWBAnchorArea = new Models.UWBAnchorArea();
 
+            //加载坐标位置信息
+            var anchor0 = new Tuple<double, double>(AppSettings.Default.Anchor0_X, AppSettings.Default.Anchor0_Y);
+            var anchor1 = new Tuple<double, double>(AppSettings.Default.Anchor1_X, AppSettings.Default.Anchor1_Y);
+            var anchor2 = new Tuple<double, double>(AppSettings.Default.Anchor2_X, AppSettings.Default.Anchor2_Y);
+            var anchor3 = new Tuple<double, double>(AppSettings.Default.Anchor3_X, AppSettings.Default.Anchor3_Y);
+
+            //渲染布局
+            Constant.UWBAnchorArea.Render(anchor0, anchor1, anchor2, anchor3);
+
+            //绘制布局
+            Constant.DrawingHelper.Paint(Constant.UWBAnchorArea);
+
+            //界面显示
             this.textBox_Anchor0_X.Text = anchor0.Item1.ToString("f2");
             this.textBox_Anchor0_Y.Text = anchor0.Item2.ToString("f2");
             this.textBox_Anchor1_X.Text = anchor1.Item1.ToString("f2");
@@ -159,6 +180,37 @@ namespace MouseClick
             this.textBox_Anchor2_Y.Text = anchor2.Item2.ToString("f2");
             this.textBox_Anchor3_X.Text = anchor3.Item1.ToString("f2");
             this.textBox_Anchor3_Y.Text = anchor3.Item2.ToString("f2");
+        }
+
+        private void SaveAppSettings()
+        {
+            try
+            {
+                var anchor0_x = Convert.ToDouble(this.textBox_Anchor0_X.Text);
+                var anchor0_y = Convert.ToDouble(this.textBox_Anchor0_Y.Text);
+                var anchor1_x = Convert.ToDouble(this.textBox_Anchor1_X.Text);
+                var anchor1_y = Convert.ToDouble(this.textBox_Anchor1_Y.Text);
+                var anchor2_x = Convert.ToDouble(this.textBox_Anchor2_X.Text);
+                var anchor2_y = Convert.ToDouble(this.textBox_Anchor2_Y.Text);
+                var anchor3_x = Convert.ToDouble(this.textBox_Anchor3_X.Text);
+                var anchor3_y = Convert.ToDouble(this.textBox_Anchor3_Y.Text);
+
+                AppSettings.Default.Anchor0_X = anchor0_x;
+                AppSettings.Default.Anchor0_Y = anchor0_y;
+                AppSettings.Default.Anchor1_X = anchor1_x;
+                AppSettings.Default.Anchor1_Y = anchor1_y;
+                AppSettings.Default.Anchor2_X = anchor2_x;
+                AppSettings.Default.Anchor2_Y = anchor2_y;
+                AppSettings.Default.Anchor3_X = anchor3_x;
+                AppSettings.Default.Anchor3_Y = anchor3_y;
+                AppSettings.Default.Save();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                MessageBox.Show("填入的坐标参数不正确！请检查后重试！", "参数错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void serialSettingControl2_Load(object sender, EventArgs e)
@@ -264,13 +316,6 @@ namespace MouseClick
             Global.shouldShowHideBlock = checkBox1.Checked;
         }
 
-        private void button2_Click_1(object sender, EventArgs e)
-        {
-            //SendTest();
-            var paintForm = new PaintPanel();
-            paintForm.ShowDialog();
-
-        }
 
         private async void SendTest()
         {
@@ -284,7 +329,7 @@ namespace MouseClick
             int count = random.Next(400, 600);
             int w = 0;
             Constant.SendViewer3DOrientation(x, y, z, w);
-            
+
             while (true)
             {
                 //if (i < count && flag % 3 == 1)
@@ -328,7 +373,6 @@ namespace MouseClick
         private void button3_Click(object sender, EventArgs e)
         {
             SendTest();
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -350,6 +394,17 @@ namespace MouseClick
             ToastWindow toastWindow = new ToastWindow();
             Global.toastString = "测试输出";
             toastWindow.Show();
+        }
+
+        private void buttonOpenPaintPanel_Click(object sender, EventArgs e)
+        {
+            var paintForm = new PaintPanel();
+            paintForm.ShowDialog();
+        }
+
+        private void toast_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
